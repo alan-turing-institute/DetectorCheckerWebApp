@@ -1,5 +1,8 @@
 # This is the server logic of a Shiny web application. 
 
+# Maximum size of an upload file 30 MB
+options(shiny.maxRequestSize=30*1024^2) 
+
 library(shiny)
 library(shinythemes)
 library(ggplot2)

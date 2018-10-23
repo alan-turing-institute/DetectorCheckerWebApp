@@ -18,6 +18,13 @@ shinyServer(function(input, output, session) {
   # refresh layout select
   updateSelectInput(session, const_ui_layoutSelectInput, choices = layout_names)
   
+  output$app_summary <- renderPrint({
+    cat(paste(paste("detectorchecker v: ", packageVersion("detectorchecker"), sep=""), 
+              paste("webapp v: ", webapp_version, sep=""), 
+              sep="\n"))
+        
+  })
+  
   # Load layout
   observeEvent(input$layoutLoad, {
     # check whether a model has been selected

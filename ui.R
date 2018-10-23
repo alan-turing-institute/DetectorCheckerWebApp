@@ -34,7 +34,11 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           
           hr(),
           
-          actionButton("layoutPixels", "Plot")
+          actionButton("layoutPixels", "Plot"), 
+          
+          hr(),
+          
+          verbatimTextOutput("app_summary")
         ),
       
         # Main panel

@@ -1,5 +1,7 @@
 # global.R define objects available to both ui.R and server.R
 
+webapp_version <- "0.1.0"
+
 # global parameters
 const_layout_default <- "None"
 const_cwd <- getwd()

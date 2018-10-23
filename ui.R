@@ -57,7 +57,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     
     tabPanel("Damaged Pixels", 
       sidebarLayout(
-        sidebarPanel(
+        sidebarPanel(width = 4,
           fileInput("dead_file", "Choose Pixel Damage File", multiple = TRUE),
           
           actionButton("dead_pix_load", "Load"),
@@ -83,6 +83,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                 selected = const_dead_plot))),
           
           actionButton("layoutDeadPixels", "Plot")
+          
         ),
                
         # Main panel
@@ -90,7 +91,19 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           tabsetPanel(type = "tabs", 
                       
             tabPanel("Damaged Pixels Analysis", 
-              plotOutput("dead_pixel_plot"), style = "width:100%"),
+                     
+              plotOutput("dead_pixel_plot", 
+                         click = "dead_pix_plot_click"), 
+              
+              verbatimTextOutput("info"),
+            
+              style = "width:100%"),
+            
+            tabPanel("Module Analysis", 
+                     
+                     plotOutput("dead_pixel_module_plot"), 
+
+                     style = "width:100%"),
             
             tabPanel("Sumarry", 
               verbatimTextOutput("dead_pixel_summary"))

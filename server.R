@@ -287,11 +287,11 @@ shinyServer(function(input, output, session) {
       mod_row <- detectorchecker::which_module(y, layout$module_edges_row)
       
       output$module_analysis_caption <- renderPrint({
-        cat(paste("Module (", mod_row, ", ", mod_col, ") analysis", sep = ""))
+        cat("Module analysis:")
       })
       
       output$module_analysis_left <- renderPrint({
-        cat("Damaged module")
+        cat(paste("Damaged module [", mod_row, ", ", mod_col, "]", sep = ""))
       })
       
       output$dead_pixel_module_plot <- renderPlot({
@@ -323,11 +323,11 @@ shinyServer(function(input, output, session) {
       mod_row <- detectorchecker::which_module(y, layout$module_edges_row)
       
       output$module_analysis_caption <- renderPrint({
-        cat(paste("Module (", mod_row, ", ", mod_col, ") analysis", sep = ""))
+        cat("Module analysis")
       })
       
       output$module_analysis_left <- renderPrint({
-        cat("Damaged module")
+        cat(paste("Damaged module [", mod_row, ", ", mod_col, "]", sep = ""))
       })
       
       output$dead_pixel_module_plot <- renderPlot({
@@ -440,7 +440,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = "Finished!", value = 1.0)
           
           output$module_analysis_right <- renderPrint({
-            cat(analysis_caption)
+            cat(paste(analysis_caption, "[", mod_row, ", ", mod_col, "]", sep = ""))
           })
         })
       })

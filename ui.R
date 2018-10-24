@@ -94,25 +94,25 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                 # LAYOUT ANALYSIS
                 # --------------------------------------------------------------
                 fluidRow(
-                  column(8, align="center",
+                  column(12, align="center",
                     fluidRow(verbatimTextOutput("layout_analysis_caption")))
                 ),
                 
                 fluidRow(
-                  column(4, align="center",
+                  column(6, align="center",
                     fluidRow(verbatimTextOutput("layout_analysis_left_caption"))),
                   
-                  column(4, align="center",
+                  column(6, align="center",
                     fluidRow(verbatimTextOutput("layout_analysis_right_caption")))
                 ),
                 
                 fluidRow(
-                  column(4, align="center",
+                  column(6, align="center",
                          fluidRow(plotOutput("dead_pixel_plot",
                                   click = "dead_pix_plot_click",
                                   dblclick = "dead_pix_plot_dbclick"))),
                   
-                  column(4, align="center",
+                  column(6, align="center",
                          fluidRow(plotOutput("dead_pixel_analysis_plot")))
                 ) ,
                 
@@ -120,26 +120,26 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                 # MODULE ANALYSIS
                 # --------------------------------------------------------------
                 fluidRow(
-                  column(8, align="center",
+                  column(12, align="center",
                     fluidRow(verbatimTextOutput("module_analysis_caption")))
                 ), 
                 
                 fluidRow(
-                  column(4, align="center",
+                  column(6, align="center",
                          fluidRow(verbatimTextOutput("module_analysis_left"))),
                   
-                  column(4, align="center",
+                  column(6, align="center",
                          fluidRow(verbatimTextOutput("module_analysis_right")))
                 ),
                 
                 fluidRow(
-                  column(4, align="center",
+                  column(6, align="center",
                          fluidRow(plotOutput("dead_pixel_module_plot"))),
                   
-                  column(4, align="center",
+                  column(6, align="center",
                          fluidRow(plotOutput("dead_pixel_module_analysis_plot")))
                 )
-              ), style = "width:100%"),
+              )),
             
             tabPanel("Sumarry", 
               verbatimTextOutput("dead_pixel_summary"))

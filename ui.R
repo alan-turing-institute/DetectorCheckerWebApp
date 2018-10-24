@@ -64,11 +64,11 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           
           hr(),
           
-          fluidRow(
+          fixedRow(
             column(gui_sidebar_radio_col_size,
                    radioButtons("dead_radio", label = "Analysis", inline = FALSE,
                                 choices = list(
-                                  "Damage" = const_dead_plot,
+                                  # "Damage" = const_dead_plot,
                                   "Density" = const_dead_density_plot,
                                   "Counts" = const_dead_counts,
                                   "Arrows" = const_dead_arrows,
@@ -80,35 +80,71 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                   "Inhom. F-func." = const_dead_inhom_F,
                                   "Inhom. G-func." = const_dead_inhom_G
                                   ), 
-                                selected = const_dead_plot))),
+                                selected = const_dead_density_plot))),
           
           actionButton("layoutDeadPixels", "Plot")
-          
         ),
                
         # Main panel
         mainPanel(
           tabsetPanel(type = "tabs", 
-                      
             tabPanel("Damaged Pixels Analysis", 
-                     
-              plotOutput("dead_pixel_plot", 
-                         click = "dead_pix_plot_click"), 
-              
-              verbatimTextOutput("info"),
-            
-              style = "width:100%"),
-            
-            tabPanel("Module Analysis", 
-                     
-                     plotOutput("dead_pixel_module_plot"), 
-
-                     style = "width:100%"),
+              fluidRow(
+                # --------------------------------------------------------------
+                # LAYOUT ANALYSIS
+                # --------------------------------------------------------------
+                fluidRow(
+                  column(8, align="center",
+                    fluidRow(verbatimTextOutput("layout_analysis_caption")))
+                ),
+                
+                fluidRow(
+                  column(4, align="center",
+                    fluidRow(verbatimTextOutput("layout_analysis_left_caption"))),
+                  
+                  column(4, align="center",
+                    fluidRow(verbatimTextOutput("layout_analysis_right_caption")))
+                ),
+                
+                fluidRow(
+                  column(4, align="center",
+                         fluidRow(plotOutput("dead_pixel_plot",
+                                  click = "dead_pix_plot_click",
+                                  dblclick = "dead_pix_plot_dbclick"))),
+                  
+                  column(4, align="center",
+                         fluidRow(plotOutput("dead_pixel_analysis_plot")))
+                ) ,
+                
+                # --------------------------------------------------------------
+                # MODULE ANALYSIS
+                # --------------------------------------------------------------
+                fluidRow(
+                  column(8, align="center",
+                    fluidRow(verbatimTextOutput("module_analysis_caption")))
+                ), 
+                
+                fluidRow(
+                  column(4, align="center",
+                         fluidRow(verbatimTextOutput("module_analysis_left"))),
+                  
+                  column(4, align="center",
+                         fluidRow(verbatimTextOutput("module_analysis_right")))
+                ),
+                
+                fluidRow(
+                  column(4, align="center",
+                         fluidRow(plotOutput("dead_pixel_module_plot"))),
+                  
+                  column(4, align="center",
+                         fluidRow(plotOutput("dead_pixel_module_analysis_plot")))
+                )
+              ), style = "width:100%"),
             
             tabPanel("Sumarry", 
               verbatimTextOutput("dead_pixel_summary"))
-          )
-        )
+          ),
+        width = 8)
       )
     ),
     

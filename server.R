@@ -10,10 +10,6 @@ library(ggplot2)
 library(detectorchecker)
 library(spatstat)
 
-# We'll use a subset of the mtcars data set, with fewer columns
-# so that it prints nicely
-mtcars2 <- mtcars[, c("mpg", "cyl", "disp", "hp", "wt", "am", "gear")]
-
 # Define server
 shinyServer(function(input, output, session) {
 
@@ -157,6 +153,15 @@ shinyServer(function(input, output, session) {
       })
       
       setProgress(message = "Finished!", value = 1.0)
+      
+      output$layout_analysis_caption <- renderPrint({
+        cat("Layout analysis:")
+      })
+      
+      output$layout_analysis_left_caption <- renderPrint({
+        cat("Damaged layout")
+      })
+      
     })
   })
   
@@ -168,92 +173,279 @@ shinyServer(function(input, output, session) {
     
     withProgress({
       
-      if (input$dead_radio == const_dead_plot) {
-        
-        setProgress(message = "Rendering layout...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_damaged(layout)}, 
-                                          width = "auto", height = "auto")
+      # if (input$dead_radio == const_dead_plot) {
+      #   
+      #   setProgress(message = "Rendering layout...")
+      #   output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_damaged(layout)}, 
+      #                                     width = "auto", height = "auto")
+      # 
+      # } else 
       
-      } else if (input$dead_radio == const_dead_density_plot) {
+      analysis_caption <- NULL
         
-        setProgress(message = "Rendering dead pixel density...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_density(layout, adjust = 0.5)}, 
+      if (input$dead_radio == const_dead_density_plot) {
+        
+        analysis_caption <- const_dead_density_plot_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_layout_density(layout, adjust = 0.5)}, 
                                              width = "auto", height = "auto")
         
       } else if (input$dead_radio == const_dead_counts) {
         
-        setProgress(message = "Rendering counts...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_cnt_mod(layout = layout)}, 
+        analysis_caption <- const_dead_counts_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_layout_cnt_mod(layout = layout)}, 
                                              width = "auto", height = "auto")
         
       } else if (input$dead_radio == const_dead_arrows) {
         
-        setProgress(message = "Rendering arrows...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_arrows(layout = layout)}, 
+        analysis_caption <- const_dead_arrows_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_layout_arrows(layout = layout)}, 
                                              width = "auto", height = "auto")
       
       } else if (input$dead_radio == const_dead_angles) {
         
-        setProgress(message = "Rendering arrows...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_angles(layout = layout)}, 
+        analysis_caption <- const_dead_angles_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_layout_angles(layout = layout)}, 
                                              width = "auto", height = "auto")
       
       } else if (input$dead_radio == const_dead_K) {
         
-        setProgress(message = "K-Function...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "K")}, 
+        analysis_caption <- const_dead_K_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "K")}, 
                                              width = "auto", height = "auto")
       
       } else if (input$dead_radio == const_dead_F) {
         
-        setProgress(message = "F-Function...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "F")}, 
+        analysis_caption <- const_dead_F_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "F")}, 
                                              width = "auto", height = "auto")
       
       } else if (input$dead_radio == const_dead_G) {
         
-        setProgress(message = "G-Function...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "G")}, 
+        analysis_caption <- const_dead_G_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "G")}, 
                                              width = "auto", height = "auto")
       
       } else if (input$dead_radio == const_dead_inhom_K) {
         
-        setProgress(message = "Inhomogeneous K-Function...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Kinhom")}, 
+        analysis_caption <- const_dead_inhom_K_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Kinhom")}, 
                                              width = "auto", height = "auto")
         
       } else if (input$dead_radio == const_dead_inhom_F) {
         
-        setProgress(message = "Inhomogeneous F-Function...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Finhom")}, 
+        analysis_caption <- const_dead_inhom_F_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+        
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Finhom")}, 
                                              width = "auto", height = "auto")
         
       } else if (input$dead_radio == const_dead_inhom_G) {
         
-        setProgress(message = "Inhomogeneous G-Function...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Ginhom")}, 
-                                             width = "auto", height = "auto")
+        analysis_caption <- const_dead_inhom_G_cap
+        setProgress(message = paste("Rendering", analysis_caption, sep=" "))
         
+        output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Ginhom")}, 
+                                             width = "auto", height = "auto")
       } 
+      
+      output$layout_analysis_right_caption <- renderPrint({
+        cat(analysis_caption)
+      })
       
       setProgress(message = "Finished!", value = 1.0)
     })
   })
   
-  output$info <- renderPrint({
+  observeEvent(input$dead_pix_plot_click, {
     
-    x <- input$dead_pix_plot_click$x
-    y <- input$dead_pix_plot_click$y
+    if (is.null(layout) || is.na(layout) || is.na(layout$dead_stats))
+      return(NULL)
     
-    mod_col <- detectorchecker::which_module(x, layout$module_edges_col)
-    mod_row <- detectorchecker::which_module(y, layout$module_edges_row)
-
+    if (!is.null(input$dead_pix_plot_click$x) && 
+        !is.null(input$dead_pix_plot_click$y)) {
+      
+      x <- input$dead_pix_plot_click$x
+      y <- input$dead_pix_plot_click$y
+      
+      mod_col <- detectorchecker::which_module(x, layout$module_edges_col)
+      mod_row <- detectorchecker::which_module(y, layout$module_edges_row)
+      
+      output$module_analysis_caption <- renderPrint({
+        cat(paste("Module (", mod_row, ", ", mod_col, ") analysis", sep = ""))
+      })
+      
+      output$module_analysis_left <- renderPrint({
+        cat("Damaged module")
+      })
+      
+      output$dead_pixel_module_plot <- renderPlot({
+          withProgress({
+            
+            setProgress(message = "Rendering layout...")
+               output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_layout_module_damaged(layout, col = mod_col, row = mod_row)}, 
+                                                    width = "auto", height = "auto")
+  
+            setProgress(message = "Finished!", value = 1.0)
+          })
+      })
     
-    paste("x=", x, "\n y=", y, 
-          "which row ", mod_row, " which col ", mod_col)
-    
+    }
   })
   
+  observeEvent(input$dead_pix_plot_dbclick, {
+    
+    if (is.null(layout) || is.na(layout) || is.na(layout$dead_stats))
+      return(NULL)
+    
+    if (!is.null(input$dead_pix_plot_click$x) && 
+        !is.null(input$dead_pix_plot_click$y)) {
+      
+      x <- input$dead_pix_plot_click$x
+      y <- input$dead_pix_plot_click$y
+      
+      mod_col <- detectorchecker::which_module(x, layout$module_edges_col)
+      mod_row <- detectorchecker::which_module(y, layout$module_edges_row)
+      
+      output$module_analysis_caption <- renderPrint({
+        cat(paste("Module (", mod_row, ", ", mod_col, ") analysis", sep = ""))
+      })
+      
+      output$module_analysis_left <- renderPrint({
+        cat("Damaged module")
+      })
+      
+      output$dead_pixel_module_plot <- renderPlot({
+        withProgress({
+          
+          setProgress(message = "Rendering layout...")
+          output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_layout_module_damaged(layout, col = mod_col, row = mod_row)}, 
+                                                      width = "auto", height = "auto")
+          
+          setProgress(message = "Finished!", value = 1.0)
+        })
+      })
+      
+      output$dead_pixel_module_analysis_plot <- renderPlot({
+        withProgress({
+          
+          analysis_caption <- NULL
+          
+          if (input$dead_radio == const_dead_density_plot) {
+            
+            analysis_caption <- const_dead_density_plot_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_layout_density(layout, adjust = 0.5, 
+                                                                                                       col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_counts) {
+            
+            analysis_caption <- const_dead_counts_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_layout_cnt_mod(layout = layout, 
+                                                                                                       col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_arrows) {
+            
+            analysis_caption <- const_dead_arrows_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_layout_arrows(layout = layout, 
+                                                                                                      col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_angles) {
+            
+            analysis_caption <- const_dead_angles_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_layout_angles(layout = layout, 
+                                                                                                      col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_K) {
+            
+            analysis_caption <- const_dead_K_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "K", 
+                                                                                            col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_F) {
+            
+            analysis_caption <- const_dead_F_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "F", 
+                                                                                            col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_G) {
+            
+            analysis_caption <- const_dead_G_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "G", 
+                                                                                            col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_inhom_K) {
+            
+            analysis_caption <- const_dead_inhom_K_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Kinhom", 
+                                                                                            col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_inhom_F) {
+            
+            analysis_caption <- const_dead_inhom_F_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+            
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Finhom", 
+                                                                                            col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+            
+          } else if (input$dead_radio == const_dead_inhom_G) {
+            
+            analysis_caption <- const_dead_inhom_G_cap
+            setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+                        
+            output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_kfg(layout = layout, func = "Ginhom", 
+                                                                                            col = mod_col, row = mod_row)}, 
+                                                                 width = "auto", height = "auto")
+          } 
+          
+          setProgress(message = "Finished!", value = 1.0)
+          
+          output$module_analysis_right <- renderPrint({
+            cat(analysis_caption)
+          })
+        })
+      })
+    }
+  })
   
   # Fit model
   observeEvent(input$model_fit, {
@@ -324,28 +516,7 @@ shinyServer(function(input, output, session) {
       setProgress(message = "Finished!", value=1.0)
     })
   })
- 
-  # # Analyse layout pixels
-  # observeEvent(input$pixelAnalysis, {
-  #   withProgress({
-  #     setProgress(message = "Analysing pixels...")
-  #     
-  #     layout.pixel <<- analysePixels(layout=layout.selected)
-  #     
-  #     setProgress(message = "Rendering...", value=0.5)
-  #     
-  #     plotPixels(layout=layout.selected, layout.pixel=layout.pixel, pixel.analysis=input$pixelRadio)
-  #     
-  #     output$pixelPlot <- renderImage({
-  #       # TODO: fix path
-  #       filename <- file.path(".", paste("temp", ".png", sep=""))
-  #       
-  #       # Return a list containing the filename
-  #       list(src = filename)
-  #     }, deleteFile = TRUE)
-  #     
-  #     setProgress(message = "Finished!", value=1.0)
-  #   })
-  # })
   
 })
+
+

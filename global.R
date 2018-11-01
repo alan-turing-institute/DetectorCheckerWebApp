@@ -1,6 +1,6 @@
 # global.R define objects available to both ui.R and server.R
 
-webapp_version <- "0.1.0"
+webapp_version <- "0.1.2"
 
 # global parameters
 const_layout_default <- "None"
@@ -28,16 +28,37 @@ const_pix_distedgesmin = 7
 
 # damaged pixel analysis
 const_dead_plot = 1
+const_dead_plot_cap = "Damage"
+  
 const_dead_density_plot = 2
+const_dead_density_plot_cap = "Density"
+
 const_dead_counts = 3
+const_dead_counts_cap = "Counts"
+
 const_dead_arrows = 4
+const_dead_arrows_cap = "Arrows"
+
 const_dead_angles = 5
+const_dead_angles_cap = "Angles"
+
 const_dead_K = 6
+const_dead_K_cap = "K-func."
+
 const_dead_F = 7
+const_dead_F_cap = "F-func."
+
 const_dead_G = 8
+const_dead_G_cap = "G-func."
+
 const_dead_inhom_K = 9
+const_dead_inhom_K_cap = "Inhom. K-func."
+
 const_dead_inhom_F = 10
+const_dead_inhom_F_cap = "Inhom. F-func."
+
 const_dead_inhom_G = 11
+const_dead_inhom_G_cap = "Inhom. G-func."
 
 # model fit
 const_model_fit_centreeucl = 1

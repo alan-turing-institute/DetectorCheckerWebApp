@@ -21,17 +21,18 @@ shinyServer(function(input, output, session) {
     cat(paste(paste("detectorchecker v: ", packageVersion("detectorchecker"), sep=""),
               paste("webapp v: ", webapp_version, sep=""),
               sep="\n"))
-
   })
+  
+  output$test <- renderPrint({"TEST"})
 
   # Load layout
-  observeEvent(input$layoutLoad, {
+  observeEvent(input$layoutSelect, {
     # check whether a model has been selected
     if (input$layoutSelect == const_layout_default) {
-      showModal(modalDialog(
-        title = "Error",
-        "Layout model has not been selected."
-      ))
+      # showModal(modalDialog(
+      #   title = "Error",
+      #   "Layout model has not been selected."
+      # ))
 
     } else {
       withProgress({
@@ -40,7 +41,7 @@ shinyServer(function(input, output, session) {
 
         setProgress(message = "Rendering layout...")
 
-        output$layoutPlot <- renderPlot({detectorchecker::plot_layout(layout)},
+        output$layoutPlot <- renderPlot({detectorchecker::plot_layout(layout, caption = FALSE)},
                                         width = "auto", height = "auto")
 
         output$layout_summary <- renderPrint({
@@ -48,6 +49,9 @@ shinyServer(function(input, output, session) {
         })
 
         setProgress(message = "Finished!", value = 1.0)
+        
+        output$loaded_layout_text <- renderText({
+          HTML(paste("Layout: ", layout$name))})
       })
     }
   })
@@ -67,7 +71,7 @@ shinyServer(function(input, output, session) {
         withProgress({
           setProgress(message = "Rendering layout...")
 
-          output$layoutPlot <- renderPlot({detectorchecker::plot_layout(layout)},
+          output$layoutPlot <- renderPlot({detectorchecker::plot_layout(layout, caption = FALSE)},
                      width = "auto", height = "auto")
 
           setProgress(message = "Finished!", value = 1.0)
@@ -121,7 +125,7 @@ shinyServer(function(input, output, session) {
   })
 
   # Load dead pixels
-  observeEvent(input$dead_pix_load, {
+  observeEvent(input$dead_file, {
 
     if (is.null(layout) || is.na(layout))
       return(NULL)

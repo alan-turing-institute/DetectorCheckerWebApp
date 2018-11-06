@@ -6,22 +6,22 @@ library(shinythemes)
 shinyUI(fluidPage(theme = shinytheme("flatly"),
                   
   navbarPage("DetectorChecker",
-             
+    ############################################################################
+    ### Layout Panel
+    ############################################################################
     tabPanel("Layout",
       sidebarLayout(
         # Sidebar
         sidebarPanel(
           
           # Input: Select layout
-          selectInput("layoutSelect", "Select a layout:", choices = layout_names),
+          selectInput("layoutSelect", "1. Select a layout:", choices = layout_names),
           
-          actionButton("layoutLoad", "Load"),
-
           hr(),
           
           fluidRow(
             column(gui_sidebar_radio_col_size,
-              radioButtons("pixelRadio", label = "Analysis", inline = FALSE,
+              radioButtons("pixelRadio", label = "2. Analysis", inline = FALSE,
                 choices = list(
                   "layout" = const_layout_plot,
                   "distcentreeucl" = const_pix_distcentreeucl,
@@ -45,23 +45,30 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
         mainPanel(
           tabsetPanel(type = "tabs", 
             tabPanel("Layout Analysis", 
-                     plotOutput("layoutPlot"), 
-                     style = "width:100%"),
+              fluidRow(
+                column(12, align="center",
+                  fluidRow(plotOutput("layoutPlot"))))),
             
-            tabPanel("Sumarry", 
+            tabPanel("Summary", 
                      verbatimTextOutput("layout_summary"))
           )
         )
       )
     ),
     
+    ############################################################################
+    ### Damaged Pixels Panel
+    ############################################################################
     tabPanel("Damaged Pixels", 
       sidebarLayout(
         sidebarPanel(width = 4,
+          
+          verbatimTextOutput("loaded_layout_text", placeholder = TRUE),           
+          
+          hr(),
+          
           fileInput("dead_file", "Choose Pixel Damage File", multiple = TRUE),
-          
-          actionButton("dead_pix_load", "Load"),
-          
+
           hr(),
           
           fixedRow(
@@ -148,6 +155,9 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
       )
     ),
     
+    ############################################################################
+    ### Model Fitting Panel
+    ############################################################################
     tabPanel("Model fitting", 
       sidebarLayout(
         sidebarPanel(
@@ -178,7 +188,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
         )
       )
     )
-
+    #,
     # navbarMenu("More",
     #             tabPanel("Summary"),
     #             "----",

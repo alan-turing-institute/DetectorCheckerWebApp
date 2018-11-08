@@ -1,9 +1,10 @@
 # global.R define objects available to both ui.R and server.R
 
-webapp_version <- "0.1.2"
+webapp_version <- "0.1.3"
 
 # global parameters
 const_layout_default <- "None"
+const_layout_user <- "<<user-defined>>"
 const_cwd <- getwd()
 
 layout_names <- c(const_layout_default)

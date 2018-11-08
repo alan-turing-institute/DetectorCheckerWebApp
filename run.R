@@ -2,6 +2,7 @@
 source("global.R")
 source("ui.R")
 source("server.R")
+source("gui_utils.R")
 
 shiny::runApp(
   appDir = ".",

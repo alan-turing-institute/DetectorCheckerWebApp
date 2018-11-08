@@ -44,7 +44,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           
           verbatimTextOutput("app_summary")
         ),
-      
+        
         # Main panel
         mainPanel(
           tabsetPanel(type = "tabs", 
@@ -66,34 +66,38 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     tabPanel("Damaged Pixels", 
       sidebarLayout(
         sidebarPanel(width = 4,
-          
-          verbatimTextOutput("loaded_layout_text2", placeholder = TRUE),           
-          
-          fileInput("dead_file", "4. Choose Pixel Damage File", multiple = TRUE),
-
-          hr(),
-          
-          fixedRow(
-            column(gui_sidebar_radio_col_size,
-                   radioButtons("dead_radio", label = "5. Analysis", inline = FALSE,
-                                choices = list(
-                                  # "Damage" = const_dead_plot,
-                                  "Density" = const_dead_density_plot,
-                                  "Counts" = const_dead_counts,
-                                  "Arrows" = const_dead_arrows,
-                                  "Angles" = const_dead_angles,
-                                  "K-func." = const_dead_K,
-                                  "F-func." = const_dead_F,
-                                  "G-func." = const_dead_G,
-                                  "Inhom. K-func." = const_dead_inhom_K,
-                                  "Inhom. F-func." = const_dead_inhom_F,
-                                  "Inhom. G-func." = const_dead_inhom_G
-                                  ), 
-                                selected = const_dead_density_plot))),
-          
-          actionButton("layoutDeadPixels", "6. Plot analysis")
-        ),
-               
+          fluidRow(
+            verbatimTextOutput("loaded_layout_text2", placeholder = TRUE),           
+            
+            fileInput("dead_file", "4. Choose Pixel Damage File", multiple = TRUE),
+  
+            fixedRow(
+              column(gui_sidebar_radio_col_size,
+                     radioButtons("dead_radio", label = "5. Analysis", inline = FALSE,
+                                  choices = list(
+                                    # "Damage" = const_dead_plot,
+                                    "Density" = const_dead_density_plot,
+                                    "Counts" = const_dead_counts,
+                                    "Arrows" = const_dead_arrows,
+                                    "Angles" = const_dead_angles,
+                                    "K-func." = const_dead_K,
+                                    "F-func." = const_dead_F,
+                                    "G-func." = const_dead_G,
+                                    "Inhom. K-func." = const_dead_inhom_K,
+                                    "Inhom. F-func." = const_dead_inhom_F,
+                                    "Inhom. G-func." = const_dead_inhom_G
+                                    ), 
+                                  selected = const_dead_density_plot))),
+            
+            actionButton("layoutDeadPixels", "6. Plot analysis")
+          ),
+          fluidRow(
+            hr(),
+            p("Data upload to developers"),
+            actionButton("deadPixelsUpload", "Upload data")
+          )
+        ),       
+        
         # Main panel
         mainPanel(
           tabsetPanel(type = "tabs", 

@@ -39,6 +39,9 @@
 # clears all the plots
 .clear_output <- function(output) {
   
+  reset("dead_file")
+  reset("layout_file")
+  
   ########### LAYOUT
   # Layout analysis plot
   output$layoutPlot <- NULL
@@ -70,4 +73,10 @@
   
   ############ FIT
   output$model_fit_summary <- NULL
+}
+
+.layout_not_selected_error <- function(){
+  showModal(modalDialog(
+    title = "Error",
+    "Layout model has not been selected."))
 }

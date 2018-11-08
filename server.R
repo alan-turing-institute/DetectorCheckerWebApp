@@ -75,6 +75,11 @@ shinyServer(function(input, output, session) {
           return(NULL)})
       
       if (is.null(layout) || is.na(layout)) {
+        
+        layout <<- NULL
+        .update_layout_textbox(layout = layout, output = output)
+        .clear_output(output)
+        
         return(NULL)
       }
       
@@ -90,11 +95,13 @@ shinyServer(function(input, output, session) {
 
     # check whether a model has been selected
     if (input$layoutSelect == const_layout_default) {
-      showModal(modalDialog(
-        title = "Error",
-        "Layout model has not been selected."))
-
+      .layout_not_selected_error()
+    
+    } else if ((input$layoutSelect == const_layout_user) && (is.na(layout) || is.null(layout))) {
+      .layout_not_selected_error()
+        
     } else {
+      
       # select appropriate action with respect to the radio button
       if (input$pixelRadio == const_layout_plot) {
         withProgress({

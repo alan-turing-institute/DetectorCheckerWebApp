@@ -1,10 +1,11 @@
 # This is the UI of a Shiny web application. 
 library(shiny)
+library(shinyjs)
 library(shinythemes)
 
 # Define UI for application 
 shinyUI(fluidPage(theme = shinytheme("flatly"),
-                  
+                  useShinyjs(),
   navbarPage("DetectorChecker",
     ############################################################################
     ### Layout Panel
@@ -13,11 +14,16 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
       sidebarLayout(
         # Sidebar
         sidebarPanel(
+          verbatimTextOutput("loaded_layout_text1", placeholder = TRUE), 
           
           # Input: Select layout
           selectInput("layoutSelect", "1. Select a layout:", choices = layout_names),
           
-          hr(),
+          # Only show this panel if user-defined layout has been chosen
+          conditionalPanel(
+            condition = "input.layoutSelect == '<<user-defined>>'",
+            fileInput("layout_file", "Upload layout file", multiple = FALSE)
+          ),
           
           fluidRow(
             column(gui_sidebar_radio_col_size,
@@ -32,9 +38,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                   "distedgesmin" = const_pix_distedgesmin), 
                 selected = const_layout_plot))),
           
-          hr(),
-          
-          actionButton("layoutPixels", "Plot"), 
+          actionButton("layoutPixels", "3. Plot analysis"), 
           
           hr(),
           
@@ -63,17 +67,15 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
       sidebarLayout(
         sidebarPanel(width = 4,
           
-          verbatimTextOutput("loaded_layout_text", placeholder = TRUE),           
+          verbatimTextOutput("loaded_layout_text2", placeholder = TRUE),           
           
-          hr(),
-          
-          fileInput("dead_file", "Choose Pixel Damage File", multiple = TRUE),
+          fileInput("dead_file", "4. Choose Pixel Damage File", multiple = TRUE),
 
           hr(),
           
           fixedRow(
             column(gui_sidebar_radio_col_size,
-                   radioButtons("dead_radio", label = "Analysis", inline = FALSE,
+                   radioButtons("dead_radio", label = "5. Analysis", inline = FALSE,
                                 choices = list(
                                   # "Damage" = const_dead_plot,
                                   "Density" = const_dead_density_plot,
@@ -89,7 +91,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                   ), 
                                 selected = const_dead_density_plot))),
           
-          actionButton("layoutDeadPixels", "Plot")
+          actionButton("layoutDeadPixels", "6. Plot analysis")
         ),
                
         # Main panel
@@ -161,9 +163,11 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     tabPanel("Model fitting", 
       sidebarLayout(
         sidebarPanel(
+          verbatimTextOutput("loaded_layout_text3", placeholder = TRUE),           
+          
           fluidRow(
             column(gui_sidebar_radio_col_size,
-              radioButtons("fit_radio", label = "Model", inline = FALSE,
+              radioButtons("fit_radio", label = "6. Model", inline = FALSE,
                 choices = list(
                   "Pix cntr eucl" = const_model_fit_centreeucl,
                   "Pix cntr inf" = const_model_fit_centrlinf,
@@ -175,7 +179,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
               # textInput("custom_model", label = "", value = "Enter model expression")
             ),
           
-         actionButton("model_fit", "Fit"),
+         actionButton("model_fit", "7. Fit"),
          
          hr()
         ),

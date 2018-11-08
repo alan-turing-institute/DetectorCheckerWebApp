@@ -4,15 +4,18 @@
 options(shiny.maxRequestSize=30*1024^2)
 
 library(shiny)
+library(shinyjs)
 library(shinythemes)
 library(ggplot2)
 library(detectorchecker)
+source("gui_utils.R")
 
 # Define server
 shinyServer(function(input, output, session) {
 
   # load layouts
-  layout_names <- detectorchecker::available_layouts
+  layout_names <- c(const_layout_default, detectorchecker::available_layouts, 
+                    const_layout_user)
 
   # refresh layout select
   updateSelectInput(session, const_ui_layoutSelectInput, choices = layout_names)
@@ -23,17 +26,23 @@ shinyServer(function(input, output, session) {
               sep="\n"))
   })
   
-  output$test <- renderPrint({"TEST"})
-
+  # update loaded layout text boxes to NONE
+  .update_layout_textbox(layout = layout, output = output)
+  
   # Load layout
   observeEvent(input$layoutSelect, {
     # check whether a model has been selected
     if (input$layoutSelect == const_layout_default) {
-      # showModal(modalDialog(
-      #   title = "Error",
-      #   "Layout model has not been selected."
-      # ))
-
+    
+      layout <<- NULL
+      
+      .update_layout_textbox(layout = layout, output = output)
+      
+      .clear_output(output)
+      
+    } else if (input$layoutSelect == const_layout_user) {  
+      
+    
     } else {
       withProgress({
         setProgress(message = "Loading layout...")
@@ -41,19 +50,39 @@ shinyServer(function(input, output, session) {
 
         setProgress(message = "Rendering layout...")
 
-        output$layoutPlot <- renderPlot({detectorchecker::plot_layout(layout, caption = FALSE)},
-                                        width = "auto", height = "auto")
-
-        output$layout_summary <- renderPrint({
-          cat(detectorchecker::layout_summary(layout))
-        })
-
-        setProgress(message = "Finished!", value = 1.0)
+        .render_layout(layout = layout, output = output)
         
-        output$loaded_layout_text <- renderText({
-          HTML(paste("Layout: ", layout$name))})
+        setProgress(message = "Finished!", value = 1.0)
       })
     }
+  })
+  
+  # Load custom layout
+  observeEvent(input$layout_file, {
+    
+    layout_file <- input$layout_file
+    
+    if (is.null(layout_file))
+      return(NULL)
+    
+    withProgress({
+      setProgress(message = "Loading layout...")
+      
+      tryCatch({ 
+        layout <<- detectorchecker::readin_layout(layout_file$datapath)},
+        error = function(err) {
+          showModal(modalDialog(title = "Error", err))
+          return(NULL)})
+      
+      if (is.null(layout) || is.na(layout)) {
+        return(NULL)
+      }
+      
+      .render_layout(layout = layout, output = output)
+      
+      setProgress(message = "Finished!", value = 1.0)
+    })
+    
   })
 
   # Plot the selected layout pixel analysis
@@ -130,20 +159,34 @@ shinyServer(function(input, output, session) {
     if (is.null(layout) || is.na(layout))
       return(NULL)
 
-    dead_file <- input$dead_file
-
     if (is.null(input$dead_file))
       return(NULL)
 
     withProgress({
       setProgress(message = "Reading in data...")
-
-      layout <<- detectorchecker::load_pix_matrix(layout = layout,
-                                                  file_path = dead_file$datapath)
-
-      setProgress(message = "Analysing damage...")
-      layout <<- detectorchecker::get_dead_stats(layout)
-
+      
+      dead_load_ok <- TRUE
+      tryCatch({
+        layout <<- detectorchecker::load_pix_matrix(layout = layout, file_path = input$dead_file$datapath)
+        
+        setProgress(message = "Analysing damage...")
+        
+        layout <<- detectorchecker::get_dead_stats(layout)
+        
+        },
+        error = function(err) {
+          reset("dead_file")
+          showModal(modalDialog(title = "Error", err))
+          dead_load_ok <<- FALSE
+          return(NULL)
+        }
+      )
+      
+      if (!dead_load_ok) {
+        
+        return(NULL)
+      }
+      
       setProgress(message = "Rendering damage...")
       output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_damaged(layout, caption = FALSE)},
                                            width = "auto", height = "auto")

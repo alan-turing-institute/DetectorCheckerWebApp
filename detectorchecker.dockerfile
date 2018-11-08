@@ -10,6 +10,7 @@ RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; 
 
 # install R packages
 RUN Rscript -e "install.packages('shiny')"
+RUN Rscript -e "install.packages('shinyjs')"
 RUN Rscript -e "install.packages('shinythemes')"
 RUN Rscript -e "install.packages('ggplot2')"
 RUN Rscript -e "install.packages('spatstat')"
@@ -20,6 +21,7 @@ RUN Rscript -e "install.packages('raster')"
 RUN Rscript -e "install.packages('igraph')"
 RUN Rscript -e "install.packages('plyr')"
 RUN Rscript -e "install.packages('dplyr')"
+RUN Rscript -e "install.packages('readr')"
 RUN Rscript -e "install.packages('testthat')"
 RUN Rscript -e "install.packages('knitr')"
 RUN Rscript -e "install.packages('rmarkdown')"

@@ -1,4 +1,4 @@
-FROM r-base:3.5.1
+FROM rocker/r-ver:3.5.1
 
 # install R, and setup CRAN mirror
 #RUN apt-get update && apt-get install -y software-properties-common pandoc gnupg
@@ -10,7 +10,6 @@ RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; 
 
 # install R packages
 RUN Rscript -e "install.packages('shiny')"
-RUN Rscript -e "install.packages('shinyjs')"
 RUN Rscript -e "install.packages('shinythemes')"
 RUN Rscript -e "install.packages('ggplot2')"
 RUN Rscript -e "install.packages('spatstat')"
@@ -30,14 +29,30 @@ RUN Rscript -e "install.packages('devtools')"
 
 # this is where detectorchecker package should installed
 
+# install Azure CLI - instructions from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
+RUN apt-get update; apt-get -y install lsb-release
+RUN apt-get update; apt-get -y install curl
+RUN apt-get update; apt-get -y install gnupg
+
+RUN echo $(lsb_release -cs)
+
+
+RUN AZ_REPO=$(lsb_release -cs) \
+    &&  echo "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ $AZ_REPO main" | \
+    tee /etc/apt/sources.list.d/azure-cli.list
+
+RUN curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
+RUN apt-get install -y apt-transport-https
+RUN apt-get update; apt-get install -y --allow-unauthenticated azure-cli
+
 ADD . DetectorCheckerWebApp
 WORKDIR DetectorCheckerWebApp
 
 # this is temporary while we do not publish the app on CRAN
-RUN Rscript -e "install.packages('detectorchecker_0.1.7.tgz', repos = NULL, type='source')"
+RUN Rscript -e "install.packages('detectorchecker_0.1.7.gz', repos = NULL, type='source')"
 
 # make sure that shiny.sh is an executable
-# RUN chmod +x shiny.sh
+RUN chmod +x shiny.sh
 
 # azure config
 ENV AZURE_STORAGE_ACCOUNT detectorcheckerstorage
@@ -46,6 +61,8 @@ ENV AZURE_CONTAINER detectorcheckercontainer
 
 # expose R Shiny port
 EXPOSE 1111
+
+run az -v
 
 # launch the webapp
 CMD ["./shiny.sh"]

@@ -5,10 +5,10 @@
 # Docker image preparation
 
 ## Building a docker image
-docker build -t tomaslaz/detectorchecker_dashboard:0.1.8 -f detectorchecker.dockerfile .
+docker build -t tomaslaz/detectorchecker_dashboard:0.1.5 -f detectorchecker.dockerfile .
 
 ## Pushing the build to docker hub
-docker push tomaslaz/detectorchecker_dashboard:latest
+docker push tomaslaz/detectorchecker_dashboard:0.1.5
 
 # Data management (Azure)
 

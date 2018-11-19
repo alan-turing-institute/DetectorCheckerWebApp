@@ -1,6 +1,7 @@
+library(shiny)
 # global.R define objects available to both ui.R and server.R
 
-webapp_version <- "0.1.4"
+webapp_version <- "0.1.5"
 
 # global parameters
 const_layout_default <- "None"

@@ -1,3 +1,5 @@
+source("global.R")
+
 # renders selected layout
 .render_layout <- function(layout, output) {
   output$layoutPlot <- renderPlot({detectorchecker::plot_layout(layout, caption = FALSE)},
@@ -76,7 +78,14 @@
 }
 
 .layout_not_selected_error <- function(){
-  showModal(modalDialog(
-    title = "Error",
-    "Layout model has not been selected."))
+  showModal(modalDialog(title = "Error", msg_err_no_layout))
+}
+
+.dead_file_error <- function(){
+  showModal(modalDialog(title = "Error", msg_err_no_deadfile))
+}
+
+# validation of email addresses 
+.is_valid_email <- function(x) {
+  grepl("\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>", as.character(x), ignore.case=TRUE)
 }

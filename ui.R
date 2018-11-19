@@ -65,13 +65,13 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     ############################################################################
     tabPanel("Damaged Pixels", 
       sidebarLayout(
-        sidebarPanel(width = 4,
-          fluidRow(
+        sidebarPanel(
+          # fluidRow(
             verbatimTextOutput("loaded_layout_text2", placeholder = TRUE),           
             
             fileInput("dead_file", "4. Choose Pixel Damage File", multiple = TRUE),
   
-            fixedRow(
+            fluidRow(
               column(gui_sidebar_radio_col_size,
                      radioButtons("dead_radio", label = "5. Analysis", inline = FALSE,
                                   choices = list(
@@ -89,13 +89,14 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                                     ), 
                                   selected = const_dead_density_plot))),
             
-            actionButton("layoutDeadPixels", "6. Plot analysis")
-          ),
-          fluidRow(
+            actionButton("layoutDeadPixels", "6. Plot analysis"),
+          # ),
+          # fluidRow(
             hr(),
-            p("Data upload to developers"),
-            actionButton("deadPixelsUpload", "Upload data")
-          )
+            textInput("text", label = h4("Data upload"), value = "Email address.."),
+          
+            actionButton("deadPixelsUpload", "7. Upload data")
+          # )
         ),       
         
         # Main panel
@@ -154,7 +155,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                 )
               )),
             
-            tabPanel("Sumarry", 
+            tabPanel("Summary", 
               verbatimTextOutput("dead_pixel_summary"))
           ),
         width = 8)
@@ -171,7 +172,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           
           fluidRow(
             column(gui_sidebar_radio_col_size,
-              radioButtons("fit_radio", label = "6. Model", inline = FALSE,
+              radioButtons("fit_radio", label = "8. Model", inline = FALSE,
                 choices = list(
                   "Pix cntr eucl" = const_model_fit_centreeucl,
                   "Pix cntr inf" = const_model_fit_centrlinf,
@@ -183,7 +184,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
               # textInput("custom_model", label = "", value = "Enter model expression")
             ),
           
-         actionButton("model_fit", "7. Fit"),
+         actionButton("model_fit", "9. Fit"),
          
          hr()
         ),

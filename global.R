@@ -1,6 +1,6 @@
 # global.R define objects available to both ui.R and server.R
 
-webapp_version <- "0.1.3"
+webapp_version <- "0.1.4"
 
 # global parameters
 const_layout_default <- "None"
@@ -20,12 +20,25 @@ const_ui_layoutSelectInput <- "layoutSelect"
 
 # pixel analysis
 const_layout_plot = 1
+const_layout_plot_cap = "layout"
+  
 const_pix_distcentreeucl = 2
+const_pix_distcentreeucl_cap = "distcentreeucl"
+  
 const_pix_distcentrelinf = 3
+const_pix_distcentrelinf_cap = "distcentrelinf"
+  
 const_pix_distcorner = 4
+const_pix_distcorner_cap = "distcorner"
+  
 const_pix_distedgescol = 5
+const_pix_distedgescol_cap = "distedgescol"
+  
 const_pix_distedgesrow = 6
+const_pix_distedgesrow_cap = "distedgesrow"
+  
 const_pix_distedgesmin = 7
+const_pix_distedgesmin_cap = "distedgesmin"
 
 # damaged pixel analysis
 const_dead_plot = 1
@@ -68,3 +81,7 @@ const_model_fit_distedgecol = 3
 const_model_fit_distedgerow = 4
 
 const_model_fit_custom = 99
+
+### Error messages
+msg_err_no_layout = "Layout model has not been selected."
+msg_err_no_deadfile = "Dead pixels file has not been uploaded."

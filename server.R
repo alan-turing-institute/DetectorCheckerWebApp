@@ -516,16 +516,30 @@ shinyServer(function(input, output, session) {
   # Upload data to the server
   observeEvent(input$deadPixelsUpload, {
     
+    # check if layout was selected
     if (is.null(layout) || is.na(layout) || is.na(layout$dead_stats)) {
       .layout_not_selected_error()
       return(NULL)
-    } 
-    
+    }
+
+    # check if pixel damage file was uploaded
     if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
       .dead_file_error()
       return(NULL)
     }
     
+    # check the email address
+    # if (!.is_valid_email(input$user_email)) {
+    #   .invalid_email_error()
+    #   return(NULL)
+    # }
+    
+    # upload file
+    tryCatch({ 
+      .upload_pixel_damage_file(input$user_email, input$dead_file$datapath)},
+      error = function(err) {
+        showModal(modalDialog(title = "Error", err))
+        return(NULL)})
   })
   
   # Fit model

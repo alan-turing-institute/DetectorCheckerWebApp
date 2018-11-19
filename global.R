@@ -84,4 +84,34 @@ const_model_fit_custom = 99
 
 ### Error messages
 msg_err_no_layout = "Layout model has not been selected."
-msg_err_no_deadfile = "Dead pixels file has not been uploaded."
+msg_err_no_deadfile = "Pixel damage file has not been uploaded."
+msg_err_invalid_email = "Invalid email address."
+
+### Tooltips
+
+### LAYOUT
+
+# sidebar
+tt_selected_layout = "Selected layout."
+tt_select_input = "Select a predifined or upload custom layout."
+tt_custom_layout = "Select a file with a custom layout parameters."
+tt_custom_example = paste0("Example can be found ", a("here.", 
+  href = "https://github.com/alan-turing-institute/DetectorChecker",
+  target="_blank"))
+tt_layout_analysis = "Select a layout analysis type."
+tt_layout_analysis_button = "Perform analysis."
+tt_version = "Webapp and package versions."
+tt_layout = "This is the selected layout. "
+tt_layout_summary = "This is the summary of the selected layout. "
+
+### DAMAGED PIXELS
+tt_dead_file = "Select a file containing damaged pixel information."
+tt_dead_analysis = "Select a damaged layout analysis type."
+tt_dead_analysis_button = "Perform analysis on the damaged layout."
+tt_email = "Email address will be used as a unique identifier when uploading the data."
+tt_upload_button = "Uploads the damage pixel file to the server."
+tt_damaged_layout_clicks = "Single click on the plot will focus on the specified module, double click - will perform analysis on the specified module."
+tt_dead_pixels_summary = "The summary of damaged pixels."
+
+### MODEL FITTING
+tt_model_fit = "This is the model fit summary."

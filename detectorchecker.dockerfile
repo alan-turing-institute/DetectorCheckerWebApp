@@ -27,6 +27,7 @@ RUN Rscript -e "install.packages('rmarkdown')"
 RUN Rscript -e "install.packages('roxygen2')"
 RUN Rscript -e "install.packages('devtools')"
 RUN Rscript -e "install.packages('shinyjs')"
+RUN Rscript -e "install.packages('shinyBS')"
 
 # this is where detectorchecker package should installed
 

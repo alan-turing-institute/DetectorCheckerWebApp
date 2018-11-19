@@ -77,15 +77,30 @@ source("global.R")
   output$model_fit_summary <- NULL
 }
 
+# error message: layout has not been selected
 .layout_not_selected_error <- function(){
   showModal(modalDialog(title = "Error", msg_err_no_layout))
 }
 
+# error message: pixel damage file has not been uplaoded
 .dead_file_error <- function(){
   showModal(modalDialog(title = "Error", msg_err_no_deadfile))
+}
+
+# error message: invalid email address
+.invalid_email_error <- function(){
+  showModal(modalDialog(title = "Error", msg_err_invalid_email))
 }
 
 # validation of email addresses 
 .is_valid_email <- function(x) {
   grepl("\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>", as.character(x), ignore.case=TRUE)
+}
+
+# pixel damage file upload
+.upload_pixel_damage_file <- function(email_address, file_path) {
+  
+  # 
+  
+  stop("STOP")
 }

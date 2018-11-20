@@ -4,6 +4,7 @@ FROM rocker/r-ver:3.5.1
 #RUN apt-get update && apt-get install -y software-properties-common pandoc gnupg
 RUN apt-get update; apt-get install -y libhdf5-dev
 RUN apt-get update; apt-get install -y libtiff-dev
+RUN apt-get update; apt-get install r-cran-rjava
 
 #RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile
@@ -28,7 +29,8 @@ RUN Rscript -e "install.packages('rmarkdown')"
 RUN Rscript -e "install.packages('roxygen2')"
 RUN Rscript -e "install.packages('devtools')"
 RUN Rscript -e "install.packages('shinyBS')"
-
+RUN Rscript -e "install.packages('rJava')"
+RUN Rscript -e "install.packages('mailR')"
 # this is where detectorchecker package should installed
 
 # install Azure CLI - instructions from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest

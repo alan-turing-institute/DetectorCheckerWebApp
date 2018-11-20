@@ -10,6 +10,7 @@ RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; 
 
 # install R packages
 RUN Rscript -e "install.packages('shiny')"
+RUN Rscript -e "install.packages('shinyjs')"
 RUN Rscript -e "install.packages('shinythemes')"
 RUN Rscript -e "install.packages('ggplot2')"
 RUN Rscript -e "install.packages('spatstat')"
@@ -26,7 +27,6 @@ RUN Rscript -e "install.packages('knitr')"
 RUN Rscript -e "install.packages('rmarkdown')"
 RUN Rscript -e "install.packages('roxygen2')"
 RUN Rscript -e "install.packages('devtools')"
-RUN Rscript -e "install.packages('shinyjs')"
 RUN Rscript -e "install.packages('shinyBS')"
 
 # this is where detectorchecker package should installed
@@ -48,6 +48,7 @@ RUN apt-get update; apt-get install -y --allow-unauthenticated azure-cli
 
 ADD . DetectorCheckerWebApp
 WORKDIR DetectorCheckerWebApp
+ENV DC_HOME /DetectorCheckerWebApp
 
 # this is temporary while we do not publish the app on CRAN
 RUN Rscript -e "install.packages('detectorchecker_0.1.7.tgz', repos = NULL, type='source')"

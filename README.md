@@ -15,8 +15,8 @@ docker push tomaslaz/detectorchecker_dashboard:0.1.5
 ## Naming convention
 
 ```
-email@address/yyyy-mm-dd-hh-mm-ss-layout_name/data_file.ext
-email@address/yyyy-mm-dd-hh-mm-ss-layout_name/layout.dc
+email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.ext
+email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.dc
 ```
 
 ## Uploading/Downloading data to/from Azure using Azure CLI

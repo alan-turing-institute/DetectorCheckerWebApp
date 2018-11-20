@@ -517,7 +517,7 @@ shinyServer(function(input, output, session) {
   observeEvent(input$deadPixelsUpload, {
     
     # check if layout was selected
-    if (is.null(layout) || is.na(layout) || is.na(layout$dead_stats)) {
+    if (is.null(layout) || is.na(layout)) {
       .layout_not_selected_error()
       return(NULL)
     }
@@ -529,17 +529,22 @@ shinyServer(function(input, output, session) {
     }
     
     # check the email address
-    # if (!.is_valid_email(input$user_email)) {
-    #   .invalid_email_error()
-    #   return(NULL)
-    # }
+    if (!.is_valid_email(input$user_email)) {
+      .invalid_email_error()
+      return(NULL)
+    }
     
-    # upload file
-    tryCatch({ 
-      .upload_pixel_damage_file(input$user_email, input$dead_file$datapath)},
-      error = function(err) {
-        showModal(modalDialog(title = "Error", err))
-        return(NULL)})
+    withProgress({
+      setProgress(message = "Uploading data...")
+      
+      # upload file
+      tryCatch({ 
+        .upload_pixel_damage_file(layout$name, input$user_email, 
+          input$dead_file$datapath, input$layout_file$datapath)},
+        error = function(err) {
+          showModal(modalDialog(title = "Error", err))
+          return(NULL)})
+    })
   })
   
   # Fit model

@@ -29,8 +29,6 @@ RUN Rscript -e "install.packages('rmarkdown')"
 RUN Rscript -e "install.packages('roxygen2')"
 RUN Rscript -e "install.packages('devtools')"
 RUN Rscript -e "install.packages('shinyBS')"
-RUN Rscript -e "install.packages('rJava')"
-RUN Rscript -e "install.packages('mailR')"
 # this is where detectorchecker package should installed
 
 # install Azure CLI - instructions from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
@@ -63,6 +61,7 @@ RUN apt-get -y install python3
 RUN apt-get -y install python3-pip
 RUN pip3 install --upgrade pip
 RUN python3 -m pip install azure
+RUN python3 -m pip install smtplib
 
 # azure config
 ENV AZURE_STORAGE_ACCOUNT detectorcheckerstorage

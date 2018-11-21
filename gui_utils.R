@@ -113,19 +113,10 @@ library(mailR)
     format(Sys.time(), "%Y-%m-%d-%H-%M-"), 
     as.numeric(format(Sys.time(), "%OS3")) * 1000, "/", trimws(layout_name))
   
-  up_damage_file <- paste0(upload_name_prefix, ".", tools::file_ext(file_path))
-  
-  # run python script to upload to azure
-  run_cmd <- paste("python3", file.path(Sys.getenv("DC_HOME"), "python_utils", "blob_upload.py"),
-    "--source", file_path,
-    "--target", up_damage_file)
-  
-  stopifnot(system(run_cmd, intern=FALSE) == 0)
-  
   # upload custom user layout
   if (layout_name == const_layout_user_name) {
     up_layout_file <- paste0(upload_name_prefix, ".dc")
-
+    
     run_cmd <- paste("python3", file.path(Sys.getenv("DC_HOME"), "python_utils", "blob_upload.py"),
                      "--source", layout_file_path,
                      "--target", up_layout_file)
@@ -134,29 +125,16 @@ library(mailR)
     stopifnot(system(run_cmd, intern=FALSE) == 0)
   }
   
-  # send email to the user
-  .send_email(layout_name, email_address, file_path, layout_file_path)
+  up_damage_file <- paste0(upload_name_prefix, ".", tools::file_ext(file_path))
+  
+  # run python script to upload to azure
+  run_cmd <- paste("python3", file.path(Sys.getenv("DC_HOME"), "python_utils", "blob_upload.py"),
+    "--source", file_path,
+    "--target", up_damage_file,
+    "--email", email_address)
+  
+  stopifnot(system(run_cmd, intern=FALSE) == 0)
   
   # upload successful message
   .upload_success()
-}
-
-# sends email
-.send_email <- function(layout_name, email_address, file_path, layout_file_path) {
-  
-  sender <- "detectorchecker@gmail.com" 
-  recipients <- c(email_address) 
-  subject <- paste("Layout", layout_name, "data upload successful")
-  
-  body <- "Thank you for the upload!"
-  
-  email <- mailR::send.mail(from = sender,
-                     to = recipients,
-                     subject=subject,
-                     body = "Body of the email",
-                     smtp = list(host.name = "aspmx.l.google.com", port = 25),
-                     authenticate = FALSE,
-                     send = FALSE)
-  
-  ## Not run: email$send() # execute to send email
 }

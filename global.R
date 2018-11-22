@@ -84,12 +84,15 @@ const_model_fit_distedgerow = 4
 
 const_model_fit_custom = 99
 
+
+############### Messages
+
 ### Error messages
 msg_err_no_layout = "Layout model has not been selected."
 msg_err_no_deadfile = "Pixel damage file has not been uploaded."
 msg_err_invalid_email = "Invalid email address."
 
-### Tooltips
+################ Tooltips
 
 ### LAYOUT
 
@@ -102,7 +105,7 @@ tt_custom_example = paste0("Example can be found ", a("here.",
   target="_blank"))
 tt_layout_analysis = "Select a layout analysis type."
 tt_layout_analysis_button = "Perform analysis."
-tt_version = "Webapp and package versions."
+tt_version = "DetectorChecker package and webapp versions."
 tt_layout = "This is the selected layout. "
 tt_layout_summary = "This is the summary of the selected layout. "
 
@@ -116,4 +119,5 @@ tt_damaged_layout_clicks = "Single click on the plot will focus on the specified
 tt_dead_pixels_summary = "The summary of damaged pixels."
 
 ### MODEL FITTING
+tt_model = "This is to fit different models"
 tt_model_fit = "This is the model fit summary."

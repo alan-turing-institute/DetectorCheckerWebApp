@@ -53,9 +53,9 @@ Subject: %s
 
 Dear DetectorChecker user,
 
-The file %s has been uploaded successfuly.
+File %s has been uploaded successfuly.
 
-- DetectorChecker TEAM
+- DetectorChecker Team
   """ % (sent_from, email_to, subject, blob_name)
 
   try:
@@ -84,7 +84,11 @@ if __name__ == "__main__":
 
   file_path = (args.source).strip()
   blob_name = (args.target).strip()
-  email = (args.email).strip()
+
+  if args.email is not None:
+    email = (args.email).strip()
+  else:
+    email = None
 
   blob_exists = check_blob_exists(blob_name)
 

@@ -1,7 +1,5 @@
 source("global.R")
 
-library(mailR)
-
 # renders selected layout
 .render_layout <- function(layout, output) {
   output$layoutPlot <- renderPlot({detectorchecker::plot_layout(layout, caption = FALSE)},

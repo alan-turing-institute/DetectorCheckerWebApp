@@ -1,3 +1,5 @@
+source("global.R")
+
 # renders selected layout
 .render_layout <- function(layout, output) {
   output$layoutPlot <- renderPlot({detectorchecker::plot_layout(layout, caption = FALSE)},
@@ -75,8 +77,62 @@
   output$model_fit_summary <- NULL
 }
 
+# error message: layout has not been selected
 .layout_not_selected_error <- function(){
-  showModal(modalDialog(
-    title = "Error",
-    "Layout model has not been selected."))
+  showModal(modalDialog(title = "Error", msg_err_no_layout))
+}
+
+# error message: pixel damage file has not been uplaoded
+.dead_file_error <- function(){
+  showModal(modalDialog(title = "Error", msg_err_no_deadfile))
+}
+
+# error message: invalid email address
+.invalid_email_error <- function(){
+  showModal(modalDialog(title = "Error", msg_err_invalid_email))
+}
+
+# validation of email addresses 
+.is_valid_email <- function(x) {
+  grepl("\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>", as.character(x), ignore.case=TRUE)
+}
+
+# success message: Data upload was successful
+.upload_success <- function(){
+  showModal(modalDialog(title = "Data upload", "Upload successful."))
+}
+
+# pixel damage file upload
+.upload_pixel_damage_file <- function(layout_name, email_address, 
+  file_path, layout_file_path) {
+  
+  # generating a name
+  upload_name_prefix <- paste0(trimws(email_address), "/", 
+    format(Sys.time(), "%Y-%m-%d-%H-%M-"), 
+    as.numeric(format(Sys.time(), "%OS3")) * 1000, "/", trimws(layout_name))
+  
+  # upload custom user layout
+  if (layout_name == const_layout_user_name) {
+    up_layout_file <- paste0(upload_name_prefix, ".dc")
+    
+    run_cmd <- paste("python3", file.path(Sys.getenv("DC_HOME"), "python_utils", "blob_upload.py"),
+                     "--source", layout_file_path,
+                     "--target", up_layout_file)
+    
+    print(run_cmd)
+    stopifnot(system(run_cmd, intern=FALSE) == 0)
+  }
+  
+  up_damage_file <- paste0(upload_name_prefix, ".", tools::file_ext(file_path))
+  
+  # run python script to upload to azure
+  run_cmd <- paste("python3", file.path(Sys.getenv("DC_HOME"), "python_utils", "blob_upload.py"),
+    "--source", file_path,
+    "--target", up_damage_file,
+    "--email", email_address)
+  
+  stopifnot(system(run_cmd, intern=FALSE) == 0)
+  
+  # upload successful message
+  .upload_success()
 }

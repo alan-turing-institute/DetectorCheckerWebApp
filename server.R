@@ -96,9 +96,11 @@ shinyServer(function(input, output, session) {
     # check whether a model has been selected
     if (input$layoutSelect == const_layout_default) {
       .layout_not_selected_error()
+      return(NULL)
     
     } else if ((input$layoutSelect == const_layout_user) && (is.na(layout) || is.null(layout))) {
       .layout_not_selected_error()
+      return(NULL)
         
     } else {
       
@@ -163,12 +165,17 @@ shinyServer(function(input, output, session) {
   # Load dead pixels
   observeEvent(input$dead_file, {
 
-    if (is.null(layout) || is.na(layout))
+    if (is.null(layout) || is.na(layout)) {
+      .layout_not_selected_error()
+      .clear_output(output)
       return(NULL)
+    }
 
-    if (is.null(input$dead_file))
+    if (is.null(input$dead_file)) {
       return(NULL)
-
+      .dead_file_error()
+    }
+    
     withProgress({
       setProgress(message = "Reading in data...")
       
@@ -220,8 +227,15 @@ shinyServer(function(input, output, session) {
   # Plot the selected layout pixel analysis
   observeEvent(input$layoutDeadPixels, {
 
-    if (is.null(layout) || is.na(layout) || is.na(layout$dead_stats))
+    if (is.null(layout) || is.na(layout)) {
+      .layout_not_selected_error()
       return(NULL)
+    } 
+    
+    if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
+      .dead_file_error()
+      return(NULL)
+    }
 
     withProgress({
 
@@ -498,12 +512,53 @@ shinyServer(function(input, output, session) {
       })
     }
   })
+  
+  # Upload data to the server
+  observeEvent(input$deadPixelsUpload, {
+    
+    # check if layout was selected
+    if (is.null(layout) || is.na(layout)) {
+      .layout_not_selected_error()
+      return(NULL)
+    }
 
+    # check if pixel damage file was uploaded
+    if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
+      .dead_file_error()
+      return(NULL)
+    }
+    
+    # check the email address
+    if (!.is_valid_email(input$user_email)) {
+      .invalid_email_error()
+      return(NULL)
+    }
+    
+    withProgress({
+      setProgress(message = "Uploading data...")
+      
+      # upload file
+      tryCatch({ 
+        .upload_pixel_damage_file(layout$name, input$user_email, 
+          input$dead_file$datapath, input$layout_file$datapath)},
+        error = function(err) {
+          showModal(modalDialog(title = "Error", err))
+          return(NULL)})
+    })
+  })
+  
   # Fit model
   observeEvent(input$model_fit, {
 
-    if (is.null(layout) || is.na(layout) || is.na(layout$dead_stats))
+    if (is.null(layout) || is.na(layout)) {
+      .layout_not_selected_error()
       return(NULL)
+    } 
+    
+    if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
+      .dead_file_error()
+      return(NULL)
+    }
 
     withProgress({
       setProgress(message = "Fitting model...")

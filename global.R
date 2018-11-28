@@ -46,35 +46,35 @@ const_pix_distedgesmin_cap = "distedgesmin"
 const_dead_plot = 1
 const_dead_plot_cap = "Damage"
   
-const_dead_density_plot = 2
-const_dead_density_plot_cap = "Density"
+const_density_plot = 2
+const_density_plot_cap = "Density"
 
-const_dead_counts = 3
-const_dead_counts_cap = "Counts"
+const_counts = 3
+const_counts_cap = "Counts"
 
-const_dead_arrows = 4
-const_dead_arrows_cap = "Arrows"
+const_arrows = 4
+const_arrows_cap = "Arrows"
 
-const_dead_angles = 5
-const_dead_angles_cap = "Angles"
+const_angles = 5
+const_angles_cap = "Angles"
 
-const_dead_K = 6
-const_dead_K_cap = "K-func."
+const_K = 6
+const_K_cap = "K-func."
 
-const_dead_F = 7
-const_dead_F_cap = "F-func."
+const_F = 7
+const_F_cap = "F-func."
 
-const_dead_G = 8
-const_dead_G_cap = "G-func."
+const_G = 8
+const_G_cap = "G-func."
 
-const_dead_inhom_K = 9
-const_dead_inhom_K_cap = "Inhom. K-func."
+const_inhom_K = 9
+const_inhom_K_cap = "Inhom. K-func."
 
-const_dead_inhom_F = 10
-const_dead_inhom_F_cap = "Inhom. F-func."
+const_inhom_F = 10
+const_inhom_F_cap = "Inhom. F-func."
 
-const_dead_inhom_G = 11
-const_dead_inhom_G_cap = "Inhom. G-func."
+const_inhom_G = 11
+const_inhom_G_cap = "Inhom. G-func."
 
 # model fit
 const_model_fit_centreeucl = 1
@@ -84,6 +84,9 @@ const_model_fit_distedgerow = 4
 
 const_model_fit_custom = 99
 
+# analysis level (pixels, events)
+const_level_pixels = "Pixels"
+const_level_events = "Events"
 
 ############### Messages
 
@@ -111,6 +114,7 @@ tt_layout_summary = "This is the summary of the selected layout. "
 
 ### DAMAGED PIXELS
 tt_dead_file = "Select a file containing damaged pixel information."
+tt_dead_level = "Choose level.."
 tt_dead_analysis = "Select a damaged layout analysis type."
 tt_dead_analysis_button = "Perform analysis on the damaged layout."
 tt_email = "Email address will be used as a unique identifier when uploading the data."

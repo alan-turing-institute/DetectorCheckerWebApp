@@ -3,6 +3,7 @@ library(shiny)
 library(shinyjs)
 library(shinyBS)
 library(shinythemes)
+library(shinydashboard)
 source("global.R")
 
 # Define UI for application 
@@ -22,7 +23,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
             placement = "right", options = list(container = "body")),
 
           # Input: Select layout
-          selectInput("layoutSelect", label = h4("1. Layout selection"), choices = layout_names),
+          selectInput("layoutSelect", label = h4("1. Select Layout"), choices = layout_names),
           bsTooltip("layoutSelect", tt_select_input, 
             placement = "right", options = list(container = "body")),
           
@@ -46,7 +47,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           fluidRow(
             column(gui_sidebar_radio_col_size,
               radioButtons("pixelRadio", 
-                label = h4("2. Analysis", 
+                label = h4("2. Visualisation", 
                   tags$style(type = "text/css", "#q2 {vertical-align: top;}"),
                   bsButton("q2", label = "", icon = icon("question"), 
                     style = "info", size = "extra-small")), 
@@ -67,13 +68,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                       options = list(container = "body")
             )),
           
-          # bsTooltip("pixelRadio", tt_layout_analysis, 
-          #   placement = "right", options = list(container = "body")),
-          
-          actionButton("layoutPixels", "Plot"), 
-          
-          # bsTooltip("layoutPixels", tt_layout_analysis_button, 
-          #   placement = "right", options = list(container = "body")),
+          actionButton("layoutPixels", "3. Plot"), 
           
           hr(),
           
@@ -111,99 +106,90 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     ############################################################################
     ### Damaged Pixels Panel
     ############################################################################
-    tabPanel("Damaged Pixels", 
+    tabPanel("Damage", 
       sidebarLayout(
         sidebarPanel(
-          # fluidRow(
-            verbatimTextOutput("loaded_layout_text2", placeholder = TRUE),           
-            
-            bsTooltip("loaded_layout_text2", tt_selected_layout, 
-                      placement = "right", options = list(container = "body")),
-            
-            fileInput("dead_file", 
-              label = h4("3. Pixel Damage File", 
-                tags$style(type = "text/css", "#q3 {vertical-align: top;}"),
-                bsButton("q3", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
-              multiple = TRUE),
-            
-            bsPopover(id = "q3", title = "Pixel damage file",
-                      content = tt_dead_file,
-                      placement = "right",
-                      trigger = "focus",
-                      options = list(container = "body")
-            ),
+          
+          verbatimTextOutput("loaded_layout_text2", placeholder = TRUE),           
+          
+          bsTooltip("loaded_layout_text2", tt_selected_layout, 
+            placement = "right", options = list(container = "body")),
+          
+          fileInput("dead_file", 
+            label = h4("4. Import File", 
+              tags$style(type = "text/css", "#q3 {vertical-align: top;}"),
+              bsButton("q3", label = "", icon = icon("question"), 
+                style = "info", size = "extra-small")), 
+            multiple = TRUE),
+          
+          bsPopover(id = "q3", title = "4. Import File", content = tt_dead_file,
+            placement = "right", trigger = "focus", options = list(container = "body")),
 
-            fluidRow(
-              column(gui_sidebar_radio_col_size,
-                radioButtons("dead_radio", 
-                  label = h4("4. Analysis", 
-                             tags$style(type = "text/css", "#q4 {vertical-align: top;}"),
-                             bsButton("q4", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
-                  inline = FALSE,
-                  choices = list(
-                    # "Damage" = const_dead_plot,
-                    "Density" = const_dead_density_plot,
-                    "Counts" = const_dead_counts,
-                    "Arrows" = const_dead_arrows,
-                    "Angles" = const_dead_angles,
-                    "K-func." = const_dead_K,
-                    "F-func." = const_dead_F,
-                    "G-func." = const_dead_G,
-                    "Inhom. K-func." = const_dead_inhom_K,
-                    "Inhom. F-func." = const_dead_inhom_F,
-                    "Inhom. G-func." = const_dead_inhom_G), 
-                  selected = const_dead_density_plot),
-                
-                bsPopover(id = "q4", title = "Pixel damage analysis",
-                  content = tt_dead_analysis,
-                  placement = "right",
-                  trigger = "focus",
-                  options = list(container = "body"))
-                
-               # bsTooltip("dead_radio", , 
-               #   placement = "right", options = list(container = "body"))
-               
-               )),
-            
-            actionButton("layoutDeadPixels", "Plot"),
-            # bsTooltip("layoutDeadPixels", tt_dead_analysis_button, 
-            #   placement = "right", options = list(container = "body")),
-            
-          # ),
-          # fluidRow(
-            hr(),
-            textInput("user_email", 
-              label = h4("5. Data upload", 
-                tags$style(type = "text/css", "#q5 {vertical-align: top;}"),
-                bsButton("q5", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
-              value = "Email address.."),
-            
-            bsPopover(id = "q5", title = "Data upload",
-                      content = paste(tt_email, tt_upload_button),
-                      placement = "right",
-                      trigger = "focus",
-                      options = list(container = "body")
-            ),
+          radioButtons("level_radio", 
+            label = h4("5. Choose Level", 
+              tags$style(type = "text/css", "#q4 {vertical-align: top;}"),
+              bsButton("q5", label = "", icon = icon("question"), style = "info", size = "extra-small")),
+            choices = list("Pixels" = const_level_pixels, "Events" = const_level_events),
+            selected = const_level_pixels),
+ 
+          bsPopover(id = "q5", title = "Analysis level",
+            placement = "right", trigger = "focus", options = list(container = "body"),
+            content = tt_dead_level),
           
-            # bsPopover(id = "user_email", title = "Email address",
-            #           content = tt_email,
-            #           placement = "right",
-            #           trigger = "hover",
-            #           options = list(container = "body")
-            # ),  
+          # Only show this panel if user-defined layout has been chosen
+          conditionalPanel(
+            condition = "input.level_radio == 'Events'",
+            checkboxGroupInput("events_chk_group", label = h5("Incl. Event Types"), 
+              choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, 
+                             "5" = 5, "6" = 6, "7" = 7, "8" = 8),
+              selected = 1:8, inline = FALSE)
+          ),
           
-            actionButton("deadPixelsUpload", "Upload")
+          radioButtons("dead_radio", inline = FALSE,
+            label = h4("6. Choose Analysis", 
+              tags$style(type = "text/css", "#q4 {vertical-align: top;}"),
+              bsButton("q6", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
+            choices = list(
+              "Density" = const_density_plot,
+              "Counts" = const_counts,
+              "Arrows" = const_arrows,
+              "Angles" = const_angles,
+              "K-func." = const_K,
+              "F-func." = const_F,
+              "G-func." = const_G,
+              "Inhom. K-func." = const_inhom_K,
+              "Inhom. F-func." = const_inhom_F,
+              "Inhom. G-func." = const_inhom_G), 
+            selected = const_density_plot),
           
-          # ,
-          #   bsTooltip("deadPixelsUpload", tt_upload_button, 
-          #     placement = "right", options = list(container = "body"))
-          # )
+          bsPopover(id = "q6", title = "Damage analysis",
+            content = tt_dead_analysis,
+            placement = "right",
+            trigger = "focus",
+            options = list(container = "body")),
+              
+          actionButton("layoutDeadPixels", "7. Plot"),
+
+          hr(),
+          
+          textInput("user_email", 
+            label = h4("8. Send Data", 
+              tags$style(type = "text/css", "#q5 {vertical-align: top;}"),
+              bsButton("q8", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
+            value = "Email address.."),
+          
+          bsPopover(id = "q8", title = "Data upload",
+            placement = "right", trigger = "focus", options = list(container = "body"),
+            content = paste(tt_email, tt_upload_button)),
+        
+          actionButton("deadPixelsUpload", "Send")
+      
         ),       
         
         # Main panel
         mainPanel(
           tabsetPanel(type = "tabs", 
-            tabPanel("Damaged Pixels Analysis", 
+            tabPanel("Analysis", 
               fluidRow(
                 # --------------------------------------------------------------
                 # LAYOUT ANALYSIS
@@ -289,9 +275,9 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           fluidRow(
             column(gui_sidebar_radio_col_size,
               radioButtons("fit_radio", 
-                label = h4("6. Modelling",
+                label = h4("9. Modelling",
                            tags$style(type = "text/css", "#q6 {vertical-align: top;}"),
-                  bsButton("q6", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
+                  bsButton("q9", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
                 inline = FALSE,
                 choices = list(
                   "Pix cntr eucl" = const_model_fit_centreeucl,
@@ -301,13 +287,13 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                 ), 
                 selected = const_model_fit_centreeucl)),
             
-            bsPopover(id = "q6", title = "Model fitting",
+            bsPopover(id = "q9", title = "Model fitting",
               content = tt_model,
               placement = "right",
               trigger = "focus",
               options = list(container = "body"))),
           
-          actionButton("model_fit", "Fit model")
+          actionButton("model_fit", "10. Fit model")
         ),
         
         mainPanel(

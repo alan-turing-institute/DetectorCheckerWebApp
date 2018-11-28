@@ -136,6 +136,15 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
             placement = "right", trigger = "focus", options = list(container = "body"),
             content = tt_dead_level),
           
+          # Only show this panel if user-defined layout has been chosen
+          conditionalPanel(
+            condition = "input.level_radio == 'Events'",
+            checkboxGroupInput("events_chk_group", label = h5("Incl. Event Types"), 
+              choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, 
+                             "5" = 5, "6" = 6, "7" = 7, "8" = 8),
+              selected = 1:8, inline = FALSE)
+          ),
+          
           radioButtons("dead_radio", inline = FALSE,
             label = h4("6. Choose Analysis", 
               tags$style(type = "text/css", "#q4 {vertical-align: top;}"),

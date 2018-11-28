@@ -251,7 +251,7 @@ shinyServer(function(input, output, session) {
       
     } else if (input$level_radio == const_level_events) {
       
-      incl_event_list <- NA
+      incl_event_list <- as.list(as.integer(input$events_chk_group))
       
       layout_temp <- detectorchecker::find_clumps(layout)
       
@@ -379,10 +379,18 @@ shinyServer(function(input, output, session) {
       
       } else if (input$level_radio == const_level_events) {  
         
-        incl_event_list <- NA
-        
+        incl_event_list <- as.list(as.integer(input$events_chk_group))
+      
         setProgress(message = "Looking for clumps..", value = 0.3)
         layout_temp <- detectorchecker::find_clumps(layout)
+        
+        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_events(layout_temp, 
+          caption = FALSE, incl_event_list = incl_event_list)},
+          width = "auto", height = "auto")
+        
+        output$layout_analysis_left_caption <- renderPrint({
+          cat("Layout Events")
+        })
         
         # density
         if (input$dead_radio == const_density_plot) {
@@ -394,6 +402,16 @@ shinyServer(function(input, output, session) {
             detectorchecker::plot_events_density(layout_temp, caption = FALSE, incl_event_list = incl_event_list)},
                                                         width = "auto", height = "auto")
         
+        # counts
+        } else if(input$dead_radio == const_counts) {
+          
+          analysis_caption <- const_counts_cap
+          setProgress(message = paste("Rendering", analysis_caption, sep=" "))
+          
+          output$dead_pixel_analysis_plot <- renderPlot({
+            detectorchecker::plot_events_count(layout = layout_temp, caption = FALSE, incl_event_list = incl_event_list)},
+                                                        width = "auto", height = "auto")
+          
         # arrows
         } else if(input$dead_radio == const_arrows) {  
           

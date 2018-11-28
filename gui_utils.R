@@ -38,8 +38,8 @@ source("global.R")
   }
 }
 
-# clears all the plots
-.clear_output <- function(output) {
+# clears everything
+.clear_everything <- function(output) {
   
   reset("dead_file")
   reset("layout_file")
@@ -52,6 +52,18 @@ source("global.R")
   output$layout_summary <- NULL
   
   ########### DEAD PIXELS
+  .clear_analysis_plots(output)
+  
+  # summary
+  output$dead_pixel_summary <- NULL
+  
+  ############ FIT
+  output$model_fit_summary <- NULL
+}
+
+# clears analysis plots
+.clear_analysis_plots <- function(output) {
+  
   # captions
   output$layout_analysis_caption <- NULL
   output$layout_analysis_left_caption <- NULL
@@ -69,12 +81,6 @@ source("global.R")
   # module plots
   output$dead_pixel_plot <- NULL
   output$dead_pixel_analysis_plot <- NULL
-  
-  # summary
-  output$dead_pixel_summary <- NULL
-  
-  ############ FIT
-  output$model_fit_summary <- NULL
 }
 
 # error message: layout has not been selected

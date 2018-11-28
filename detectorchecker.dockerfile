@@ -51,7 +51,7 @@ WORKDIR DetectorCheckerWebApp
 ENV DC_HOME /DetectorCheckerWebApp
 
 # this is temporary while we do not publish the app on CRAN
-RUN Rscript -e "install.packages('detectorchecker_0.1.7.tgz', repos = NULL, type='source')"
+RUN Rscript -e "install.packages('detectorchecker_0.1.9.tgz', repos = NULL, type='source')"
 
 # make sure that shiny.sh is an executable
 RUN chmod +x shiny.sh

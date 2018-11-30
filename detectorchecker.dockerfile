@@ -4,7 +4,7 @@ FROM rocker/r-ver:3.5.1
 #RUN apt-get update && apt-get install -y software-properties-common pandoc gnupg
 RUN apt-get update; apt-get install -y libhdf5-dev
 RUN apt-get update; apt-get install -y libtiff-dev
-RUN apt-get update; apt-get install -y r-cran-rjava
+#RUN apt-get update; apt-get install -y r-cran-rjava
 
 #RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys E298A3A825C0D65DFD57CBB651716619E084DAB9
 RUN echo "r <- getOption('repos'); r['CRAN'] <- 'http://cran.us.r-project.org'; options(repos = r);" > ~/.Rprofile
@@ -14,7 +14,6 @@ RUN Rscript -e "install.packages('shiny')"
 RUN Rscript -e "install.packages('shinyjs')"
 RUN Rscript -e "install.packages('shinythemes')"
 RUN Rscript -e "install.packages('ggplot2')"
-RUN Rscript -e "install.packages('spatstat')"
 RUN Rscript -e "install.packages('tools')"
 RUN Rscript -e "install.packages('tiff')"
 RUN Rscript -e "install.packages('h5')"
@@ -29,6 +28,10 @@ RUN Rscript -e "install.packages('rmarkdown')"
 RUN Rscript -e "install.packages('roxygen2')"
 RUN Rscript -e "install.packages('devtools')"
 RUN Rscript -e "install.packages('shinyBS')"
+RUN Rscript -e "install.packages('lattice')"
+RUN Rscript -e "install.packages('nlme')"
+RUN Rscript -e "install.packages('spatstat')"
+RUN Rscript -e "install.packages('shinydashboard')"
 # this is where detectorchecker package should installed
 
 # install Azure CLI - instructions from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
@@ -51,7 +54,7 @@ WORKDIR DetectorCheckerWebApp
 ENV DC_HOME /DetectorCheckerWebApp
 
 # this is temporary while we do not publish the app on CRAN
-RUN Rscript -e "install.packages('detectorchecker_0.1.9.tgz', repos = NULL, type='source')"
+RUN Rscript -e "install.packages('detectorchecker_0.1.9.tar.gz', repos = NULL, type='source')"
 
 # make sure that shiny.sh is an executable
 RUN chmod +x shiny.sh
@@ -61,7 +64,7 @@ RUN apt-get -y install python3
 RUN apt-get -y install python3-pip
 RUN pip3 install --upgrade pip
 RUN python3 -m pip install azure
-RUN python3 -m pip install smtplib
+#RUN python3 -m pip install smtplib
 
 # azure config
 ENV AZURE_STORAGE_ACCOUNT detectorcheckerstorage

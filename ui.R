@@ -3,6 +3,7 @@ library(shiny)
 library(shinyjs)
 library(shinyBS)
 library(shinythemes)
+library(spatstat)
 library(shinydashboard)
 source("global.R")
 
@@ -313,7 +314,8 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
       # tabPanel("Summary"),
       "----",
       # "Section header",
-      tabPanel("About")
+      
+      tabPanel("About", helpText(HTML(about_text)))
     )
   )
 ))

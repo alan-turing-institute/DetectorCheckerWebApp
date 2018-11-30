@@ -125,3 +125,24 @@ tt_dead_pixels_summary = "The summary of damaged pixels."
 ### MODEL FITTING
 tt_model = "This is to fit different models"
 tt_model_fit = "This is the model fit summary."
+
+# About text
+about_text = paste('<h2 style="text-align: center;"><strong>DetectorChecker</strong></h2>
+<p style="text-align: center;"><strong>Version: v.', webapp_version, '</strong></p>
+<p>DetectorChecker is designed to&nbsp;assess developing detector screen damage in high-value detector screens used in computerised tomography [CT] using statistical methodology.&nbsp;</p>
+<p>&nbsp;</p>
+<div class="page" title="Page 1">
+<div class="layoutArea">
+<div class="column">
+<p><strong>Acknowledgments:</strong></p>
+<p>Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;</p>
+<p>Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a></p>
+<p>Dr <a href="https://www.turing.ac.uk/people/researchers/tomas-lazauskas">Tomas Lazauskas</a></p>
+<p>&nbsp;</p>
+<p>For more information about the DetectorChecker project please contact Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;or Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a>.</p>
+</div>
+</div>
+</div>
+<p>&copy; Any copyrights remain with the original authors.</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>', "")

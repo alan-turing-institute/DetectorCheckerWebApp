@@ -10,6 +10,9 @@ docker build -t tomaslaz/detectorchecker_dashboard:0.1.6 -f detectorchecker.dock
 ## Pushing the build to docker hub
 docker push tomaslaz/detectorchecker_dashboard:0.1.6
 
+## Running locally
+docker run -p 1111:1111 tomaslaz/detectorchecker_dashboard:0.1.6
+
 # Data management (Azure)
 
 ## Naming convention

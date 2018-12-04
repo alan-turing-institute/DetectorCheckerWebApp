@@ -234,42 +234,56 @@ shinyServer(function(input, output, session) {
       return(NULL)
     }
 
+  })
+  
+  # Level analysis plot
+  observeEvent(input$layoutLevelAnalysis, {
+    if (is.null(layout) || is.na(layout)) {
+      .layout_not_selected_error()
+      return(NULL)
+    }
+    
+    if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
+      .dead_file_error()
+      return(NULL)
+    }
+    
     .clear_analysis_plots(output)
-
+    
     output$layout_analysis_caption <- renderPrint({
       cat("Layout analysis:")
     })
-
+    
     if (input$level_radio == const_level_pixels) {
-
+      
       output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_damaged(layout, caption = FALSE)},
                                            width = "auto", height = "auto")
-
+      
       output$layout_analysis_left_caption <- renderPrint({
         cat("Damaged layout")
       })
-
+      
     } else if (input$level_radio == const_level_events) {
-
+      
       incl_event_list <- as.list(as.integer(input$events_chk_group))
-
+      
       layout_temp <- detectorchecker::find_clumps(layout)
-
+      
       output$dead_pixel_plot <- renderPlot({detectorchecker::plot_events(layout_temp,
-                                              caption = FALSE, incl_event_list = incl_event_list)},
-        width = "auto", height = "auto")
-
+                                                                         caption = FALSE, incl_event_list = incl_event_list)},
+                                           width = "auto", height = "auto")
+      
       output$layout_analysis_left_caption <- renderPrint({
         cat("Layout Events")
       })
-
+      
     } else {
       showModal(modalDialog(title = "Error", "Analysis level is not specified. Level slection."))
       return(NULL)
     }
-
+    
   })
-
+  
   # Plot the selected layout pixel analysis
   observeEvent(input$layoutDeadPixels, {
 

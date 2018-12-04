@@ -17,27 +17,38 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     tabPanel("Layout",
       sidebarLayout(
         # Sidebar
-        sidebarPanel(
+        sidebarPanel(width = 4,
           verbatimTextOutput("loaded_layout_text1", placeholder = TRUE), 
           
           bsTooltip("loaded_layout_text1", tt_selected_layout, 
             placement = "right", options = list(container = "body")),
 
           # Input: Select layout
-          selectInput("layoutSelect", label = h4("1. Select Layout"), choices = layout_names),
-          bsTooltip("layoutSelect", tt_select_input, 
-            placement = "right", options = list(container = "body")),
+          selectInput("layoutSelect", 
+                      label = h4("1. Select Layout",
+                                 tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
+                                 bsButton("q1", label = "", icon = icon("question"), style = "info", size = "extra-small")             
+                      ), choices = layout_names),
           
+          
+          bsPopover(id = "q1", title = "1. Select Layout",
+                    content = tt_select_input,
+                    placement = "right", 
+                    trigger = "focus", 
+                    options = list(container = "body")
+          ),
+          
+
           # Only show this panel if user-defined layout has been chosen
           conditionalPanel(
             condition = "input.layoutSelect == '<<user-defined>>'",
             fileInput("layout_file", multiple = FALSE, 
               label = h5("Upload layout file", 
-                         tags$style(type = "text/css", "#q1 {vertical-align: top;}"),
-                         bsButton("q1", label = "", icon = icon("question"), style = "info", size = "extra-small")
+                         tags$style(type = "text/css", "#q {vertical-align: top;}"),
+                         bsButton("q", label = "", icon = icon("question"), style = "info", size = "extra-small")
               )),
 
-            bsPopover(id = "q1", title = "Custom layout file",
+            bsPopover(id = "q", title = "Upload layout file",
               content = paste(tt_custom_layout, tt_custom_example),
               placement = "right", 
               trigger = "focus", 
@@ -46,30 +57,30 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           ),
           
           fluidRow(
-            column(gui_sidebar_radio_col_size,
+            column(12,
               radioButtons("pixelRadio", 
                 label = h4("2. Visualisation", 
-                  tags$style(type = "text/css", "#q2 {vertical-align: top;}"),
+                  tags$style(type = "text/css", "#q3 {vertical-align: top;}"),
                   bsButton("q2", label = "", icon = icon("question"), 
                     style = "info", size = "extra-small")), 
                 inline = FALSE,
                 choices = list(
                   "layout" = const_layout_plot,
-                  "distcentreeucl" = const_pix_distcentreeucl,
-                  "distcentrelinf" = const_pix_distcentrelinf,
-                  "distcorner" = const_pix_distcorner,
-                  "distedgescol" = const_pix_distedgescol,
-                  "distedgesrow" = const_pix_distedgesrow,
-                  "distedgesmin" = const_pix_distedgesmin), 
+                  "euclidean distance from centre" = const_pix_distcentreeucl,
+                  "L-infinity distance from centre" = const_pix_distcentrelinf,
+                  "euclidean distance to nearest corner" = const_pix_distcorner,
+                  "horizontal distance to nearest sub-panel edge" = const_pix_distedgescol,
+                  "vertical distance to nearest sub-panel edge" = const_pix_distedgesrow,
+                  "L-infinity distance to nearest sub-panel edge" = const_pix_distedgesmin), 
                 selected = const_layout_plot)),
-            bsPopover(id = "q2", title = "Layout analysis",
+            bsPopover(id = "q2", title = "2. Visualisation",
                       content = paste(tt_layout_analysis),
                       placement = "right", 
                       trigger = "focus", 
                       options = list(container = "body")
             )),
           
-          actionButton("layoutPixels", "3. Plot"), 
+          actionButton("layoutPixels", "Display plot"), 
           
           hr(),
           
@@ -85,12 +96,14 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
               fluidRow(
                 column(12, align="center",
                   fluidRow(
-                    plotOutput("layoutPlot"),
-                    bsPopover(id = "layoutPlot", title = "Layout",
-                             content = tt_layout,
-                             trigger = 'hover', 
-                             options = list(container = "body")
-                    ))))),
+                    plotOutput("layoutPlot", width="600px", height="600px")
+                    #,
+                    # bsPopover(id = "layoutPlot", title = "Layout",
+                    #          content = tt_layout,
+                    #          trigger = 'hover', 
+                    #          options = list(container = "body")
+                    # )
+                    )))),
             
             tabPanel("Summary", 
                      verbatimTextOutput("layout_summary"),
@@ -109,7 +122,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     ############################################################################
     tabPanel("Damage", 
       sidebarLayout(
-        sidebarPanel(
+        sidebarPanel(width = 4,
           
           verbatimTextOutput("loaded_layout_text2", placeholder = TRUE),           
           
@@ -117,39 +130,42 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
             placement = "right", options = list(container = "body")),
           
           fileInput("dead_file", 
-            label = h4("4. Import File", 
+            label = h4("3. Import File", 
               tags$style(type = "text/css", "#q3 {vertical-align: top;}"),
               bsButton("q3", label = "", icon = icon("question"), 
                 style = "info", size = "extra-small")), 
             multiple = TRUE),
           
-          bsPopover(id = "q3", title = "4. Import File", content = tt_dead_file,
+          bsPopover(id = "q3", title = "3. Import File", content = tt_dead_file,
             placement = "right", trigger = "focus", options = list(container = "body")),
 
           radioButtons("level_radio", 
-            label = h4("5. Choose Level", 
+            label = h4("4. Choose Level", 
               tags$style(type = "text/css", "#q4 {vertical-align: top;}"),
-              bsButton("q5", label = "", icon = icon("question"), style = "info", size = "extra-small")),
-            choices = list("Pixels" = const_level_pixels, "Events" = const_level_events),
+              bsButton("q4", label = "", icon = icon("question"), style = "info", size = "extra-small")),
+            choices = list("Pixels" = const_level_pixels, "Events (Currently slow)" = const_level_events),
             selected = const_level_pixels),
  
-          bsPopover(id = "q5", title = "Analysis level",
+          bsPopover(id = "q4", title = "4. Choose Level",
             placement = "right", trigger = "focus", options = list(container = "body"),
             content = tt_dead_level),
           
           # Only show this panel if user-defined layout has been chosen
           conditionalPanel(
             condition = "input.level_radio == 'Events'",
-            checkboxGroupInput("events_chk_group", label = h5("Incl. Event Types"), 
-              choices = list("1" = 1, "2" = 2, "3" = 3, "4" = 4, 
-                             "5" = 5, "6" = 6, "7" = 7, "8" = 8),
+            checkboxGroupInput("events_chk_group", label = h5("Incl. event types"), 
+              choices = list("Singleton" = 1, "Doublet" = 2, "Triplet" = 3, "Larger clusters" = 4, 
+                             "Upper horizontal lines" = 5, "Lower horizontal lines" = 6, 
+                             "Left vertical lines" = 7, "Right vertical lines" = 8),
               selected = 1:8, inline = FALSE)
           ),
           
+          actionButton("layoutLevelAnalysis", "Plot"),
+          
           radioButtons("dead_radio", inline = FALSE,
-            label = h4("6. Choose Analysis", 
-              tags$style(type = "text/css", "#q4 {vertical-align: top;}"),
-              bsButton("q6", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
+            label = h4("5. Choose Analysis", 
+              tags$style(type = "text/css", "#q5 {vertical-align: top;}"),
+              bsButton("q5", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
             choices = list(
               "Density" = const_density_plot,
               "Counts" = const_counts,
@@ -163,25 +179,25 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
               "Inhom. G-func." = const_inhom_G), 
             selected = const_density_plot),
           
-          bsPopover(id = "q6", title = "Damage analysis",
+          bsPopover(id = "q5", title = "5. Choose Analysis",
             content = tt_dead_analysis,
             placement = "right",
             trigger = "focus",
             options = list(container = "body")),
-              
-          actionButton("layoutDeadPixels", "7. Plot"),
+          
+          actionButton("layoutDeadPixels", "Plot"),
 
           hr(),
           
           textInput("user_email", 
-            label = h4("8. Send Data", 
-              tags$style(type = "text/css", "#q5 {vertical-align: top;}"),
-              bsButton("q8", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
-            value = "Email address.."),
+            label = h4("6. Send Data", 
+              tags$style(type = "text/css", "#q6 {vertical-align: top;}"),
+              bsButton("q6", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
+            value = "Your email address.."),
           
-          bsPopover(id = "q8", title = "Data upload",
+          bsPopover(id = "q6", title = "6. Send Data",
             placement = "right", trigger = "focus", options = list(container = "body"),
-            content = paste(tt_email, tt_upload_button)),
+            content = paste(tt_upload_button, tt_email)),
         
           actionButton("deadPixelsUpload", "Send")
       
@@ -213,15 +229,16 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                          fluidRow(
                            plotOutput("dead_pixel_plot",
                              click = "dead_pix_plot_click",
-                             dblclick = "dead_pix_plot_dbclick"),
-                                  
-                                  
-                           bsPopover(id = "dead_pixel_plot", title = "Damaged layout",
-                             content = tt_damaged_layout_clicks,
-                             placement = "right",
-                             trigger = "hover",
-                             options = list(container = "body")
-                            ))),
+                             dblclick = "dead_pix_plot_dbclick")
+                           
+                           # ,
+                           # bsPopover(id = "dead_pixel_plot", title = "Damaged layout",
+                           #   content = tt_damaged_layout_clicks,
+                           #   placement = "right",
+                           #   trigger = "hover",
+                           #   options = list(container = "body")
+                           #  )
+                           )),
                   
                   column(6, align="center",
                          fluidRow(plotOutput("dead_pixel_analysis_plot")))
@@ -269,32 +286,32 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     ############################################################################
     tabPanel("Model fitting", 
       sidebarLayout(
-        sidebarPanel(
+        sidebarPanel(width = 4,
           verbatimTextOutput("loaded_layout_text3", placeholder = TRUE),           
           bsTooltip("loaded_layout_text3", tt_selected_layout, "right", options = list(container = "body")),
           
           fluidRow(
-            column(gui_sidebar_radio_col_size,
+            column(12,
               radioButtons("fit_radio", 
-                label = h4("9. Modelling",
-                           tags$style(type = "text/css", "#q6 {vertical-align: top;}"),
-                  bsButton("q9", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
+                label = h4("7. Modelling Damage Intensity",
+                           tags$style(type = "text/css", "#q7 {vertical-align: top;}"),
+                  bsButton("q7", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
                 inline = FALSE,
                 choices = list(
-                  "Pix cntr eucl" = const_model_fit_centreeucl,
-                  "Pix cntr inf" = const_model_fit_centrlinf,
-                  "Pix dist edge col" = const_model_fit_distedgecol,
-                  "Pix dist edge row" = const_model_fit_distedgerow
+                  "euclidean distance from centre" = const_model_fit_centreeucl,
+                  "L-infinity distance from centre" = const_model_fit_centrlinf,
+                  "horizontal distance to nearest sub-panel edge" = const_model_fit_distedgecol,
+                  "vertical distance to nearest sub-panel edge" = const_model_fit_distedgerow
                 ), 
                 selected = const_model_fit_centreeucl)),
             
-            bsPopover(id = "q9", title = "Model fitting",
+            bsPopover(id = "q7", title = "7. Modelling Damage Intensity",
               content = tt_model,
               placement = "right",
               trigger = "focus",
               options = list(container = "body"))),
           
-          actionButton("model_fit", "10. Fit model")
+          actionButton("model_fit", "Fit model")
         ),
         
         mainPanel(
@@ -310,11 +327,10 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
         )
       )
     ),
-    navbarMenu("More",
+    navbarMenu("Help",
       # tabPanel("Summary"),
       "----",
-      # "Section header",
-      
+      HTML('<div align="left"><a href="https://github.com/tomaslaz/DetectorChecker/blob/master/Manual.pdf" target="_blank" style="text-decoration:none">Manual</a></div>'),
       tabPanel("About", helpText(HTML(about_text)))
     )
   )

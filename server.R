@@ -267,9 +267,9 @@ shinyServer(function(input, output, session) {
       
       incl_event_list <- as.list(as.integer(input$events_chk_group))
       
-      layout_temp <- detectorchecker::find_clumps(layout)
+      layout_events <- detectorchecker::find_clumps(layout)
       
-      output$dead_pixel_plot <- renderPlot({detectorchecker::plot_events(layout_temp,
+      output$dead_pixel_plot <- renderPlot({detectorchecker::plot_events(layout_events,
                                                                          caption = FALSE, incl_event_list = incl_event_list)},
                                            width = "auto", height = "auto")
       
@@ -534,8 +534,6 @@ shinyServer(function(input, output, session) {
     if (is.null(layout) || is.na(layout) || is.na(layout$dead_stats))
       return(NULL)
 
-    if (input$level_radio == const_level_pixels) {
-
       if (!is.null(input$dead_pix_plot_click$x) &&
           !is.null(input$dead_pix_plot_click$y)) {
 
@@ -552,23 +550,38 @@ shinyServer(function(input, output, session) {
         output$module_analysis_left <- renderPrint({
           cat(paste("Damaged module [", mod_row, ", ", mod_col, "]", sep = ""))
         })
-
+        
         output$dead_pixel_module_plot <- renderPlot({
           withProgress({
 
-            setProgress(message = "Rendering layout...")
-            output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_layout_module_damaged(layout, col = mod_col, row = mod_row, caption = FALSE)},
+            setProgress(message = "Rendering module...")
+            
+            # plot module damaged pixels
+            if (input$level_radio == const_level_pixels) {
+            
+              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_layout_module_damaged(layout, col = mod_col, row = mod_row, caption = FALSE)},
                                                         width = "auto", height = "auto")
 
+              # plot module events
+            } else if (input$level_radio == const_level_events) {
+              
+              incl_event_list <- as.list(as.integer(input$events_chk_group))
+              
+              layout_module_events <- detectorchecker::find_clumps(layout, row = mod_row, col = mod_col)
+              
+              plot_module_events(layout_module_events, row = mod_row, col = mod_col, caption = FALSE, 
+                                 incl_event_list = incl_event_list)
+            }
+            
             setProgress(message = "Finished!", value = 1.0)
           })
         })
-
+          
       } else {
         showModal(modalDialog(title = "Error", "Analysis level is not specified. Single click."))
         return(NULL)
       }
-    }
+    
   })
 
   observeEvent(input$dead_pix_plot_dbclick, {

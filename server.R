@@ -767,6 +767,11 @@ shinyServer(function(input, output, session) {
               analysis_caption <- const_counts_cap
               setProgress(message = paste("Rendering", analysis_caption, sep=" "))
               
+              output$dead_pixel_module_analysis_plot <- renderPlot({
+                detectorchecker::plot_events_count(layout_module_events, 
+                  row = mod_row, col = mod_col, caption = FALSE, 
+                  incl_event_list = incl_event_list)},
+                width = "auto", height = "auto")
               
             # arrows
             } else if(input$dead_radio == const_arrows) {

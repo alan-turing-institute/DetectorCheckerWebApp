@@ -193,7 +193,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
             label = h4("6. Send Data", 
               tags$style(type = "text/css", "#q6 {vertical-align: top;}"),
               bsButton("q6", label = "", icon = icon("question"), style = "info", size = "extra-small")), 
-            value = "Your email address.."),
+            placeholder = "Your email address.."),
           
           bsPopover(id = "q6", title = "6. Send Data",
             placement = "right", trigger = "focus", options = list(container = "body"),

@@ -213,11 +213,11 @@ shinyServer(function(input, output, session) {
       setProgress(message = "Finished!", value = 1.0)
 
       output$layout_analysis_caption <- renderPrint({
-        cat("Layout analysis:")
+        cat("Layout analysis: PIXELS")
       })
 
       output$layout_analysis_left_caption <- renderPrint({
-        cat("Damaged layout")
+        cat("Damaged Pixels")
       })
 
     })
@@ -225,7 +225,19 @@ shinyServer(function(input, output, session) {
 
   # Layout level
   observeEvent(input$level_radio, {
-
+    
+    # Chnage the model fit caption accordingly
+    if (input$level_radio == const_level_pixels) {
+      
+      output$loaded_layout_text4 <- renderText({
+        HTML(paste("Level: ", "pixels"))})
+      
+    } else if (input$level_radio == const_level_events) {
+      
+      output$loaded_layout_text4 <- renderText({
+        HTML(paste("Level: ", "selected events"))})
+    }
+    
     if (is.null(layout) || is.na(layout)) {
       return(NULL)
     }
@@ -233,7 +245,7 @@ shinyServer(function(input, output, session) {
     if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
       return(NULL)
     }
-
+    
   })
   
   # Level analysis plot
@@ -250,31 +262,37 @@ shinyServer(function(input, output, session) {
     
     .clear_analysis_plots(output)
     
-    output$layout_analysis_caption <- renderPrint({
-      cat("Layout analysis:")
-    })
-    
     if (input$level_radio == const_level_pixels) {
+      
+      output$layout_analysis_caption <- renderPrint({
+        cat("Layout analysis: PIXELS")
+      })
       
       output$dead_pixel_plot <- renderPlot({detectorchecker::plot_layout_damaged(layout, caption = FALSE)},
                                            width = "auto", height = "auto")
       
       output$layout_analysis_left_caption <- renderPrint({
-        cat("Damaged layout")
+        cat("Damaged Pixels")
       })
       
     } else if (input$level_radio == const_level_events) {
       
+      event_values <- as.integer(input$events_chk_group)
+      
+      output$layout_analysis_caption <- renderPrint({
+        cat("Layout analysis: EVENTS:", event_values)
+      })
+      
       incl_event_list <- as.list(as.integer(input$events_chk_group))
       
-      layout_events <- detectorchecker::find_clumps(layout)
+      layout <<- detectorchecker::find_clumps(layout)
       
-      output$dead_pixel_plot <- renderPlot({detectorchecker::plot_events(layout_events,
+      output$dead_pixel_plot <- renderPlot({detectorchecker::plot_events(layout,
                                                                          caption = FALSE, incl_event_list = incl_event_list)},
                                            width = "auto", height = "auto")
       
       output$layout_analysis_left_caption <- renderPrint({
-        cat("Layout Events")
+        cat("Events")
       })
       
     } else {
@@ -396,9 +414,9 @@ shinyServer(function(input, output, session) {
         incl_event_list <- as.list(as.integer(input$events_chk_group))
 
         setProgress(message = "Looking for clumps..", value = 0.3)
-        layout_temp <- detectorchecker::find_clumps(layout)
+        # layout <<- detectorchecker::find_clumps(layout)
 
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_events(layout_temp,
+        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_events(layout,
           caption = FALSE, incl_event_list = incl_event_list)},
           width = "auto", height = "auto")
 
@@ -413,7 +431,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "), value = 0.6)
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_density(layout_temp, caption = FALSE, incl_event_list = incl_event_list)},
+            detectorchecker::plot_events_density(layout, caption = FALSE, incl_event_list = incl_event_list)},
                                                         width = "auto", height = "auto")
 
         # counts
@@ -423,7 +441,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_count(layout = layout_temp, caption = FALSE, incl_event_list = incl_event_list)},
+            detectorchecker::plot_events_count(layout = layout, caption = FALSE, incl_event_list = incl_event_list)},
                                                         width = "auto", height = "auto")
 
         # arrows
@@ -433,7 +451,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "), value = 0.6)
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_arrows(layout_temp, caption = FALSE, incl_event_list = incl_event_list)},
+            detectorchecker::plot_events_arrows(layout, caption = FALSE, incl_event_list = incl_event_list)},
                                                         width = "auto", height = "auto")
 
         # angles
@@ -442,7 +460,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "), value = 0.6)
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_angles(layout_temp, caption = FALSE, incl_event_list = incl_event_list)},
+            detectorchecker::plot_events_angles(layout, caption = FALSE, incl_event_list = incl_event_list)},
             width = "auto", height = "auto")
 
         # K-func
@@ -452,7 +470,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_kfg(layout_temp, func = "K", caption = FALSE,
+            detectorchecker::plot_events_kfg(layout, func = "K", caption = FALSE,
                                              incl_event_list = incl_event_list)},
             width = "auto", height = "auto")
 
@@ -463,7 +481,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_kfg(layout_temp, func = "F", caption = FALSE,
+            detectorchecker::plot_events_kfg(layout, func = "F", caption = FALSE,
                                              incl_event_list = incl_event_list)},
             width = "auto", height = "auto")
 
@@ -474,7 +492,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_kfg(layout_temp, func = "G", caption = FALSE,
+            detectorchecker::plot_events_kfg(layout, func = "G", caption = FALSE,
                                              incl_event_list = incl_event_list)},
             width = "auto", height = "auto")
 
@@ -485,7 +503,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_kfg(layout_temp, func = "Kinhom", caption = FALSE,
+            detectorchecker::plot_events_kfg(layout, func = "Kinhom", caption = FALSE,
                                              incl_event_list = incl_event_list)},
             width = "auto", height = "auto")
 
@@ -496,7 +514,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_kfg(layout_temp, func = "Finhom", caption = FALSE,
+            detectorchecker::plot_events_kfg(layout, func = "Finhom", caption = FALSE,
                                              incl_event_list = incl_event_list)},
             width = "auto", height = "auto")
 
@@ -507,7 +525,7 @@ shinyServer(function(input, output, session) {
           setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
           output$dead_pixel_analysis_plot <- renderPlot({
-            detectorchecker::plot_events_kfg(layout_temp, func = "Ginhom", caption = FALSE,
+            detectorchecker::plot_events_kfg(layout, func = "Ginhom", caption = FALSE,
                                              incl_event_list = incl_event_list)},
             width = "auto", height = "auto")
 
@@ -879,10 +897,8 @@ shinyServer(function(input, output, session) {
             output$module_analysis_right <- renderPrint({
               cat(paste(analysis_caption, "[", mod_row, ", ", mod_col, "]", sep = ""))
             })
-            
           })
         })
-        
       } 
       
       # Someting went wrong 
@@ -944,11 +960,19 @@ shinyServer(function(input, output, session) {
       setProgress(message = "Fitting model...")
 
       ok <- TRUE
-
+      
+      
+      if (input$level_radio == const_level_pixels) {
+        pix_matrix <- layout$pix_matrix
+        
+      } else if (input$level_radio == const_level_events) {
+        pix_matrix <- layout$clumps$events_matrix
+      }
+      
       if (input$fit_radio == const_model_fit_centreeucl) {
 
         dist <- detectorchecker::pixel_dist_ctr_eucl(layout)
-        pix_matrix <- layout$pix_matrix
+        
 
         glm_fit <- glm(as.vector(pix_matrix) ~ as.vector(dist),
                        family = binomial(link = logit))
@@ -956,7 +980,6 @@ shinyServer(function(input, output, session) {
       } else if (input$fit_radio == const_model_fit_centrlinf) {
 
         dist <- detectorchecker::pixel_dist_ctr_linf(layout)
-        pix_matrix <- layout$pix_matrix
 
         glm_fit <- glm(as.vector(pix_matrix) ~ as.vector(dist),
                        family = binomial(link = logit))
@@ -964,7 +987,6 @@ shinyServer(function(input, output, session) {
       } else if (input$fit_radio == const_model_fit_distedgecol) {
 
         dist <- detectorchecker::dist_edge_col(layout)
-        pix_matrix <- layout$pix_matrix
 
         glm_fit <- glm(as.vector(pix_matrix) ~ as.vector(dist),
                        family = binomial(link = logit))
@@ -972,17 +994,9 @@ shinyServer(function(input, output, session) {
       } else if (input$fit_radio == const_model_fit_distedgerow) {
 
         dist <- detectorchecker::dist_edge_row(layout)
-        pix_matrix <- layout$pix_matrix
 
         glm_fit <- glm(as.vector(pix_matrix) ~ as.vector(dist),
                        family = binomial(link = logit))
-
-      # } else if (input$fit_radio == const_model_fit_custom) {
-      #
-      #   model_fit_expr <- input$custom_model
-      #
-      #   glm_fit <- glm(model_fit_expr,
-      #                  family = binomial(link = logit))
 
       } else {
 

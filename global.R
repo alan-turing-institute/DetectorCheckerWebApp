@@ -123,7 +123,8 @@ tt_damaged_layout_clicks = "Single click on the plot will focus on the specified
 tt_dead_pixels_summary = "The summary of damaged pixels."
 
 ### MODEL FITTING
-tt_model = "Select a model to fit damaged pixel data."
+tt_model_label = "7. Modelling Damage Intensity"
+tt_model = "Select a model to fit damaged pixel / events data."
 tt_model_fit = "This is the model fit summary."
 
 # About text

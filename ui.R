@@ -154,9 +154,9 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           conditionalPanel(
             condition = "input.level_radio == 'Events'",
             checkboxGroupInput("events_chk_group", label = h5("Incl. event types"), 
-              choices = list("Singleton" = 1, "Doublet" = 2, "Triplet" = 3, "Larger clusters" = 4, 
-                             "Upper horizontal lines" = 5, "Lower horizontal lines" = 6, 
-                             "Left vertical lines" = 7, "Right vertical lines" = 8),
+              choices = list("1 - Singleton" = 1, "2 - Doublet" = 2, "3 - Triplet" = 3, "4 - Larger clusters" = 4, 
+                             "5 - Upper horizontal lines" = 5, "6 - Lower horizontal lines" = 6, 
+                             "7 - Left vertical lines" = 7, "8 - Right vertical lines" = 8),
               selected = 1:8, inline = FALSE)
           ),
           
@@ -289,6 +289,8 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
         sidebarPanel(width = 4,
           verbatimTextOutput("loaded_layout_text3", placeholder = TRUE),           
           bsTooltip("loaded_layout_text3", tt_selected_layout, "right", options = list(container = "body")),
+          
+          verbatimTextOutput("loaded_layout_text4", placeholder = TRUE),
           
           fluidRow(
             column(12,

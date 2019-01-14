@@ -309,7 +309,7 @@ shinyServer(function(input, output, session) {
       .layout_not_selected_error()
       return(NULL)
     }
-
+    
     if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
       .dead_file_error()
       return(NULL)
@@ -410,7 +410,12 @@ shinyServer(function(input, output, session) {
         })
 
       } else if (input$level_radio == const_level_events) {
-
+        
+        if (is.null(layout$clumps) || is.na(layout$clumps)) {
+          .events_not_found_error()
+          return(NULL)
+        }
+        
         incl_event_list <- as.list(as.integer(input$events_chk_group))
 
         setProgress(message = "Looking for clumps..", value = 0.3)
@@ -966,6 +971,12 @@ shinyServer(function(input, output, session) {
         pix_matrix <- layout$pix_matrix
         
       } else if (input$level_radio == const_level_events) {
+        
+        if (is.null(layout$clumps) || is.na(layout$clumps)) {
+          .events_not_found_error()
+          return(NULL)
+        }
+        
         pix_matrix <- layout$clumps$events_matrix
       }
       

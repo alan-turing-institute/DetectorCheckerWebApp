@@ -49,22 +49,22 @@ RUN curl -L https://packages.microsoft.com/keys/microsoft.asc | apt-key add -
 RUN apt-get install -y apt-transport-https
 RUN apt-get update; apt-get install -y --allow-unauthenticated azure-cli
 
-ADD . DetectorCheckerWebApp
-WORKDIR DetectorCheckerWebApp
-ENV DC_HOME /DetectorCheckerWebApp
-
-# this is temporary while we do not publish the app on CRAN
-RUN Rscript -e "install.packages('detectorchecker_0.1.9.tar.gz', repos = NULL, type='source')"
-
-# make sure that shiny.sh is an executable
-RUN chmod +x shiny.sh
-
 # python, pip etc. so we can use python azure interface (avoid 2FA)
 RUN apt-get -y install python3
 RUN apt-get -y install python3-pip
 RUN pip3 install --upgrade pip
 RUN python3 -m pip install azure
 #RUN python3 -m pip install smtplib
+
+ADD . DetectorCheckerWebApp
+WORKDIR DetectorCheckerWebApp
+ENV DC_HOME /DetectorCheckerWebApp
+
+# this is temporary while we do not publish the app on CRAN
+RUN Rscript -e "install.packages('detectorchecker_0.1.10.tgz', repos = NULL, type='source')"
+
+# make sure that shiny.sh is an executable
+RUN chmod +x shiny.sh
 
 # azure config
 ENV AZURE_STORAGE_ACCOUNT detectorcheckerstorage

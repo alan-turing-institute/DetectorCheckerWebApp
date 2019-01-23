@@ -96,6 +96,9 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
               fluidRow(
                 column(12, align="center",
                   fluidRow(
+
+                    checkboxInput("javascriptWarning", label = "JavaScript is not enabled! For the best experience, use a modern web browser which supports HTML5 technology (such as, Google Chrome v. 70.0 or later, Mozilla Firefox v. 62.0 or later, or similar) with JavaScript being enabled.", value = TRUE),
+                    
                     plotOutput("layoutPlot", width="600px", height="600px")
                     #,
                     # bsPopover(id = "layoutPlot", title = "Layout",
@@ -319,12 +322,13 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
         mainPanel(
           tabsetPanel(type = "tabs", 
             tabPanel("Output", 
-              verbatimTextOutput("model_fit_summary"),
-              bsPopover(id = "model_fit_summary", title = "Model fitting",
-                content = tt_model_fit,
-                trigger = 'hover', 
-                options = list(container = "body")
-              ))
+              verbatimTextOutput("model_fit_summary")
+              # bsPopover(id = "model_fit_summary", title = "Model fitting",
+              #   content = tt_model_fit,
+              #   trigger = 'hover', 
+              #   options = list(container = "body")
+              # )
+              )
           )
         )
       )
@@ -332,6 +336,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
     navbarMenu("Help",
       # tabPanel("Summary"),
       "----",
+      HTML('<div align="left"><a href="https://github.com/tomaslaz/DetectorChecker/tree/master/examples" target="_blank" style="text-decoration:none">Examples</a></div>'),
       HTML('<div align="left"><a href="https://github.com/tomaslaz/DetectorChecker/blob/master/Manual.pdf" target="_blank" style="text-decoration:none">Manual</a></div>'),
       tabPanel("About", helpText(HTML(about_text)))
     )

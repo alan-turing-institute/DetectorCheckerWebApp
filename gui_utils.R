@@ -103,6 +103,11 @@ source("global.R")
   grepl("\\<[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\>", as.character(x), ignore.case=TRUE)
 }
 
+# error message: layout has not been selected
+.events_not_found_error <- function(){
+  showModal(modalDialog(title = "Error", msg_err_no_events))
+}
+
 # success message: Data upload was successful
 .upload_success <- function(){
   showModal(modalDialog(title = "Data upload", "Upload successful."))

@@ -88,12 +88,15 @@ const_model_fit_custom = 99
 const_level_pixels = "Pixels"
 const_level_events = "Events"
 
+const_javascriptWarning = "Javascript Warning!"
+
 ############### Messages
 
 ### Error messages
 msg_err_no_layout = "Layout model has not been selected."
 msg_err_no_deadfile = "Pixel damage file has not been uploaded."
 msg_err_invalid_email = "Invalid email address."
+msg_err_no_events = "No events found. Please revisit step 4."
 
 ################ Tooltips
 
@@ -148,4 +151,5 @@ about_text = paste('<h2 style="text-align: center;"><strong>DetectorChecker</str
 </tr>
 </tbody>
 </table>
-<p style="text-align: center;">&nbsp;</p>', "")
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: left;">Users can revert to calculations by using tabs at top of the window.</p>', "")

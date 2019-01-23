@@ -66,11 +66,6 @@ RUN Rscript -e "install.packages('detectorchecker_0.1.10.tgz', repos = NULL, typ
 # make sure that shiny.sh is an executable
 RUN chmod +x shiny.sh
 
-# azure config
-ENV AZURE_STORAGE_ACCOUNT detectorcheckerstorage
-ENV AZURE_STORAGE_ACCESS_KEY aSMDADXSZEdGfBiuIUMlmvBIZEWhY+40NvQ5JLZKADsBZ5ZCYTxin7HvhSL5/cu15vOIYXIEHaaKsYcEKdufdA==
-ENV AZURE_CONTAINER detectorcheckercontainer
-
 # expose R Shiny port
 EXPOSE 1111
 

@@ -88,6 +88,8 @@ const_model_fit_custom = 99
 const_level_pixels = "Pixels"
 const_level_events = "Events"
 
+const_javascriptWarning = "Javascript Warning!"
+
 ############### Messages
 
 ### Error messages
@@ -149,4 +151,5 @@ about_text = paste('<h2 style="text-align: center;"><strong>DetectorChecker</str
 </tr>
 </tbody>
 </table>
-<p style="text-align: center;">&nbsp;</p>', "")
+<p style="text-align: center;">&nbsp;</p>
+<p style="text-align: left;">Users can revert to calculations by using tabs at top of the window.</p>', "")

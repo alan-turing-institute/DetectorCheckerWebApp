@@ -1,0 +1,10 @@
+detector_width = 2000
+detector_height = 2000
+module_col_n = 16
+module_row_n = 2
+module_col_sizes = c(104, rep(128, 14), 104)
+module_row_sizes = rep(1000, 2)
+gap_col_sizes = rep(0, 15)
+gap_row_sizes = c(0)
+module_edges_col = NA
+module_edges_row = NA

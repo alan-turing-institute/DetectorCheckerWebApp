@@ -1,5 +1,10 @@
+# Secrets folder
+secrets
+
+# Package
 detectorchecker_*.tgz
 
+# Misc
 .DS_Store
 
 # History files

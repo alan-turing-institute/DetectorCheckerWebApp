@@ -1,7 +1,7 @@
 library(shiny)
 # global.R define objects available to both ui.R and server.R
 
-webapp_version <- "0.1.8"
+webapp_version <- "0.1.9"
 
 # global parameters
 const_layout_default <- "None"
@@ -23,29 +23,29 @@ const_ui_layoutSelectInput <- "layoutSelect"
 # pixel analysis
 const_layout_plot = 1
 const_layout_plot_cap = "layout"
-  
+
 const_pix_distcentreeucl = 2
 const_pix_distcentreeucl_cap = "distcentreeucl"
-  
+
 const_pix_distcentrelinf = 3
 const_pix_distcentrelinf_cap = "distcentrelinf"
-  
+
 const_pix_distcorner = 4
 const_pix_distcorner_cap = "distcorner"
-  
+
 const_pix_distedgescol = 5
 const_pix_distedgescol_cap = "distedgescol"
-  
+
 const_pix_distedgesrow = 6
 const_pix_distedgesrow_cap = "distedgesrow"
-  
+
 const_pix_distedgesmin = 7
 const_pix_distedgesmin_cap = "distedgesmin"
 
 # damaged pixel analysis
 const_dead_plot = 1
 const_dead_plot_cap = "Damage"
-  
+
 const_density_plot = 2
 const_density_plot_cap = "Density"
 
@@ -106,7 +106,7 @@ msg_err_no_events = "No events found. Please revisit step 4."
 tt_selected_layout = "Selected layout."
 tt_select_input = "Choose a predifined layout or upload your own."
 tt_custom_layout = "Select a file with a custom layout parameters."
-tt_custom_example = paste0("Example can be found ", a("here.", 
+tt_custom_example = paste0("Example can be found ", a("here.",
   href = "https://github.com/tomaslaz/DetectorChecker/blob/master/layout_example.dc",
   target="_blank"))
 tt_layout_analysis = "Select a layout analysis type and click [Display plot] to visualise it."

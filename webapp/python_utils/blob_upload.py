@@ -10,11 +10,11 @@ import smtplib
 
 from azure.storage.blob import BlockBlobService, PublicAccess
 
-_container_name = "detectorcheckercontainer"
+_container_name = os.environ['AZURE_CONTAINER']
 
 block_blob_service = BlockBlobService(
   account_name=os.environ['AZURE_STORAGE_ACCOUNT'],
-  account_key=os.environ['AZURE_STORAGE_ACCESS_KEY'])
+  connection_string=os.environ['AZURE_CONNECTION_STRING'])
 
 def check_blob_exists(blob_name):
   """
@@ -39,8 +39,8 @@ def email_confirmation(blob_name, email_to):
 
   """
 
-  gmail_user = 'detectorchecker@gmail.com'
-  gmail_password = 'xsw@!YuW1*2L'
+  gmail_user = os.environ['DC_EMAIL_ACC']
+  gmail_password = os.environ['DC_EMAIL_PWD']
 
   sent_from = gmail_user
   subject = 'Data upload notification'

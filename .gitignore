@@ -1,8 +1,5 @@
 # Secrets folder
-secrets
-
-# Package
-detectorchecker_*.tgz
+.secrets
 
 # Misc
 .DS_Store

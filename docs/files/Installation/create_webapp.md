@@ -12,7 +12,7 @@ Once we have set up our Azure storage and have pushed our docker image to Docker
 
  4. On the "Create" form, choose an app name (e.g. <project>) - this will form the URL for your app, so needs to be unique.  Choose a subscription and Resource Group (creating one if necessary), and for "OS" choose "Docker".  Then click on "Configure container".
 
- 5. In the "Container Settings" choose "Docker Hub" as the image source, then "Public" or "Private" depending on the settings of your docker hub repo. (If it is "Private" you will also need to provide your docker hub login details.)
+ 5. In the "Container Settings" choose "Docker Hub" as the image source, and select "Private" docker hub repo. You will then need to provide docker hub login details.
 
  6. In "Container Settings" you need to select the DockerHub image you would like to use. For the development branch we use `dockerhub_account)/detectorchecker_dashboard:latest_devel`, while for the production branch we use `(dockerhub_account)/detectorchecker_dashboard:latest`.
 

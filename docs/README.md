@@ -19,11 +19,11 @@ To deploy the DetectorCheckerWebApp you will need:
 
 To deploy a WebApp fror the first time follow these instructions through in order:
 
-- [Setting up Azure storage](./files/Installation/azure_setup.md)
+1. [Setting up Azure storage](./files/Installation/azure_setup.md)
 
-- [Build a Docker container](./files/Installation/build_webapp_container.md)
+2. [Build a Docker container](./files/Installation/build_webapp_container.md)
 
-- [Setting up the Azure WebApp](./files/Installation/create_webapp.md)
+3. [Setting up the Azure WebApp](./files/Installation/create_webapp.md)
 
 
 ## Storage

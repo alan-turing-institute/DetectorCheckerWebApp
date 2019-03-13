@@ -66,7 +66,7 @@ where DC_EMAIL_ACC is the email address and DC_EMAIL_PWD is the password.
 docker build -t (dockerhub_account)/detectorchecker_dashboard:<tag> -f detectorchecker.dockerfile .
 ```
 
-Here `<tag> ` needs to be replaced by an appropriate docker tag. When building for the deployment webapp we replace tag with `latest`. When building for the development version we replace it with `latest_devel`
+Here `<tag> ` needs to be replaced by an appropriate docker tag. When building for the production version of the WebApp we replace tag with `latest`. When building for the development version we replace it with `latest_devel`
 
 2. Push the build to Docker Hub
 

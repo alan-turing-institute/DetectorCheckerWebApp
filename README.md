@@ -25,7 +25,7 @@ There are several ways to launch the WebApp from source, which is strictly for d
 
 ### Run with R (limitted functionality)
 
-1. Navigate to the `webapp` subdirectory and run the `run.R` file.
+1. Navigate to the *webapp* subdirectory and run the *run.R* file.
 
 2. Open a browser and go to `http://0.0.0.0:1111`
 

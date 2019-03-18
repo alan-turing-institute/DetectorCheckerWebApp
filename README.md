@@ -23,7 +23,7 @@ This is strictly for development purposes and should not be used by end users.
 
 There are several ways to launch the WebApp from source, which is strictly for development purposes. First clone the repository.
 
-### Run with R (limitted functionality)
+### Run with R (limited functionality)
 
 1. Navigate to the *webapp* subdirectory and run the *run.R* file.
 
@@ -39,7 +39,7 @@ The WebApp can be run as a shiny app simply by running the bash script in the ma
 
 2. Open a browser and go to `http://0.0.0.0:1111`
 
-**Limited Functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions on [adding storage credential information](/docs/files/Installation/build_webapp_container.md)).
+**Limited functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions on [adding storage credential information](/docs/files/Installation/build_webapp_container.md)).
 
 
 ### Docker image
@@ -63,3 +63,4 @@ The repository contains two sub folders:
 email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.ext
 email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.dc
 ```
+

@@ -39,11 +39,12 @@ The WebApp can be run as a shiny app simply by running the bash script in the ma
 
 2. Open a browser and go to `http://0.0.0.0:1111`
 
-**Limited Functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions here: https://github.com/alan-turing-institute/DetectorCheckerWebApp/blob/iss14/docs/files/Installation/build_webapp_container.md)
+**Limited Functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions on [adding storage credential information](/docs/files/Installation/build_webapp_container.md)).
+
 
 ### Docker image
 
-It is possible to run the WebApp as a Docker image (https://www.docker.com). Instructions on how to build the Docker image can be found here: https://github.com/alan-turing-institute/DetectorCheckerWebApp/blob/iss14/docs/files/Installation/build_webapp_container.md
+It is possible to run the WebApp as a Docker image (https://www.docker.com). See the instructions on how to [build the Docker image](/docs/files/Installation/build_webapp_container.md).
 
 
 # Repository Structure 

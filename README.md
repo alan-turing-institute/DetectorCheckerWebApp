@@ -1,17 +1,59 @@
 # DetectorCheckerWebApp
- Project to develop software to assess developing detector screen damage (Web App based on the original DetectorChecker package)
+
+An interactive WebApp for analysing pixel damage in CT scanners using the DetectorChecker R package (https://github.com/alan-turing-institute/DetectorChecker).
 
 
-# Docker image preparation
+# Running the app 
 
-## Building a docker image
-docker build -t detectorchecker/detectorchecker_dashboard:latest -f detectorchecker.dockerfile .
+## Official Release
 
-## Pushing the build to docker hub
-docker push detectorchecker/detectorchecker_dashboard:latest
+The official release of the DetectorChecker WebApp is hosted at https://detectorchecker.azurewebsites.net
 
-## Running locally
-docker run -p 1111:1111 detectorchecker/detectorchecker_dashboard:latest
+
+
+## Development Release
+
+A development version of the WebApp is hosted at https://detectorcheckerdev.azurewebsites.net
+
+This is strictly for development purposes and should not be used by end users. 
+
+
+
+# Running the App from source
+
+There are several ways to launch the WebApp from source, which is strictly for development purposes. First clone the repository.
+
+### Run with R (limited functionality)
+
+1. Navigate to the *webapp* subdirectory and run the *run.R* file.
+
+2. Open a browser and go to `http://0.0.0.0:1111`
+
+### Shiny App (running locally)
+
+The WebApp can be run as a shiny app simply by running the bash script in the main directory:
+
+1. Run the bash script from the terminal:
+
+ ```bash shiny.sh```
+
+2. Open a browser and go to `http://0.0.0.0:1111`
+
+**Limited functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions on [adding storage credential information](/docs/files/Installation/build_webapp_container.md)).
+
+
+### Docker image
+
+It is possible to run the WebApp as a Docker image (https://www.docker.com). See the instructions on how to [build the Docker image](/docs/files/Installation/build_webapp_container.md).
+
+
+# Repository Structure 
+
+The repository contains two sub folders:
+
+`docs`: Documentation with a description of how to build the WebApp for developers.
+
+`webapp`: R and Python scripts.
 
 # Data management (Azure)
 
@@ -21,3 +63,4 @@ docker run -p 1111:1111 detectorchecker/detectorchecker_dashboard:latest
 email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.ext
 email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.dc
 ```
+

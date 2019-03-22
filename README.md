@@ -21,7 +21,9 @@ This is strictly for development purposes and should not be used by end users.
 
 # Running the App from source
 
-There are several ways to launch the WebApp from source, which is strictly for development purposes. First clone the repository.
+There are several ways to launch the WebApp from source, which is strictly for development purposes. First clone the repository
+
+Make sure you have the latest version of the DetectorChecker R package installed (see https://github.com/alan-turing-institute/DetectorChecker)
 
 ### Run with R (limited functionality)
 

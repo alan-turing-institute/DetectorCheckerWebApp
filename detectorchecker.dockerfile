@@ -16,7 +16,7 @@ RUN Rscript -e "install.packages('shinythemes')"
 RUN Rscript -e "install.packages('ggplot2')"
 RUN Rscript -e "install.packages('tools')"
 RUN Rscript -e "install.packages('tiff')"
-RUN Rscript -e "install.packages('h5')"
+RUN Rscript -e "install.packages('hdf5r')"
 RUN Rscript -e "install.packages('raster')"
 RUN Rscript -e "install.packages('igraph')"
 RUN Rscript -e "install.packages('plyr')"
@@ -31,6 +31,7 @@ RUN Rscript -e "install.packages('lattice')"
 RUN Rscript -e "install.packages('nlme')"
 RUN Rscript -e "install.packages('spatstat')"
 RUN Rscript -e "install.packages('shinydashboard')"
+RUN Rscript -e "install.packages('dbscan')"
 
 # install Azure CLI - instructions from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
 RUN apt-get update; apt-get -y install lsb-release
@@ -58,7 +59,7 @@ RUN Rscript -e "install.packages('devtools')"
 
 # Installing detector checker
 # TODO: needs to be updated when the repo will become public
-RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker/Package/detectorchecker/', auth_token='')"
+RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker', auth_token='', ref = '')"
 
 ADD . DetectorCheckerWebApp
 WORKDIR DetectorCheckerWebApp

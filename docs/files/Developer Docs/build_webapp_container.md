@@ -57,6 +57,16 @@ export DC_EMAIL_PWD=""
 
 where DC_EMAIL_ACC is the email address and DC_EMAIL_PWD is the password. 
 
+3. Configure the dockerfile
+
+The `detectorchecker.dockerfile` contains the following line:
+
+```
+RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker', auth_token='', ref = '')"
+```
+
+Depending on whether you are building the producton or development version you may wish to set the branch of the detectorchecker repo to use. If you want to use the development branch set `ref=develop`, else set `ref=master`.
+
 
 ## 4. Creating the Docker image
 

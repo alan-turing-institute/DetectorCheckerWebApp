@@ -1085,12 +1085,17 @@ shinyServer(function(input, output, session) {
         }
 
         if (ok) {
+          glm_summary <- summary(glm_fit)
+          remove(glm_fit) #Remove the glm_fit object
           output$model_fit_summary <- renderPrint({
-            summary(glm_fit)
+            glm_summary
           })
         }
 
+        # Remove the glm_fit object from memory
+        
         setProgress(message = "Finished!", value=1.0)
+        
       })
 
     }, error = function(err) {

@@ -59,7 +59,7 @@ RUN Rscript -e "install.packages('devtools')"
 
 # Installing detector checker
 # TODO: needs to be updated when the repo will become public
-RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker/Package/detectorchecker/', auth_token='')"
+RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker', auth_token='', ref = '')"
 
 ADD . DetectorCheckerWebApp
 WORKDIR DetectorCheckerWebApp

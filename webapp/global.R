@@ -140,6 +140,7 @@ about_text = paste('<h2 style="text-align: center;"><strong>DetectorChecker</str
 <p>Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;</p>
 <p>Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a></p>
 <p>Dr <a href="https://www.turing.ac.uk/people/researchers/tomas-lazauskas">Tomas Lazauskas</a></p>
+<p>Dr <a href="https://www.turing.ac.uk/people/researchers/oscar-giles">Oscar Giles</a></p>
 <p>For more information about the DetectorChecker project please contact Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;or Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a>.</p>
 <p>DetectorChecker is being developed by the University of Warwick and Alan Turing Institute.</p>
 <p style="text-align: left;">&copy; Any copyrights remain with the original authors.</p>

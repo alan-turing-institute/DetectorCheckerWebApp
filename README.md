@@ -42,7 +42,7 @@ The WebApp can be run as a shiny app simply by running the bash script in the ma
 
 2. Open a browser and go to `http://0.0.0.0:1111`
 
-**Limited functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions on [adding storage credential information](/docs/files/Developer_Docs/build_webapp_container.md)).
+**Limited functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions in point 3 of [adding storage credential information](/docs/files/Developer_Docs/build_webapp_container.md)).
 
 
 ### Docker image

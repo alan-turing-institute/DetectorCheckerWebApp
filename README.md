@@ -26,6 +26,14 @@ There are several ways to launch the WebApp from source, which is strictly for d
 
 Make sure you have the latest version of the DetectorChecker R package installed (see https://github.com/alan-turing-institute/DetectorChecker)
 
+### Dependencies
+
+To run the WebApp from source make sure you have the following R packages installed:
+
+```
+install.packages(c("shiny", "shinyjs", "shinyBS", "shinythemes", "spatstat", "shinydashboard"))
+```
+
 ### Run with R (limited functionality)
 
 1. Navigate to the *webapp* subdirectory and run the *run.R* file.

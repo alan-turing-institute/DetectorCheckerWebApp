@@ -104,7 +104,7 @@ msg_err_no_events = "No events found. Please revisit step 4."
 
 # sidebar
 tt_selected_layout = "Selected layout."
-tt_select_input = "Choose a predifined layout or upload your own."
+tt_select_input = "Choose a predefined layout or upload your own."
 tt_custom_layout = "Select a file with a custom layout parameters."
 tt_custom_example = paste0("Example can be found ", a("here.",
   href = "https://github.com/tomaslaz/DetectorChecker/blob/master/layout_example.dc",

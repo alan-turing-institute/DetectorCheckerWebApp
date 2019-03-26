@@ -1,7 +1,8 @@
 # DetectorCheckerWebApp
 
-An interactive WebApp for analysing pixel damage in CT scanners using the DetectorChecker R package (https://github.com/alan-turing-institute/DetectorChecker).
+An interactive WebApp for analysing pixel damage in CT scanners using the DetectorChecker `R` package (https://github.com/alan-turing-institute/DetectorChecker).
 
+This WebApp loads data acquired from detector screens (`tiff` images from daily tests, or `xml` files listing bad pixels), and applies methods from spatial statistics (particularly the R package `spatstat`) to produce analyses and graphical reports concerning location and possible departures from spatial randomness of damaged pixels and regions.
 
 # Running the app 
 
@@ -25,6 +26,14 @@ There are several ways to launch the WebApp from source, which is strictly for d
 
 Make sure you have the latest version of the DetectorChecker R package installed (see https://github.com/alan-turing-institute/DetectorChecker)
 
+### Dependencies
+
+To run the WebApp from source make sure you have the following R packages installed:
+
+```
+install.packages(c("shiny", "shinyjs", "shinyBS", "shinythemes", "spatstat", "shinydashboard"))
+```
+
 ### Run with R (limited functionality)
 
 1. Navigate to the *webapp* subdirectory and run the *run.R* file.
@@ -41,12 +50,12 @@ The WebApp can be run as a shiny app simply by running the bash script in the ma
 
 2. Open a browser and go to `http://0.0.0.0:1111`
 
-**Limited functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions on [adding storage credential information](/docs/files/Installation/build_webapp_container.md)).
+**Limited functionality**: The WebApp will run, but you will not be able to upload data to the cloud. To add this functionality you will need to add credential information to a folder called `.secrets` (see the instructions on [adding storage credential information](/docs/files/Developer_Docs/build_webapp_container.md)).
 
 
 ### Docker image
 
-It is possible to run the WebApp as a Docker image (https://www.docker.com). See the instructions on how to [build the Docker image](/docs/files/Installation/build_webapp_container.md).
+It is possible to run the WebApp as a Docker image (https://www.docker.com). See the instructions on how to [build the Docker image](/docs/files/Developer_Docs/build_webapp_container.md).
 
 
 # Repository Structure 

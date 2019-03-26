@@ -43,3 +43,14 @@ rsconnect/
 .Rproj.user
 
 .vscode/
+
+# Latex outputs
+
+docs/files/WebApp_user_docs/*.aux
+docs/files/WebApp_user_docs/*.fdb_latexmk
+docs/files/WebApp_user_docs/*.fls 
+docs/files/WebApp_user_docs/*.log
+docs/files/WebApp_user_docs/*.gz
+docs/files/WebApp_user_docs/*.out
+docs/files/WebApp_user_docs/*.blg
+*.log

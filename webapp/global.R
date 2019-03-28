@@ -136,6 +136,14 @@ about_text = paste('<h2 style="text-align: center;"><strong>DetectorChecker</str
 <p>DetectorChecker is a&nbsp;multi-platform open-source software package aimed to&nbsp;assess developing detector screen damage in high-value detector screens used in computerised tomography.&nbsp;DetectorChecker produces statistical summaries of damage of detector screens including dysfunctional pixel and noise analysis and allows users to&nbsp;forward their summaries, enabling comparative data analysis over a broader range of system.</p>
 <p><strong>Requirements:&nbsp;</strong></p>
 <p>For the best experience, use a modern web browser which supports HTML5 technology (such as, Google Chrome v. 70.0 or later, Mozilla Firefox v. 62.0 or later, or similar) with javascript being enabled.</p>
+<p><strong>License Information</strong></p>
+<p>The software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and noninfringement. In no event shall the
+authors or copyright holders be liable for any claim, damages or other
+liability, whether in an action of contract, tort or otherwise, arising from,
+out of or in connection with the software or the use or other dealings in the
+software.</p>
 <p><strong>Acknowledgments:</strong></p>
 <p>Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;</p>
 <p>Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a></p>

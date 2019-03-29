@@ -24,6 +24,9 @@ A development version of the WebApp is hosted at https://detectorcheckerdev.azur
 This is strictly for development purposes and should not be used by end users. 
 
 
+# Documentation
+A user guide is available as a [pdf file](docs/files/WebApp_user_docs/detectorCheckerManual-WSK_JAB2.pdf)
+
 
 # Running the App from source
 

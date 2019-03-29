@@ -1,8 +1,9 @@
 #!/bin/bash
 
+# getting secrets
+source .secrets/azure_auth.sh
+source .secrets/gmail.sh
 
-export AZURE_STORAGE_ACCOUNT="detectorcheckerstorage"
-export AZURE_STORAGE_ACCESS_KEY="aSMDADXSZEdGfBiuIUMlmvBIZEWhY+40NvQ5JLZKADsBZ5ZCYTxin7HvhSL5/cu15vOIYXIEHaaKsYcEKdufdA=="
-export AZURE_CONTAINER="detectorcheckercontainer"
+cd webapp
 
 Rscript run.R

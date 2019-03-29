@@ -1,0 +1,454 @@
+\documentclass[11pt,a4paper,twosided]{article}
+\usepackage{layout}
+\usepackage{exscale, amsmath, amsfonts, amssymb, amsthm, amscd, fdsymbol, mdframed}
+
+\usepackage{hyperref}
+\usepackage{enumerate,textcomp}
+%multicol}
+\usepackage{subfigure}
+\usepackage{graphicx}
+%\usepackage{color}
+\usepackage{float}
+
+\usepackage{xspace}
+
+%\usepackage[notcite,notref]{showkeys}
+%\usepackage[notcite]{showkeys}
+%\usepackage{showtags}
+\usepackage{verbatim}
+\parindent0pt
+\parskip7pt
+\textwidth14.5cm
+\textheight=24cm
+\addtolength{\oddsidemargin}{-1cm}
+%\addtolength{\evensidemargin}{cm}
+\addtolength{\voffset}{-15mm}
+\pagestyle{myheadings}
+\renewcommand{\baselinestretch}{1.05mm}
+
+%============================= MAKROS ===============================
+\newcommand{\no}{\noindent}
+\newcommand{\pfskip}{\vspace{3mm}}
+\newcommand{\qqd}{\quad\quad}
+
+%-------------------- General Math ----------------------
+\newcommand{\Conv}{{\rm conv\,}}
+\newcommand{\Area}{{\rm area\,}}
+\newcommand{\Inter}{{\rm int\,}}
+\newcommand{\dist}{{\rm dist}}
+\newcommand{\N}{\mathbb{N}}
+%\renewcommand{\P}{\mathbb{P}}
+\newcommand{\E}{\mathbb{E}}
+%\newcommand{\K}{\mathbb{K}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\T}{\mathbb{T}}
+
+%--------------------- Software ------------------------
+\newcommand{\DetectorChecker}{\emph{DetectorChecker}\xspace}
+\newcommand{\Rsoftware}{\emph{R}\xspace}
+
+%--------------------- Probability ------------------------
+\newcommand{\w}{\omega}
+%\newcommand{\wt}{{\widetilde{\omega}}}
+\newcommand{\W}{\Omega}
+\newcommand{\MW}{M\times\W}
+\newcommand{\dmP}{d \mu\hspace{-1mm}\otimes\hspace{-1mm}P}
+\newcommand{\mP}{\mu\hspace{-0.5mm}\otimes\hspace{-0.5mm}P}
+\newcommand{\A}{{\mathcal A}}
+\newcommand{\B}{{\mathcal B}}
+\newcommand{\C}{{\mathcal C}}
+\newcommand{\F}{{\mathcal F}}
+\newcommand{\G}{{\mathcal G}}
+\newcommand{\I}{{\mathcal I}}
+\newcommand{\J}{{\mathcal J}}
+\renewcommand{\L}{{\mathcal L}}
+\newcommand{\M}{{\mathcal M}}
+\renewcommand{\P}{{\mathcal P}}
+\newcommand{\Tail}{{\mathcal T}}
+\newcommand{\eps}{\varepsilon}
+
+
+%........................................
+\newcommand{\Lc}{{\widehat{L}}}
+\newcommand{\Lf}{{\widehat{L}}^\sharp}
+\newcommand{\Lbm}{{\widehat{L}}^{\flat-}}
+
+%\newcommand{\lowstepline}{-\hspace{-2mm}\bullet\hspace{-2.38mm}^{\mid}\hspace{1mm}}
+\newcommand{\upstepline}{{\shortmid\hspace{-1.27mm}}^{\bullet\hspace{-0.7mm}-}}
+\newcommand{\lowstep}{-\hspace{-1mm}\bullet\hspace{-1.15mm}^{\mid}}
+\newcommand{\upstep}{{\shortmid\hspace{-1mm}}^{\bullet\hspace{-1mm}-}}
+
+\newcommand{\partialc}{{\widehat{\partial}}}
+%\newcommand{\Pa}{{\mathcal P}}
+\newcommand{\len}{{\rm length}\,}
+\newcommand{\area}{{\rm area}\,}
+%\newcommand{\inter}{{\rm int}\,}
+
+\newcommand{\nd}{\noindent}
+\newcommand{\TTT}{\clubsuit}
+
+%*********************** Theorem, Definition... *****************
+%\newcommand{\Definition}[1]{\newtheorem{%***********************
+%\newtheorem{satz}{Satz}[section]
+\newtheorem{thm}{{\bf  Theorem}}[section]
+\newtheorem{lemma}[thm]{{\bf  Lemma}}
+\newtheorem{cor}[thm]{{\bf  Corollary}}
+\newtheorem{prop}[thm]{{\bf  Proposition}}
+\newtheorem{definition}[thm]{{\bf  Definition}}
+\newtheorem{rem}[thm]{{\bf Remark}}
+\newtheorem{ex}[thm]{{\bf  Example}}
+\newcommand{\pf}{\noindent {\bf Proof. }}
+\newcommand{\pfofthm}{\noindent {\bf Proof of the theorem. }}
+\newcommand{\pfoflem}{\noindent {\bf Proof of the lemma. }}
+\newcommand{\nn}{\nonumber}
+\newcommand{\noind}{\noindent}
+
+\renewcommand{\baselinestretch}{1.2}
+
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+\begin{document}
+%>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+%TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+% Title
+%TTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
+
+\begin{center}
+
+{\Large\bf DectorChecker Instruction Manual}
+
+\bigskip
+{\Large For release version 0.1.9}
+
+\bigskip
+{\large Julia A Brettschneider, Tomas Lazauskas, Oscar Giles, Wilfrid S Kendall}
+
+
+
+\medskip
+\end{center}
+
+
+%\renewcommand{\thefootnote}{}
+%\footnote{2000 Mathematics Subject Classification: ...}
+%\vspace{-5mm}
+
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+\section{Introduction}\label{int}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+Quality assessment for digital X-ray detector panels is an important issue, because
+it impacts the quality of the images. 
+Detector panels being costly, 
+their replacement or refurbishing requires careful justification.
+% they can only 
+% be replaced if this can be justified. 
+Whether or not individual damaged pixels are actually 
+problematic depends on where they are located and if they occur in close to each other.
+Spatial analysis of dysfunctional pixels can be the key to assessing the relevance of damage.
+An overview of 
+% the 
+common
+types of spatial patterns of dysfunctional pixels can be found in  
+\cite{brettschneider2014crism}. 
+
+The freely accessible webtool \DetectorChecker allows users to assess digital X-ray 
+detector quality via spatial analysis of dysfunctional pixels.
+The webtool is built using the \Rsoftware webtool \emph{shiny}, based on an open source \Rsoftware-package of the same name.
+This webtool will be
+connected to an open archive of detector data contributed by the user community:
+it is envisaged that users will be able to choose to create an account to upload their data to this archive,
+to facilitate more extensive analysis of data trends concerning detector damage.
+
+The quality assessment provided by \DetectorChecker can be used to support decision making 
+about refurbishment and purchase of digital X-ray detectors. 
+It can also be used to monitor the state of the detector over time and to 
+link this to particular types of usage.
+It is hoped that \DetectorChecker will help highlight the occurrence of particular damage patterns,
+thus guiding
+users in assessing likely reasons for such damage.
+
+At the beginning of a session, 
+\DetectorChecker allows users either (a) to select one of the common detector layouts,
+or (b) to enter parameters defining a custom layout. 
+After this users can upload data in the form of \texttt{xml} or \texttt{tiff} files, allowing \DetectorChecker to identify dysfunctional pixels.
+\DetectorChecker will then enable the user to create numerical and graphical summaries 
+about the spatial distribution of the dysfunctional pixels. 
+This can be done either on the pixel level or on the \emph{event level}; 
+which automatically identifies and represents clusters of damage. The event level is likely to be more
+closely linked to the reasons for damage, hence may provide a clearer picture 
+of what is going on.
+Finally, users can request that severely damaged regions of the detector are masked so as 
+to exclude them from
+the analysis. This enables the effect of one specific damaged region 
+to be decoupled from
+an assessment of the remainder of the detector.
+
+\DetectorChecker has been developed by the authors as follows.
+JAB wrote the original \Rsoftware-code and contributed to the design of the webtool, 
+TL converted it into an \Rsoftware-package and designed and built the webtool, 
+while WSK initiated, supervised and tested the project at all stages.
+We thank the Alan Turing institute for providing funding for this project.
+The authors are grateful to Jay Warnett (at Warwick Manufacturing Group), Andrew Ramsay (at Nikon Metrology, UK, at the time) and Nicola Tartoni and Ian Horswell (at Diamond Lightsource, UK) for guidance on X-ray machines, detector types and damages. They are also grateful to Martin Turner and 
+Tristan Lowe (at University Manchester) for the interest in this project and their feedback.
+The webtool builds on previous work supported by EPSRC grant EP/K031066/1,
+and was funded by a Turing seed fund project awarded by the Alan Turing Institute under EPSRC grant EP/N510129/1.
+
+
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+\section{Workflow}\label{flow}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+The webtool \DetectorChecker can be assed via the following url:
+
+\begin{mdframed}
+\bigskip
+\centerline{
+\url{https://detectorchecker.azurewebsites.net}
+}
+\medskip
+\end{mdframed}
+
+It is structured around tabs that allow the user to choose actions on the left hand size and outputs 
+numerical and graphical results on the right hand side. Tooltips are available and appear in pop-up boxes.
+Outputs can be saved using standard mouse click functions from the operating system. 
+The functionalities of the webtool are also visualised in Figure \ref{fig_flowchart}.
+
+\begin{figure}[htbp]
+\begin{center}
+\hspace{-11mm}
+\includegraphics[width=15.5cm]{flowchartDCshort.jpg}
+\caption
+{
+{\bfseries 
+Flowchart illustrating possible workflows using \DetectorChecker.}
+}
+\label{fig_flowchart}
+\end{center}
+\end{figure}
+
+
+The basic program consists of eight steps some of which can be run multiple times with different options.
+Steps 1 to 2 deal with the detector panel layout. In Step 3 users upload a file containing the coordinates of dysfunctional pixels. Steps 4 to 5 are the core functions of the webtool. They conduct the analysis of spatial patterns of dysfunctional pixels. This is followed by an opportunity to create an account to share the data with the user community in Step 6. Step 7 allows to choose spatial functions related to the layout as covariates and fit a linear model. This can help identifying factors that have an influence on the decay of pixels. The steps are explained in more detail in the itemised list below.
+
+\bigskip
+
+\begin{mdframed}
+
+\medskip
+
+\begin{enumerate}
+
+\item {\bf Select Layout:} 
+Users can choose from a list of common detector layouts using a drop down menu. 
+Alternatively, users can define their own layout by entering parameters (see Section \ref{layout}). 
+
+\item {\bf Choose Visualisation:} 
+The default is a graphical representation of the layout.
+Alternatively, pixelwise functions related to the layout can be visualised. This includes 
+measuring the distances to the centre, the corners or the edges of the panel or the edges 
+of the subpanels. 
+These spatial functions are being used as covariates in later model fitting (see Section \ref{model}).
+Both the layout itself and the spatial functions can be plotted.
+
+\item {\bf Import File:} 
+Upload a file with information on dysfunctional pixel locations.
+This can be an \texttt{xml} file containing the coordinates of the damaged pixels
+or \texttt{tiff} file containing an array of pixel intensities corresponding to the mask 
+describing the dysfunctional pixels. 
+For example, this can be a file created by manufacturers maintenance routines 
+(e.g.~Perkin Elmer's {\it Bad Pixel Map}) in \texttt{xml} or \texttt{tiff} format.
+
+An image with solid squares indicating dysfunctional pixels
+is plotted automatically 
+
+\item {\bf Choose Level:} 
+Damage can be assessed on different levels (see Section \ref{levels}).
+\begin{itemize}
+\item {\it Pixels:} Each damaged pixel is seen as equally relevant occurrence.
+\item {\it Events:} Adjacent pixels are summarised 
+\end{itemize}
+If {\it Events} is chosen, the user can also specify which types are included.
+
+\item {\bf Choose Analysis:} 
+Spatial statistics tools to explore the spatial patterns of damage are available
+to the user. One is selected at a time.
+\begin{itemize}
+\item Spatial density plots based on the damaged pixel occurrance
+\item Counts of damaged pixels associated with subpanels of the detector
+\item Arrow between nearest neighbours
+\item Rose plot of the corresponding angles
+\item K-, F- and G-function to explore spatial randomness on different scales
+\item Dito but considering spatially inhomogeneous intensity
+\end{itemize}
+
+Plots are displayed. The user can repeat this step running through different choices. 
+
+Mouse clicking on individual subpanels will give individual plots showing only the subpanel in question.
+
+\item {\bf Send Data:} 
+Upload data to the archive using your email address as unique identifier.
+
+\item {\bf Modelling Damage Intensity:} 
+Select covariates related to detector layout to be included in a linear model explaining pixel damage
+and fit the model.
+
+%\item  {\bf Mask Panel:} 
+%Areas of intense damage may dominate the results of the analysis. They can be removed via a mask
+%to allow the analysis of the remaining part of the detector panel (see section \ref{mask}).
+% choose level
+\end{enumerate}
+
+\medskip
+
+\end{mdframed}
+
+\medskip
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+\section{Detector Layout}\label{layout}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+There are preset layouts to choose from for common detector panels. These include
+Perking Elmer (full and cropped version), Pilatus and Excalibur.
+
+Alternatively, users may define their own layout. 
+A detector panel is typically composed of subpanels arranged in a rectangular grid. They may also be referred to as {\it read out groups (ROG).}
+They can be seamless such as in the Perkin Elmer design (e.g.~\cite{manualXRD1621}), but gaps between the rows
+and between the columns are allowed as long as they do not interfere with this being a grid.
+In other words, the gap between the first and second columns need to be the same in all rows.
+Explain custom made layout types and which parameters to enter.
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=16cm]{layoutDrawingDC.pdf}
+\caption
+{
+{\bfseries 
+General layout with modules and gaps.}
+}
+\label{fig_layout}
+\end{center}
+\end{figure}
+
+
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+\section{Dysfunctional pixels}\label{dysfct}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+Dysfunctional pixels are referred to by many names including {\it bad, dead, erratic, stuck, hot, defective, 
+broken and underperforming.} 
+Maintenance protocols may include the creation of so-called {\it maps} identifying the locations of such pixels.
+They are identified by a combination of criteria based on signal intensities, noise levels, uniformity and lag
+(see e.g.~\cite{manualXRD1621}). 
+Common formats to store the coordinates of these pixels are \texttt{xml} for coordinates or \texttt{tiff} for masks. 
+\DetectorChecker can process both of these formats.
+
+After uploading the file, \DetectorChecker automatically produces an image indicating the dysfunctional pixel locations 
+by solid squares. An example for a highly damaged detector panel is shown in Figure \ref{damagedPixels}.
+The pixels shown are not to scale but are magnified to make them large enough so even individual
+damaged pixels are visible.
+
+We distinguish different types of dysfunctional pixels depending on their spatial arrangement. 
+This includes:
+\begin{itemize}
+\item singletons
+\item doubles
+\item triplets
+\item larger clusters
+\item upper and lower vertical lines
+\item right and left horizontal lines
+\end{itemize}
+
+ singletons, doubles, small clusters, lines and high density regions (\cite{brettschneider2014crism}). 
+The example shown in Figure \ref{damagedPixels} has singletons all over the panel, lines intersecting
+with the horizontal midline indicated the two rows of subpanels, a small cluster in the top right corner
+and a high density region in the bottom right corner. 
+
+\begin{figure}[htbp]
+\begin{center}
+\includegraphics[width=10cm]{damagedPixels.png}
+\caption
+{
+{\bfseries Representation of detector panel with dysfunctional pixels.}
+%B$\_$0 showing singletons, lines and corner damage. F$\_$0 showing also a high density region of damaged pixels.}.
+}
+\label{damagedPixels}
+\end{center}
+\end{figure}
+
+
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+\section{Spatial analysis}\label{spatial}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+An important clue to the reasons for detector panel damage can come from the spatial arrangements
+of dysfunctional pixels. \DetectorChecker offers a number of exploratory tools to analyse this.
+
+To see areas of concentrated damage we recommend a density plot:\\
+$\medblacktriangleright$ In Step 5 choose {\it Density}.
+
+Some of the tools offer insight into the directions between nearest neighbours.
+To plot an arrow for each pixel towards its nearest neighbour:\\
+$\medblacktriangleright$ In Step 5 choose {\it Arrows}.
+
+To obtain the resulting distribution of all the angles corresponding to the arrows:\\ 
+$\medblacktriangleright$ In Step 5 choose {\it Angles}.
+
+For details on the statistical methods underlying these tools see \cite{brettschneider2017crism}.
+
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+\section{Levels of Assessment}\label{levels}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+While the natural entity of damage are pixels, this is not necessarily the best ways to detect the reasons 
+for damage nor to rank their importance. For this reason, \cite{brettschneider2017crism} introduced 
+the notion of a higher level analysis by summarising adjacent pixels into events. Roughly speaking, lines are represented by one of their ends, small clusters by their centre etc. For more details about the pixel and event perspectives see \cite{brettschneider2017crism}.
+
+\DetectorChecker allows to use either of the two alternative levels of quality assessment, pixels or events.
+The default is set on pixels. To perform the alternative event based analysis proceed as follows:\\
+$\medblacktriangleright$ In Step 4 choose {\it Events.}\\
+$\medblacktriangleright$ In Step 6 choose Analysis as described in Section \ref{spatial}.
+
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+\section{Modelling}\label{model}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+In Step 2 we had the option to display some functions that assigned each pixel coordinate 
+values to do with the distance to the edges, the corners or to the vertical and/or horizontal
+subpanel boundaries, if applicable. These spatial functions are used as covariates in a
+statistical model that aims to determine factors contributing to the decay of pixels.
+
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+%\section{Masking}\label{mask}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+%Explain density based thresholding and creating of a mask.
+%For more details about the masking see \cite{} (second tech report).
+
+
+
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+%\section{Case Studies}\label{cases}
+%SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
+
+
+%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+%\chapter{Bibliography}\nonumber
+%\chapter*{Bibliography}\nonumber
+\addcontentsline{toc}{chapter}{\numberline{}Bibliography}
+%\section*{Bibliography}
+\bibliographystyle{plain}
+\bibliography{biblioManual}
+%BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+\end{document}

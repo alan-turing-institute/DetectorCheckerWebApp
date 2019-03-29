@@ -16,7 +16,7 @@ RUN Rscript -e "install.packages('shinythemes')"
 RUN Rscript -e "install.packages('ggplot2')"
 RUN Rscript -e "install.packages('tools')"
 RUN Rscript -e "install.packages('tiff')"
-RUN Rscript -e "install.packages('h5')"
+RUN Rscript -e "install.packages('hdf5r')"
 RUN Rscript -e "install.packages('raster')"
 RUN Rscript -e "install.packages('igraph')"
 RUN Rscript -e "install.packages('plyr')"
@@ -26,13 +26,12 @@ RUN Rscript -e "install.packages('testthat')"
 RUN Rscript -e "install.packages('knitr')"
 RUN Rscript -e "install.packages('rmarkdown')"
 RUN Rscript -e "install.packages('roxygen2')"
-RUN Rscript -e "install.packages('devtools')"
 RUN Rscript -e "install.packages('shinyBS')"
 RUN Rscript -e "install.packages('lattice')"
 RUN Rscript -e "install.packages('nlme')"
 RUN Rscript -e "install.packages('spatstat')"
 RUN Rscript -e "install.packages('shinydashboard')"
-# this is where detectorchecker package should installed
+RUN Rscript -e "install.packages('dbscan')"
 
 # install Azure CLI - instructions from https://docs.microsoft.com/en-us/cli/azure/install-azure-cli-apt?view=azure-cli-latest
 RUN apt-get update; apt-get -y install lsb-release
@@ -54,14 +53,17 @@ RUN apt-get -y install python3
 RUN apt-get -y install python3-pip
 RUN pip3 install --upgrade pip
 RUN python3 -m pip install azure
-#RUN python3 -m pip install smtplib
+
+RUN apt-get update; apt-get -y install libcurl4-openssl-dev libssl-dev
+RUN Rscript -e "install.packages('devtools')"
+
+# Installing detector checker
+# TODO: needs to be updated when the repo will become public
+RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker', auth_token='', ref = '')"
 
 ADD . DetectorCheckerWebApp
 WORKDIR DetectorCheckerWebApp
 ENV DC_HOME /DetectorCheckerWebApp
-
-# this is temporary while we do not publish the app on CRAN
-RUN Rscript -e "install.packages('detectorchecker_0.1.10.tgz', repos = NULL, type='source')"
 
 # make sure that shiny.sh is an executable
 RUN chmod +x shiny.sh

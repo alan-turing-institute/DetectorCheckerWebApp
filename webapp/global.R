@@ -1,7 +1,7 @@
 library(shiny)
 # global.R define objects available to both ui.R and server.R
 
-webapp_version <- "0.1.8"
+webapp_version <- "0.1.9"
 
 # global parameters
 const_layout_default <- "None"
@@ -23,29 +23,29 @@ const_ui_layoutSelectInput <- "layoutSelect"
 # pixel analysis
 const_layout_plot = 1
 const_layout_plot_cap = "layout"
-  
+
 const_pix_distcentreeucl = 2
 const_pix_distcentreeucl_cap = "distcentreeucl"
-  
+
 const_pix_distcentrelinf = 3
 const_pix_distcentrelinf_cap = "distcentrelinf"
-  
+
 const_pix_distcorner = 4
 const_pix_distcorner_cap = "distcorner"
-  
+
 const_pix_distedgescol = 5
 const_pix_distedgescol_cap = "distedgescol"
-  
+
 const_pix_distedgesrow = 6
 const_pix_distedgesrow_cap = "distedgesrow"
-  
+
 const_pix_distedgesmin = 7
 const_pix_distedgesmin_cap = "distedgesmin"
 
 # damaged pixel analysis
 const_dead_plot = 1
 const_dead_plot_cap = "Damage"
-  
+
 const_density_plot = 2
 const_density_plot_cap = "Density"
 
@@ -104,9 +104,9 @@ msg_err_no_events = "No events found. Please revisit step 4."
 
 # sidebar
 tt_selected_layout = "Selected layout."
-tt_select_input = "Choose a predifined layout or upload your own."
+tt_select_input = "Choose a predefined layout or upload your own."
 tt_custom_layout = "Select a file with a custom layout parameters."
-tt_custom_example = paste0("Example can be found ", a("here.", 
+tt_custom_example = paste0("Example can be found ", a("here.",
   href = "https://github.com/tomaslaz/DetectorChecker/blob/master/layout_example.dc",
   target="_blank"))
 tt_layout_analysis = "Select a layout analysis type and click [Display plot] to visualise it."
@@ -136,10 +136,19 @@ about_text = paste('<h2 style="text-align: center;"><strong>DetectorChecker</str
 <p>DetectorChecker is a&nbsp;multi-platform open-source software package aimed to&nbsp;assess developing detector screen damage in high-value detector screens used in computerised tomography.&nbsp;DetectorChecker produces statistical summaries of damage of detector screens including dysfunctional pixel and noise analysis and allows users to&nbsp;forward their summaries, enabling comparative data analysis over a broader range of system.</p>
 <p><strong>Requirements:&nbsp;</strong></p>
 <p>For the best experience, use a modern web browser which supports HTML5 technology (such as, Google Chrome v. 70.0 or later, Mozilla Firefox v. 62.0 or later, or similar) with javascript being enabled.</p>
+<p><strong>Disclaimer</strong></p>
+<p>The software is provided "as is", without warranty of any kind, express or
+implied, including but not limited to the warranties of merchantability,
+fitness for a particular purpose and noninfringement. In no event shall the
+authors or copyright holders be liable for any claim, damages or other
+liability, whether in an action of contract, tort or otherwise, arising from,
+out of or in connection with the software or the use or other dealings in the
+software.</p>
 <p><strong>Acknowledgments:</strong></p>
 <p>Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;</p>
 <p>Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a></p>
 <p>Dr <a href="https://www.turing.ac.uk/people/researchers/tomas-lazauskas">Tomas Lazauskas</a></p>
+<p>Dr <a href="https://www.turing.ac.uk/people/researchers/oscar-giles">Oscar Giles</a></p>
 <p>For more information about the DetectorChecker project please contact Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;or Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a>.</p>
 <p>DetectorChecker is being developed by the University of Warwick and Alan Turing Institute.</p>
 <p style="text-align: left;">&copy; Any copyrights remain with the original authors.</p>

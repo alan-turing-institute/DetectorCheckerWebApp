@@ -54,7 +54,10 @@ RUN apt-get -y install python3-pip
 RUN pip3 install --upgrade pip
 RUN python3 -m pip install azure
 
+RUN apt-get update; apt-get -y install libxml2-dev
+
 RUN apt-get update; apt-get -y install libcurl4-openssl-dev libssl-dev
+
 RUN Rscript -e "install.packages('devtools')"
 
 # Installing detector checker

@@ -14,24 +14,21 @@ This WebApp loads data acquired from detector screens (`tiff` images from daily 
 
 # Running the app
 
-## Official Release
+## Official release
 
 The official release of the DetectorChecker WebApp is hosted at https://detectorchecker.azurewebsites.net
 
-
-
-## Development Release
+<!-- ## Development Release
 
 A development version of the WebApp is hosted at https://detectorcheckerdev.azurewebsites.net
 
-This is strictly for development purposes and should not be used by end users.
-
+This is strictly for development purposes and should not be used by end users. -->
 
 # Documentation
 A user guide is available as a [pdf file](docs/files/WebApp_user_docs/detectorCheckerManual-WSK_JAB2.pdf)
 
 
-# Running the App from source
+# Running the app from source
 
 There are several ways to launch the WebApp from source, which is strictly for development purposes. First clone the repository
 
@@ -69,7 +66,7 @@ The WebApp can be run as a shiny app simply by running the bash script in the ma
 It is possible to run the WebApp as a Docker image (https://www.docker.com). See the instructions on how to [build the Docker image](/docs/files/Developer_Docs/build_webapp_container.md).
 
 
-# Repository Structure
+# Repository structure
 
 The repository contains two sub folders:
 
@@ -85,3 +82,11 @@ The repository contains two sub folders:
 email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.ext
 email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.dc
 ```
+
+# Getting help
+
+If you found a bug or need support, please submit an issue [here](https://github.com/alan-turing-institute/DetectorCheckerWebApp/issues/new).
+
+# How to contribute
+
+We welcome contributions! If you are willing to propose new features or have bug fixes to contribute, please submit a pull request [here](https://github.com/alan-turing-institute/DetectorCheckerWebApp/pulls).

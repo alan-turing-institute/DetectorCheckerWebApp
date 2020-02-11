@@ -83,6 +83,28 @@ email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.ext
 email@address/yyyy-mm-dd-hh-mm-ssssss/layout_name.dc
 ```
 
+# Citation
+If you use DetectorChecker in your work please cite our package.
+
+BibTeX:
+
+```
+@software{tomas_lazauskas_2020_3662235,
+  author       = {Tomas Lazauskas and
+                  Oscar T Giles and
+                  Martin O'Reilly and
+                  Wilfrid Kendall and
+                  Julia Brettschneider},
+  title        = {{alan-turing-institute/DetectorCheckerWebApp}},
+  month        = feb,
+  year         = 2020,
+  publisher    = {Zenodo},
+  version      = {1.0.0},
+  doi          = {10.5281/zenodo.3662235},
+  url          = {https://doi.org/10.5281/zenodo.3662235}
+}
+```
+
 # Getting help
 
 If you found a bug or need support, please submit an issue [here](https://github.com/alan-turing-institute/DetectorCheckerWebApp/issues/new).

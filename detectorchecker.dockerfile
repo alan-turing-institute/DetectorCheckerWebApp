@@ -1,4 +1,4 @@
-FROM rocker/r-ver:3.5.1
+FROM rocker/r-ver:3.6.2
 
 # install R, and setup CRAN mirror
 #RUN apt-get update && apt-get install -y software-properties-common pandoc gnupg

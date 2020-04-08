@@ -221,7 +221,7 @@ shinyServer(function(input, output, session) {
           },
           error = function(err) {
             reset("dead_file")
-            showModal(modalDialog(title = "Error", "An error occurred while performing statistics"))
+            showModal(modalDialog(title = "Error", "An error occurred while reading data"))
             dead_load_ok <<- FALSE
             return(NULL)
           }

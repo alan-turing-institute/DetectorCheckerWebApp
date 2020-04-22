@@ -492,7 +492,7 @@ shinyServer(function(input, output, session) {
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
             output$dead_pixel_analysis_plot <- renderPlot({
-              detectorchecker::plot_events_count(layout = layout, caption = FALSE, incl_event_list = incl_event_list)},
+              detectorchecker::plot_events_count(detector = layout, caption = FALSE, incl_event_list = incl_event_list)},
                                                           width = "auto", height = "auto")
 
           # arrows

@@ -1026,8 +1026,8 @@ shinyServer(function(input, output, session) {
       }
 
       withProgress({
-        setProgress(message = "Fitting model...", 
-                    detail = 'This may take a moment...')
+        setProgress(message = "Fitting model...\n This may take a moment...", 
+                    value=1)
 
         ok <- TRUE
 

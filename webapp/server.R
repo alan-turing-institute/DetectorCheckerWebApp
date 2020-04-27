@@ -58,7 +58,7 @@ shinyServer(function(input, output, session) {
       } else {
         withProgress({
           setProgress(message = "Loading layout...")
-          layout <<- detectorchecker::create_module(input$layoutSelect)
+          layout <<- detectorchecker::create_detector(input$layoutSelect)
 
           setProgress(message = "Rendering layout...")
 
@@ -1026,7 +1026,7 @@ shinyServer(function(input, output, session) {
       }
 
       withProgress({
-        setProgress(message = "Fitting model...\n This may take a moment...", 
+        setProgress(message = "Fitting model... This may take a moment...", 
                     value=1)
 
         ok <- TRUE

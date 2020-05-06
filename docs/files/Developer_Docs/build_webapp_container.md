@@ -59,7 +59,7 @@ where DC_EMAIL_ACC is the email address and DC_EMAIL_PWD is the password.
 
 3. Configure the dockerfile
 
-The `detectorchecker.dockerfile` contains the following line:
+The `Dockerfile` contains the following line:
 
 ```
 RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker', auth_token='', ref = '')"
@@ -73,7 +73,7 @@ Depending on whether you are building the producton or development version you m
 1. Build the docker image
 
 ```
-docker build -t (dockerhub_account)/detectorchecker_dashboard:<tag> -f detectorchecker.dockerfile .
+docker build -t turinginst/detectorchecker_dashboard:<tag> .
 ```
 
 Here `<tag> ` needs to be replaced by an appropriate docker tag. When building for the production version of the WebApp we replace tag with `latest`. When building for the development version we replace it with `latest_devel`
@@ -81,13 +81,13 @@ Here `<tag> ` needs to be replaced by an appropriate docker tag. When building f
 2. Push the build to Docker Hub
 
 ```
-docker push (dockerhub_account)/detectorchecker_dashboard:<tag>
+docker push turinginst/detectorchecker_dashboard:<tag>
 ```
 
 3. Optionally test the docker image locally
 
 ```
-docker run -p 1111:1111 (dockerhub_account)/detectorchecker_dashboard:<tag>
+docker run -p 1111:1111 turinginst/detectorchecker_dashboard:<tag>
 ```
 
 Here,

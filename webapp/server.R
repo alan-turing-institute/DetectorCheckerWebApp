@@ -58,7 +58,7 @@ shinyServer(function(input, output, session) {
       } else {
         withProgress({
           setProgress(message = "Loading layout...")
-          layout <<- detectorchecker::create_module(input$layoutSelect)
+          layout <<- detectorchecker::create_detector(input$layoutSelect)
 
           setProgress(message = "Rendering layout...")
 
@@ -375,8 +375,7 @@ shinyServer(function(input, output, session) {
 
             analysis_caption <- const_density_plot_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
-
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_density(layout, adjust = 0.5, caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_density(layout, adjust = 5., caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_counts) {
@@ -496,7 +495,7 @@ shinyServer(function(input, output, session) {
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
             output$dead_pixel_analysis_plot <- renderPlot({
-              detectorchecker::plot_events_count(layout = layout, caption = FALSE, incl_event_list = incl_event_list)},
+              detectorchecker::plot_events_count(detector = layout, caption = FALSE, incl_event_list = incl_event_list)},
                                                           width = "auto", height = "auto")
 
           # arrows
@@ -1031,8 +1030,9 @@ shinyServer(function(input, output, session) {
       }
 
       withProgress({
-        setProgress(message = "Fitting model. Please wait...", value=0.99)
-
+        setProgress(message = "Fitting model... This may take a moment...", 
+                    value=1)
+ 
         ok <- TRUE
 
 

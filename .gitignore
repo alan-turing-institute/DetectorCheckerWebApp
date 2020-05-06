@@ -1,6 +1,9 @@
 # Secrets folder
 .secrets
 
+# Project
+.Rproj
+
 # Misc
 .DS_Store
 
@@ -16,6 +19,7 @@
 
 # Output files from R CMD build
 /*.tar.gz
+/*.tgz
 
 # Output files from R CMD check
 /*.Rcheck/

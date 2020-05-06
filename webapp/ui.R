@@ -157,7 +157,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
           conditionalPanel(
             condition = "input.level_radio == 'Events'",
             checkboxGroupInput("events_chk_group", label = h5("Incl. event types"),
-              choices = list("1 - Singleton" = 1, "2 - Doublet" = 2, "3 - Triplet" = 3, "4 - Larger clusters" = 4,
+              choices = list("1 - Singletons" = 1, "2 - Doublets" = 2, "3 - Triplets" = 3, "4 - Larger clusters" = 4,
                              "5 - Upper horizontal lines" = 5, "6 - Lower horizontal lines" = 6,
                              "7 - Left vertical lines" = 7, "8 - Right vertical lines" = 8),
               selected = 1:8, inline = FALSE)

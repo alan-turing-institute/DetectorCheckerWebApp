@@ -33,7 +33,7 @@ shinyServer(function(input, output, session) {
     .update_layout_textbox(layout = layout, output = output)
 
   }, error = function(err) {
-    showModal(modalDialog(title = "Error", err))
+    showModal(modalDialog(title = "Error", "An error occurred while rendering layout"))
     return(NULL)})
 
   # Load layout
@@ -69,7 +69,7 @@ shinyServer(function(input, output, session) {
       }
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while loading layout"))
       return(NULL)})
   })
 
@@ -89,7 +89,7 @@ shinyServer(function(input, output, session) {
         tryCatch({
           layout <<- detectorchecker::readin_detector(layout_file$datapath)},
           error = function(err) {
-            showModal(modalDialog(title = "Error", err))
+            showModal(modalDialog(title = "Error", "An error occurred while loading layout"))
             return(NULL)})
 
         if (is.null(layout) || is.na(layout)) {
@@ -107,7 +107,7 @@ shinyServer(function(input, output, session) {
       })
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while rendering layout"))
       return(NULL)})
   })
 
@@ -183,7 +183,7 @@ shinyServer(function(input, output, session) {
       }
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while analysing pixels"))
       return(NULL)})
   })
 
@@ -221,7 +221,7 @@ shinyServer(function(input, output, session) {
           },
           error = function(err) {
             reset("dead_file")
-            showModal(modalDialog(title = "Error", err))
+            showModal(modalDialog(title = "Error", "An error occurred while reading data"))
             dead_load_ok <<- FALSE
             return(NULL)
           }
@@ -253,8 +253,12 @@ shinyServer(function(input, output, session) {
       })
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
-      return(NULL)})
+
+      showModal(modalDialog(title = "Error", "There was an error while uploading damage file."))
+
+      return(NULL)
+      }
+    )
   })
 
   # Layout level
@@ -262,7 +266,7 @@ shinyServer(function(input, output, session) {
 
     tryCatch({
 
-      # Chnage the model fit caption accordingly
+      # Change the model fit caption accordingly
       if (input$level_radio == const_level_pixels) {
 
         output$loaded_layout_text4 <- renderText({
@@ -283,7 +287,7 @@ shinyServer(function(input, output, session) {
       }
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while selecting events"))
       return(NULL)})
   })
 
@@ -337,12 +341,12 @@ shinyServer(function(input, output, session) {
         })
 
       } else {
-        showModal(modalDialog(title = "Error", "Analysis level is not specified. Level slection."))
+        showModal(modalDialog(title = "Error", "Analysis level is not specified. Level selection."))
         return(NULL)
       }
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred during analysis."))
       return(NULL)})
   })
 
@@ -597,7 +601,7 @@ shinyServer(function(input, output, session) {
       })
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while analysing pixels"))
       return(NULL)})
   })
 
@@ -657,7 +661,7 @@ shinyServer(function(input, output, session) {
       }
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while analysing pixels"))
       return(NULL)})
 
   })
@@ -970,7 +974,7 @@ shinyServer(function(input, output, session) {
       }
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while analysing pixels"))
       return(NULL)})
   })
 
@@ -1006,7 +1010,7 @@ shinyServer(function(input, output, session) {
       })
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while uploading data"))
       return(NULL)})
   })
 
@@ -1028,7 +1032,7 @@ shinyServer(function(input, output, session) {
       withProgress({
         setProgress(message = "Fitting model... This may take a moment...", 
                     value=1)
-
+ 
         ok <- TRUE
 
 
@@ -1077,8 +1081,7 @@ shinyServer(function(input, output, session) {
         } else {
 
           showModal(modalDialog(
-            title = "Error",
-            "Fitting model is undefined."
+            title = "Error", "Fitting model is undefined."
           ))
 
           ok <- FALSE
@@ -1099,7 +1102,7 @@ shinyServer(function(input, output, session) {
       })
 
     }, error = function(err) {
-      showModal(modalDialog(title = "Error", err))
+      showModal(modalDialog(title = "Error", "An error occurred while fitting models"))
       return(NULL)})
 
   })

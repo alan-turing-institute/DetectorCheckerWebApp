@@ -73,7 +73,7 @@ Depending on whether you are building the producton or development version you m
 1. Build the docker image
 
 ```
-docker build -t turinginst/detectorchecker_dashboard:<tag> .
+docker build -t detectorchecker/detectorchecker_dashboard:<tag> .
 ```
 
 Here `<tag> ` needs to be replaced by an appropriate docker tag. When building for the production version of the WebApp we replace tag with `latest`. When building for the development version we replace it with `latest_devel`
@@ -81,14 +81,11 @@ Here `<tag> ` needs to be replaced by an appropriate docker tag. When building f
 2. Push the build to Docker Hub
 
 ```
-docker push turinginst/detectorchecker_dashboard:<tag>
+docker push detectorchecker/detectorchecker_dashboard:<tag>
 ```
 
 3. Optionally test the docker image locally
 
 ```
-docker run -p 1111:1111 turinginst/detectorchecker_dashboard:<tag>
+docker run -p 1111:1111 detectorchecker/detectorchecker_dashboard:<tag>
 ```
-
-Here,
-- `(dockerhub_account)` - the dockerhub account where the container is stored.

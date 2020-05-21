@@ -1,0 +1,48 @@
+{
+  "@context": "https://raw.githubusercontent.com/codemeta/codemeta/master/codemeta.jsonld",
+  "@type": "Code",
+  "author": [
+    {
+      "@id": "http://orcid.org/0000-0003-1763-466X",
+      "@type": "Person",
+      "email": "Julia.Brettschneider@warwick.ac.uk",
+      "name": "Julia A. Brettschneider",
+      "affiliation": "Department of Statistics, University of Warwick, UK"
+    },
+    {
+      "@type": "Person",
+      "email": "ogiles@turing.ac.uk",
+      "name": "Oscar T. Giles",
+      "affiliation": "The Alan Turing Institute, UK"
+    },
+    {
+      "@id": "http://orcid.org/0000-0001-9799-3480",
+      "@type": "Person",
+      "email": "arfon@github.com",
+      "name": "Wilfrid S. Kendall",
+      "affiliation": "Department of Statistics, University of Warwick, UK"
+    },
+    {
+      "@type": "Person",
+      "email": "tlazauskas@turing.ac.uk",
+      "name": "Tomas Lazauskas",
+      "affiliation": "The Alan Turing Institute, UK"
+    },
+    {
+      "@type": "Person",
+      "email": "moreilly@turing.ac.uk",
+      "name": "Martin O'Reilly",
+      "affiliation": "The Alan Turing Institute, UK"
+    }
+  ],
+  "identifier": "",
+  "codeRepository": "https://github.com/alan-turing-institute/DetectorCheckerWebApp/",
+  "datePublished": "2020-05-19",
+  "dateModified": "2020-05-19",
+  "dateCreated": "2020-05-19",
+  "description": "DetectorCheckerWebApp uses the R package DetectorChecker to deliver a Web App to aid in the assessment of damage to CT scanners arising from exposure to high energy radiation. While the target application concerns CT scanners, this WebApp can also be used to analyze screen damage arising from other sources.",
+  "keywords": "detector screen, pixel assessment, point pattern, Poisson point process, complete spatial randomness, intensity map, graphical interaction tests, logistic regression",
+  "license": "MIT",
+  "title": "DetectorCheckerWebApp",
+  "version": "1.0.3"
+}

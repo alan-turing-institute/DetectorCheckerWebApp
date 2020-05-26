@@ -375,7 +375,7 @@ shinyServer(function(input, output, session) {
 
             analysis_caption <- const_density_plot_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_density(layout, adjust = 5., caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_density(layout, caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_counts) {
@@ -717,9 +717,9 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_density_plot_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_density(layout, adjust = 0.5,
-                                                                                                           col = mod_col, row = mod_row, caption = FALSE)},
-                                                                     width = "auto", height = "auto")
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_density(layout, 
+                    col = mod_col, row = mod_row, caption = FALSE)},
+                    width = "auto", height = "auto")
 
               } else if (input$dead_radio == const_counts) {
 

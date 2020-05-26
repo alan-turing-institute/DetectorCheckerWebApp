@@ -60,8 +60,6 @@ RUN apt-get update; apt-get -y install libcurl4-openssl-dev libssl-dev
 
 RUN Rscript -e "install.packages('devtools')"
 
-run echo 2
-
 # Installing detector checker
 RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker', ref = 'master')"
 

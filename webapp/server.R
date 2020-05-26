@@ -232,7 +232,7 @@ shinyServer(function(input, output, session) {
         }
 
         setProgress(message = "Rendering damage...")
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_detector_damaged(layout, caption = FALSE)},
+        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_pixels(layout, caption = FALSE)},
                                              width = "auto", height = "auto")
 
         setProgress(message = "Preparing summary...")
@@ -313,7 +313,7 @@ shinyServer(function(input, output, session) {
           cat("Layout analysis: PIXELS")
         })
 
-        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_detector_damaged(layout, caption = FALSE)},
+        output$dead_pixel_plot <- renderPlot({detectorchecker::plot_pixels(layout, caption = FALSE)},
                                              width = "auto", height = "auto")
 
         output$layout_analysis_left_caption <- renderPrint({
@@ -375,7 +375,7 @@ shinyServer(function(input, output, session) {
 
             analysis_caption <- const_density_plot_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_density(layout, adjust = 5., caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_density(layout, caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_counts) {
@@ -383,7 +383,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_counts_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_cnt_mod(detector = layout, caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_count(detector = layout, caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_arrows) {
@@ -391,7 +391,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_arrows_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_arrows(detector = layout, caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_arrows(detector = layout, caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_angles) {
@@ -399,7 +399,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_angles_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_angles(detector = layout, caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_angles(detector = layout, caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_K) {
@@ -407,7 +407,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_K_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "K", caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "K", caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_F) {
@@ -415,7 +415,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_F_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "F", caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "F", caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_G) {
@@ -423,7 +423,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_G_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "G", caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "G", caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_inhom_K) {
@@ -431,7 +431,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_inhom_K_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "Kinhom", caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "Kinhom", caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_inhom_F) {
@@ -439,7 +439,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_inhom_F_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "Finhom", caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "Finhom", caption = FALSE)},
                                                           width = "auto", height = "auto")
 
           } else if (input$dead_radio == const_inhom_G) {
@@ -447,7 +447,7 @@ shinyServer(function(input, output, session) {
             analysis_caption <- const_inhom_G_cap
             setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "Ginhom", caption = FALSE)},
+            output$dead_pixel_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "Ginhom", caption = FALSE)},
                                                           width = "auto", height = "auto")
           } else {
             showModal(modalDialog(title = "Error", "Functionality is not implemented."))
@@ -621,12 +621,14 @@ shinyServer(function(input, output, session) {
         mod_col <- detectorchecker::which_module(x, layout$module_edges_col)
         mod_row <- detectorchecker::which_module(y, layout$module_edges_row)
 
+        mod_row_rev <- rev(seq(1:layout$module_row_n))[mod_row]
+
         output$module_analysis_caption <- renderPrint({
           cat("Module analysis:")
         })
 
         output$module_analysis_left <- renderPrint({
-          cat(paste("Damaged module [", mod_row, ", ", mod_col, "]", sep = ""))
+          cat(paste("Damaged module [", mod_row_rev, ", ", mod_col, "]", sep = ""))
         })
 
         output$dead_pixel_module_plot <- renderPlot({
@@ -637,7 +639,7 @@ shinyServer(function(input, output, session) {
             # plot module damaged pixels
             if (input$level_radio == const_level_pixels) {
 
-              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_detector_module_damaged(layout, col = mod_col, row = mod_row, caption = FALSE)},
+              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_module_pixels(layout, col = mod_col, row = mod_row, caption = FALSE)},
                                                         width = "auto", height = "auto")
 
               # plot module events
@@ -681,12 +683,14 @@ shinyServer(function(input, output, session) {
         mod_col <- detectorchecker::which_module(x, layout$module_edges_col)
         mod_row <- detectorchecker::which_module(y, layout$module_edges_row)
 
+        mod_row_rev <- rev(seq(1:layout$module_row_n))[mod_row]
+
         output$module_analysis_caption <- renderPrint({
-          cat("Module analysis")
+          cat("Module analysis:")
         })
 
         output$module_analysis_left <- renderPrint({
-          cat(paste("Damaged module [", mod_row, ", ", mod_col, "]", sep = ""))
+          cat(paste("Damaged module [", mod_row_rev, ", ", mod_col, "]", sep = ""))
         })
 
         # Analysing selected module's pixels
@@ -696,7 +700,7 @@ shinyServer(function(input, output, session) {
             withProgress({
 
               setProgress(message = "Rendering module...")
-              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_detector_module_damaged(layout, col = mod_col, row = mod_row, caption = FALSE)},
+              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_module_pixels(layout, col = mod_col, row = mod_row, caption = FALSE)},
                                                           width = "auto", height = "auto")
 
               setProgress(message = "Finished!", value = 1.0)
@@ -713,17 +717,17 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_density_plot_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_density(layout, adjust = 0.5,
-                                                                                                           col = mod_col, row = mod_row, caption = FALSE)},
-                                                                     width = "auto", height = "auto")
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_density(layout, 
+                    col = mod_col, row = mod_row, caption = FALSE)},
+                    width = "auto", height = "auto")
 
               } else if (input$dead_radio == const_counts) {
 
                 analysis_caption <- const_counts_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_cnt_mod(detector= layout,
-                                                                                                           col = mod_col, row = mod_row, caption = FALSE)},
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_count(detector= layout,
+                                                                                                           col = mod_col, row = mod_row_rev, caption = FALSE)},
                                                                      width = "auto", height = "auto")
 
               } else if (input$dead_radio == const_arrows) {
@@ -731,7 +735,7 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_arrows_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_arrows(detector = layout,
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_arrows(detector = layout,
                                                                                                           col = mod_col, row = mod_row, caption = FALSE)},
                                                                      width = "auto", height = "auto")
 
@@ -740,7 +744,7 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_angles_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_angles(detector = layout,
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_angles(detector = layout,
                                                                                                           col = mod_col, row = mod_row, caption = FALSE)},
                                                                      width = "auto", height = "auto")
 
@@ -749,7 +753,7 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_K_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "K",
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "K",
                                                                                                        col = mod_col, row = mod_row, caption = FALSE)},
                                                                      width = "auto", height = "auto")
 
@@ -758,7 +762,7 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_F_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "F",
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "F",
                                                                                                        col = mod_col, row = mod_row, caption = FALSE)},
                                                                      width = "auto", height = "auto")
 
@@ -767,7 +771,7 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_G_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector= layout, func = "G",
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector= layout, func = "G",
                                                                                                        col = mod_col, row = mod_row, caption = FALSE)},
                                                                      width = "auto", height = "auto")
 
@@ -776,7 +780,7 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_inhom_K_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "Kinhom",
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "Kinhom",
                                                                                                        col = mod_col, row = mod_row, caption = FALSE)},
                                                                      width = "auto", height = "auto")
 
@@ -785,7 +789,7 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_inhom_F_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "Finhom",
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "Finhom",
                                                                                                        col = mod_col, row = mod_row, caption = FALSE)},
                                                                      width = "auto", height = "auto")
 
@@ -794,7 +798,7 @@ shinyServer(function(input, output, session) {
                 analysis_caption <- const_inhom_G_cap
                 setProgress(message = paste("Rendering", analysis_caption, sep=" "))
 
-                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_detector_kfg(detector = layout, func = "Ginhom",
+                output$dead_pixel_module_analysis_plot <- renderPlot({detectorchecker::plot_pixels_kfg(detector = layout, func = "Ginhom",
                                                                                                        col = mod_col, row = mod_row, caption = FALSE)},
                                                                      width = "auto", height = "auto")
               }
@@ -802,7 +806,7 @@ shinyServer(function(input, output, session) {
               setProgress(message = "Finished!", value = 1.0)
 
               output$module_analysis_right <- renderPrint({
-                cat(paste(analysis_caption, "[", mod_row, ", ", mod_col, "]", sep = ""))
+                cat(paste(analysis_caption, "[", mod_row_rev, ", ", mod_col, "]", sep = ""))
               })
             })
           })

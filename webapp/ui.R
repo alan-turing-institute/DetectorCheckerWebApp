@@ -337,7 +337,7 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
       # tabPanel("Summary"),
       "----",
       HTML('<div align="left"><a href="https://github.com/alan-turing-institute/DetectorChecker/tree/master/inst/extdata" target="_blank" style="text-decoration:none">Examples</a></div>'),
-      HTML('<div align="left"><a href="https://github.com/alan-turing-institute/DetectorCheckerWebApp/blob/master/docs/files/WebApp_user_docs/detectorCheckerManual-WSK_JAB2.pdf" target="_blank" style="text-decoration:none">Manual</a></div>'),
+      HTML('<div align="left"><a href="https://github.com/alan-turing-institute/DetectorCheckerWebApp/blob/master/docs/files/WebApp_user_docs/DetectorCheckerManual.pdf" target="_blank" style="text-decoration:none">Manual</a></div>'),
       tabPanel("About", helpText(HTML(about_text)))
     )
   )

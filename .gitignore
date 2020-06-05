@@ -57,4 +57,5 @@ docs/files/WebApp_user_docs/*.log
 docs/files/WebApp_user_docs/*.gz
 docs/files/WebApp_user_docs/*.out
 docs/files/WebApp_user_docs/*.blg
+docs/files/WebApp_user_docs/*.bbl
 *.log

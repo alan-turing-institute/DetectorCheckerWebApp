@@ -40,15 +40,17 @@ def email_confirmation(blob_name, email_to):
     Sends email confirmation of upload is successful.
     """
 
-    gmail_user = os.environ["DC_EMAIL_ACC"]
-    gmail_password = os.environ["DC_EMAIL_PWD"]
+    mail_user = os.environ["DC_EMAIL_ACC"]
+    mail_password = os.environ["DC_EMAIL_PWD"]
+    cc_list = os.environ["DC_EMAIL_CC"]
 
-    sent_from = gmail_user
+    sent_from = mail_user
     subject = "Data upload notification"
 
     email_text = """\
 From: %s
 To: %s
+Cc: %s
 Subject: %s
 
 
@@ -57,12 +59,11 @@ Dear DetectorChecker user,
 File %s has been uploaded successfuly.
 
 - DetectorChecker Team
-  """ % (sent_from, email_to, subject, blob_name)
+  """ % (sent_from, email_to, cc_list, subject, blob_name)
 
     try:
-        server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
-        server.ehlo()
-        server.login(gmail_user, gmail_password)
+        server = smtplib.SMTP("smtp.mail.com", 587)
+        server.login(mail_user, mail_password)
         server.sendmail(sent_from, email_to, email_text)
 
     except Exception as exception:
@@ -111,9 +112,9 @@ def main():
             "A blob with the filename of %s already exists!" % (blob_name)
         )
 
-    # upload was successful let's send a email notification
-    if email is not None:
-        email_confirmation(blob_name, email)
+    # # upload was successful let's send a email notification
+    # if email is not None:
+    #     email_confirmation(blob_name, email)
 
 if __name__ == "__main__":
     main()

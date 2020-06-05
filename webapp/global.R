@@ -1,7 +1,7 @@
 library(shiny)
 # global.R define objects available to both ui.R and server.R
 
-webapp_version <- "1.0.4"
+webapp_version <- "1.0.6"
 
 # global parameters
 const_layout_default <- "None"
@@ -147,7 +147,7 @@ software.</p>
 <p><strong>Acknowledgments:</strong></p>
 <p>Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;</p>
 <p>Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a></p>
-<p>Dr <a href="https://www.turing.ac.uk/people/researchers/tomas-lazauskas">Tomas Lazauskas</a></p>
+<p>Dr <a href="https://github.com/tomaslaz">Tomas Lazauskas</a></p>
 <p>Dr <a href="https://www.turing.ac.uk/people/researchers/oscar-giles">Oscar Giles</a></p>
 <p>For more information about the DetectorChecker project please contact Professor <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/kendall/">Wilfrid Kendall</a>&nbsp;or Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a>.</p>
 <p>DetectorChecker is being developed by the University of Warwick and Alan Turing Institute.</p>

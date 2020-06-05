@@ -9,6 +9,7 @@ Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code
 ## Overview
 
 An interactive WebApp for analysing pixel damage in CT scanners using the DetectorChecker `R` package (https://github.com/alan-turing-institute/DetectorChecker).
+While the target application concerns CT scanners, this application can also be used to analyze screen damage arising from other sources.
 
 This WebApp loads data acquired from detector screens (`tiff` images from daily tests, or `xml` files listing bad pixels), and applies methods from spatial statistics (particularly the R package `spatstat`) to produce analyses and graphical reports concerning location and possible departures from spatial randomness of damaged pixels and regions.
 

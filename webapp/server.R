@@ -639,7 +639,7 @@ shinyServer(function(input, output, session) {
             # plot module damaged pixels
             if (input$level_radio == const_level_pixels) {
 
-              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_module_pixels(layout, col = mod_col, row = mod_row, caption = FALSE)},
+              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_pixels(layout, col = mod_col, row = mod_row, caption = FALSE)},
                                                         width = "auto", height = "auto")
 
               # plot module events
@@ -649,7 +649,7 @@ shinyServer(function(input, output, session) {
 
               layout_module_events <- detectorchecker::find_clumps(layout, row = mod_row, col = mod_col)
 
-              plot_module_events(layout_module_events, row = mod_row, col = mod_col, caption = FALSE,
+              plot_events(layout_module_events, row = mod_row, col = mod_col, caption = FALSE,
                                  incl_event_list = incl_event_list)
             }
 
@@ -685,12 +685,14 @@ shinyServer(function(input, output, session) {
 
         mod_row_rev <- rev(seq(1:layout$module_row_n))[mod_row]
 
+        module_str <- paste("[", mod_row_rev, ", ", mod_col, "]", sep = "")
+
         output$module_analysis_caption <- renderPrint({
           cat("Module analysis:")
         })
 
         output$module_analysis_left <- renderPrint({
-          cat(paste("Damaged module [", mod_row_rev, ", ", mod_col, "]", sep = ""))
+          cat(paste("Damaged module ", module_str, sep = ""))
         })
 
         # Analysing selected module's pixels
@@ -700,7 +702,7 @@ shinyServer(function(input, output, session) {
             withProgress({
 
               setProgress(message = "Rendering module...")
-              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_module_pixels(layout, col = mod_col, row = mod_row, caption = FALSE)},
+              output$dead_pixel_module_plot <- renderPlot({detectorchecker::plot_pixels(layout, col = mod_col, row = mod_row, caption = FALSE)},
                                                           width = "auto", height = "auto")
 
               setProgress(message = "Finished!", value = 1.0)
@@ -806,7 +808,7 @@ shinyServer(function(input, output, session) {
               setProgress(message = "Finished!", value = 1.0)
 
               output$module_analysis_right <- renderPrint({
-                cat(paste(analysis_caption, "[", mod_row_rev, ", ", mod_col, "]", sep = ""))
+                cat(paste(analysis_caption, " ", module_str, sep = ""))
               })
             })
           })
@@ -823,7 +825,7 @@ shinyServer(function(input, output, session) {
             withProgress({
               setProgress(message = "Rendering module's events...")
 
-              plot_module_events(layout_module_events, row = mod_row, col = mod_col,
+              plot_events(layout_module_events, row = mod_row, col = mod_col,
                                  caption = FALSE, incl_event_list = incl_event_list)
 
               setProgress(message = "Finished!", value = 1.0)
@@ -964,7 +966,7 @@ shinyServer(function(input, output, session) {
               setProgress(message = "Finished!", value = 1.0)
 
               output$module_analysis_right <- renderPrint({
-                cat(paste(analysis_caption, "[", mod_row, ", ", mod_col, "]", sep = ""))
+                cat(paste(analysis_caption, " ", module_str, sep = ""))
               })
             })
           })

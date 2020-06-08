@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper,twosided]{article}
+\documentclass[11pt,a4paper]{article}
 \usepackage{layout}
 \usepackage{exscale, amsmath, amsfonts, amssymb, amsthm, amscd, fdsymbol, mdframed}
 
@@ -19,7 +19,7 @@
 \parindent0pt
 \parskip7pt
 \textwidth14.5cm
-\textheight=24cm
+\textheight=23cm
 \addtolength{\oddsidemargin}{-1cm}
 %\addtolength{\evensidemargin}{cm}
 \addtolength{\voffset}{-15mm}
@@ -47,6 +47,7 @@
 
 %--------------------- Software ------------------------
 \newcommand{\DetectorChecker}{\emph{DetectorChecker}\xspace}
+\newcommand{\DetectorCheckerWebApp}{\emph{DetectorChecker webapp}\xspace}
 \newcommand{\Rsoftware}{\emph{R}\xspace}
 
 %--------------------- Probability ------------------------
@@ -117,17 +118,14 @@
 
 \begin{center}
 
-{\Large\bf DetectorChecker Instruction Manual}
+{\LARGE\bf DetectorChecker Instruction Manual}
+\footnote{This manual refers to version 1.0.4 of \DetectorChecker and version 1.0.6 of \DetectorCheckerWebApp.}
+
+%{\Large For release version $\beta$}
 
 \bigskip
-{\Large For release version 1.0.0}
+{\large Julia A Brettschneider, Tomas Lazauskas, Oscar T Giles, Wilfrid S Kendall}
 
-\bigskip
-{\large Julia A Brettschneider, Tomas Lazauskas, Oscar Giles, Wilfrid S Kendall}
-
-
-
-\medskip
 \end{center}
 
 
@@ -140,45 +138,59 @@
 \section{Introduction}\label{int}
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
-Quality assessment for digital X-ray detector panels is an important issue, because
-it impacts the quality of the images. 
+Quality assessment for digital X-ray detector panels is an important issue, and evidently
+impacts the quality of the resulting images. 
 Detector panels being costly, 
-their replacement or refurbishing requires careful justification.
+decisions concerning replacement or refurbishing 
+deserve careful justification.
 % they can only 
 % be replaced if this can be justified. 
 Whether or not individual damaged pixels are actually 
-problematic depends on where they are located and if they occur in close to each other.
-Spatial analysis of dysfunctional pixels can be the key to assessing the relevance of damage.
+problematic depends on where they are located and 
+on how close they are to each other.
+Thus spatial statistical analysis of dysfunctional pixels can be 
+instrumental in assessing the relevance of damage.
 An overview of 
-% the 
-common
-types of spatial patterns of dysfunctional pixels can be found in  
-\cite{brettschneider2014crism}. 
+common types of spatial patterns of dysfunctional pixels can be found in \cite{brettschneider2014crism}. 
 
-The freely accessible webtool \DetectorChecker allows users to assess digital X-ray 
-detector quality via spatial analysis of dysfunctional pixels.
-The webtool is built using the \Rsoftware webtool \emph{shiny}, based on an open source \Rsoftware-package of the same name.
-This webtool will be
+The \DetectorCheckerWebApp is freely accessible via the url \footnote{
+	Problems with running the web app are frequently resolved as follows: check (a) web browser is full upgraded; (b) adblocker plugins are disabled or not interfering with operation of web app; (c) Javascript blockers (e.g.~NoScript) are disabled or not interfering with operation of web app.}
+:
+
+\begin{mdframed}
+	\bigskip
+	\centerline{
+		{\large
+			\url{https://detectorchecker.azurewebsites.net}
+		}
+	}
+	\medskip
+\end{mdframed}
+
+The web app allows users to assess digital X-ray 
+detector panel quality via spatial analysis of dysfunctional pixels.
+It is built using the \Rsoftware webtool \emph{shiny}, based on an open source \Rsoftware-package of the same name (\url{https://shiny.rstudio.com/}),
+and is
 connected to an open archive of detector data contributed by the user community:
 it is envisaged that users will be able to choose to create an account to upload their data to this archive,
 to facilitate more extensive analysis of data trends concerning detector damage.
 
 The quality assessment provided by \DetectorChecker can be used to support decision making 
 about refurbishment and purchase of digital X-ray detectors. 
-It can also be used to monitor the state of the detector over time and to 
-link this to particular types of usage.
-It is hoped that \DetectorChecker will help highlight the occurrence of particular damage patterns,
-thus guiding
+It can also be used to monitor the state of the detector over time and to link this to particular types of usage.
+It is hoped that \DetectorChecker will assist in highlighting the occurrence of particular damage patterns, thus guiding
 users in assessing likely reasons for such damage.
 
 At the beginning of a session, 
 \DetectorChecker allows users either (a) to select one of the common detector layouts,
 or (b) to enter parameters defining a custom layout. 
-After this users can upload data in the form of \texttt{xml} or \texttt{tiff} files, allowing \DetectorChecker to identify dysfunctional pixels.
-\DetectorChecker will then enable the user to create numerical and graphical summaries 
-about the spatial distribution of the dysfunctional pixels. 
-This can be done either on the pixel level or on the \emph{event level}; 
-which automatically identifies and represents clusters of damage. The event level is likely to be more
+Users can then upload data in the form of \texttt{xml} or \texttt{tiff} files;
+\DetectorChecker will then identify dysfunctional pixels.
+Users can then instruct
+\DetectorChecker to create numerical and graphical summaries 
+about the spatial distribution of the dysfunctional pixels,
+either on the pixel level or on the \emph{event level}
+(automatically identifying and working with clusters of damage). The event level is likely to be more
 closely linked to the reasons for damage, hence may provide a clearer picture 
 of what is going on.
 Finally, users can request that severely damaged regions of the detector are masked so as 
@@ -187,15 +199,19 @@ the analysis. This enables the effect of one specific damaged region
 to be decoupled from
 an assessment of the remainder of the detector.
 
-\DetectorChecker has been developed by the authors as follows.
-JAB wrote the original \Rsoftware-code and contributed to the design of the webtool, 
-TL converted it into an \Rsoftware-package and designed and built the webtool, 
-while WSK initiated, supervised and tested the project at all stages.
-We thank the Alan Turing institute for providing funding for this project.
-The authors are grateful to Jay Warnett (at Warwick Manufacturing Group), Andrew Ramsay (at Nikon Metrology, UK, at the time) and Nicola Tartoni and Ian Horswell (at Diamond Lightsource, UK) for guidance on X-ray machines, detector types and damages. They are also grateful to Martin Turner and 
-Tristan Lowe (at University Manchester) for the interest in this project and their feedback.
-The webtool builds on previous work supported by EPSRC grant EP/K031066/1,
-and was funded by a Turing seed fund project awarded by the Alan Turing Institute under EPSRC grant EP/N510129/1.
+\DetectorChecker has been developed as follows:
+JAB wrote the original \Rsoftware-code and contributed to the design of the web app, 
+TL converted the code into an \Rsoftware-package
+\DetectorChecker,
+and designed and built the 
+\DetectorCheckerWebApp, 
+which was further developed by OTG, while WSK initiated, supervised and tested the project at all stages. 
+% 
+The authors thank The Alan Turing Institute for providing funding for this project. They are also grateful to Jay Warnett (at Warwick Manufacturing Group) and Andrew Ramsay (during his time at Nikon Metrology, UK) 
+for data from Perkin Elmer detectors and for guidance on X-ray machines and damages. They also wish to thank Nicola Tartoni and Ian Horswell (at Diamond Lightsource, UK) for guidance on detector types and data from Pilatus and Excalibur detectors. Further thanks for helpful discussions and feedback are given
+to Martin Turner and Tristan Lowe (University Manchester) 
+and Martin O'Reilly (The Turing Institute).
+\DetectorChecker and \DetectorCheckerWebApp build on previous work supported by EPSRC grant EP/K031066/1, and were funded by Turing seed fund projects awarded by the Alan Turing Institute under EPSRC grant EP/N510129/1.
 
 
 
@@ -203,37 +219,40 @@ and was funded by a Turing seed fund project awarded by the Alan Turing Institut
 \section{Workflow}\label{flow}
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
-The webtool \DetectorChecker can be assed via the following url:
-
-\begin{mdframed}
-\bigskip
-\centerline{
-\url{https://detectorchecker.azurewebsites.net}
-}
-\medskip
-\end{mdframed}
-
-It is structured around tabs that allow the user to choose actions on the left hand size and outputs 
-numerical and graphical results on the right hand side. Tooltips are available and appear in pop-up boxes.
+The interactive web app is structured around tabs that allow the user to choose actions from the left-hand panel and to view 
+numerical and graphical results on the right-hand panel. Tooltips (in pop-up boxes) are available.
 Outputs can be saved using standard mouse click functions from the operating system. 
-The functionalities of the webtool are also visualised in Figure \ref{fig_flowchart}.
+Figure \ref{fig_flowchart} presents web app functionalities and possible work-flows
+graphically.
 
 \begin{figure}[htbp]
-\begin{center}
-\hspace{-11mm}
-\includegraphics[width=15.5cm]{flowchartDCshort.jpg}
-\caption
-{
-{\bfseries 
-Flowchart illustrating possible workflows using \DetectorChecker.}
-}
-\label{fig_flowchart}
-\end{center}
+	\begin{center}
+		\includegraphics[width=14.5cm]{flowchartDCshort.pdf}
+		\vspace{-7mm}
+		\caption
+		{
+			{\bfseries 
+				Possible workflows using \DetectorChecker, involving
+				the \emph{Layout}, \emph{Damage} and
+				\emph{Model fitting} tabs.}
+		}
+		\label{fig_flowchart}
+	\end{center}
 \end{figure}
+The basic work flow consists of eight steps,
+some of which can be run multiple times with different options.
+Steps 1 to 2 
+concern determination of the detector panel layout.
+In Step 3 users upload a file either containing the coordinates of dysfunctional pixels or arising from test images obtained from the detector screen. 
+Steps 4 to 5 
+concern the core functions of the web app, involving analysis of spatial patterns of dysfunctional pixels. This is followed by an opportunity to share the data with the user community in Step 6. Step 7 allows choice
+between some simple spatial functions as covariates in fitting of a linear model for 
+occurrence of dysfunctional pixels. 
+This gives statistical guidance
+in identification of factors that have an influence on the decay of pixels. 
 
-
-The basic program consists of eight steps some of which can be run multiple times with different options.
-Steps 1 to 2 deal with the detector panel layout. In Step 3 users upload a file containing the coordinates of dysfunctional pixels. Steps 4 to 5 are the core functions of the webtool. They conduct the analysis of spatial patterns of dysfunctional pixels. This is followed by an opportunity to create an account to share the data with the user community in Step 6. Step 7 allows to choose spatial functions related to the layout as covariates and fit a linear model. This can help identifying factors that have an influence on the decay of pixels. The steps are explained in more detail in the itemised list below.
+The steps are explained in more detail in the
+following itemised list.
 
 \bigskip
 
@@ -244,57 +263,48 @@ Steps 1 to 2 deal with the detector panel layout. In Step 3 users upload a file 
 \begin{enumerate}
 
 \item {\bf Select Layout:} 
-Users can choose from a list of common detector layouts using a drop down menu. 
-Alternatively, users can define their own layout by entering parameters (see Section \ref{layout}). 
+Users choose from a list of common detector layouts using a drop down menu. Alternatively, users can upload a plain text file with their own layout specifications (see Section \ref{layout}). 
 
 \item {\bf Choose Visualisation:} 
-The default is a graphical representation of the layout.
+The default visualisation is a graphical representation of the layout.
 Alternatively, pixelwise functions related to the layout can be visualised. This includes 
 measuring the distances to the centre, the corners or the edges of the panel or the edges 
-of the subpanels. 
-These spatial functions are being used as covariates in later model fitting (see Section \ref{model}).
-Both the layout itself and the spatial functions can be plotted.
+of the sub-panels. 
+These spatial functions are provided as covariates in later model fitting (see Section \ref{model}).
+% Both the layout itself and the spatial functions can be plotted.
 
 \item {\bf Import File:} 
 Upload a file with information on dysfunctional pixel locations.
-This can be an \texttt{xml} file containing the coordinates of the damaged pixels
-or \texttt{tiff} file containing an array of pixel intensities corresponding to the mask 
+This can be an \texttt{xml} file containing the coordinates of the damaged pixels or a \texttt{tiff} file containing an array of pixel intensities corresponding to the mask 
 describing the dysfunctional pixels. 
-For example, this can be a file created by manufacturers maintenance routines 
-(e.g.~Perkin Elmer's {\it Bad Pixel Map}) in \texttt{xml} or \texttt{tiff} format.
+These files can be created by manufacturer maintenance routines (e.g.~Perkin Elmer's \emph{Underperforming Pixel Specification}
+\cite[Section 5.2]{manualXRD1621}) in \texttt{xml} or \texttt{tiff} format. An image with open squares indicating dysfunctional pixels
+is then plotted automatically 
 
-An image with solid squares indicating dysfunctional pixels
-is plotted automatically 
-
-\item {\bf Choose Level:} 
-Damage can be assessed on different levels (see Section \ref{levels}).
-\begin{itemize}
-\item {\it Pixels:} Each damaged pixel is seen as equally relevant occurrence.
-\item {\it Events:} Adjacent pixels are summarised 
-\end{itemize}
-If {\it Events} is chosen, the user can also specify which types are included.
+\item {\bf Choose Level of Assessment:} 
+Damage can be assessed at two different levels (see Section \ref{levels}). If the \emph{Pixels} option is selected, each damaged pixel is treated as an equally relevant occurrence. If \emph{Events} is selected then combinations of adjacent pixels form the basis of analysis, according to user choice of combination rules. 
 
 \item {\bf Choose Analysis:} 
 Spatial statistics tools to explore the spatial patterns of damage are available
-to the user. One is selected at a time.
+to the user:
 \begin{itemize}
-\item Spatial density plots based on the damaged pixel occurrance
-\item Counts of damaged pixels associated with subpanels of the detector
-\item Arrow between nearest neighbours
-\item Rose plot of the corresponding angles
-\item K-, F- and G-function to explore spatial randomness on different scales
-\item Dito but considering spatially inhomogeneous intensity
+\item Spatial density plots based on spatial distribution
+of damaged pixels;
+\item Counts of damaged pixels associated with sub-panels of the detector;
+\item Arrows indicating nearest neighbours;
+\item Rose plot of the corresponding angles of arrows;
+\item Plots of $K$-, $F$- and $G$-functions to explore spatial randomness on different scales;
+\item Plots of $K$-, $F$- and $G$-functions corrected for spatially inhomogeneous intensity.
 \end{itemize}
-
-Plots are displayed. The user can repeat this step running through different choices. 
-
-Mouse clicking on individual subpanels will give individual plots showing only the subpanel in question.
+Plots are displayed on the right-hand side of the 
+app display. The user can repeat this step running through different choices. Mouse-clicks on individual sub-panels produce individual plots showing only the sub-panel in question: double-clicking displays the corresponding plot or report for the sub-panel in question.
 
 \item {\bf Send Data:} 
-Upload data to the archive using your email address as unique identifier.
+Optional data uploading using email address as unique identifier.
 
 \item {\bf Modelling Damage Intensity:} 
-Select covariates related to detector layout to be included in a linear model explaining pixel damage
+Choose a covariate related to detector layout 
+for use in a linear model for pixel damage,
 and fit the model.
 
 %\item  {\bf Mask Panel:} 
@@ -313,25 +323,29 @@ and fit the model.
 \section{Detector Layout}\label{layout}
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
-There are preset layouts to choose from for common detector panels. These include
-Perking Elmer (full and cropped version), Pilatus and Excalibur.
+Preset layouts can be chosen corresponding to common detector panels. These include Perkins Elmer (full and cropped versions), Pilatus and Excalibur. The web app will automatically display the chosen layout in the sub-tab \emph{Layout Analysis.} The sub-tab \emph{Summary} lists the parameters of the layout.
 
-Alternatively, users may define their own layout. 
-A detector panel is typically composed of subpanels arranged in a rectangular grid. They may also be referred to as {\it read out groups (ROG).}
-They can be seamless such as in the Perkin Elmer design (e.g.~\cite{manualXRD1621}), but gaps between the rows
-and between the columns are allowed as long as they do not interfere with this being a grid.
-In other words, the gap between the first and second columns need to be the same in all rows.
-Explain custom made layout types and which parameters to enter.
+Alternatively, users may define their own layout.
+It is assumed to be composed of \emph{sub-panels} arranged in a rectangular grid. They are also referred to as \emph{modules} or \emph{read out groups (ROG)}.
+Sub-panels can be seamless (as in the Perkin Elmer design; for details see \cite{manualXRD1621}), or include gaps between rows
+and/or columns. The dimensions of the sub-panels and the sizes of the gaps can vary, so long as the resulting layout still forms a grid. In other words, the gaps between adjacent columns of sub-panels need to be the same in all rows, and the gaps between adjacent rows need to be the same in all columns. Figure \ref{fig_layout_nopar} shows an example of such a layout.
+ 
+To specify your own layout:
+\\
+$\medblacktriangleright$ In Step 3 choose \emph{user-specified}. 
+A ``Browse" button appears. Click on the button
+to locate and upload a plain
+text file containing a list of parameters specifying the layout; the Appendix \ref{appendix} gives two examples. (Note that the plain text file will have the extension ``\texttt{.txt}''; users who use MS Word to construct the file should export the result as a ``\texttt{.txt}'' file.)
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=16cm]{layoutDrawingDC.pdf}
+\includegraphics[width=5cm]{layoutDrawingNoPar.pdf}
 \caption
 {
 {\bfseries 
-General layout with modules and gaps.}
+General layout with sub-panels and gaps.}
 }
-\label{fig_layout}
+\label{fig_layout_nopar}
 \end{center}
 \end{figure}
 
@@ -341,38 +355,34 @@ General layout with modules and gaps.}
 \section{Dysfunctional pixels}\label{dysfct}
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
-Dysfunctional pixels are referred to by many names including {\it bad, dead, erratic, stuck, hot, defective, 
-broken and underperforming.} 
-Maintenance protocols may include the creation of so-called {\it maps} identifying the locations of such pixels.
-They are identified by a combination of criteria based on signal intensities, noise levels, uniformity and lag
+Dysfunctional pixels are referred to by many names including \emph{bad, dead, erratic, stuck, hot, defective, broken and underperforming.} Maintenance protocols may include the creation of so-called \emph{bad pixel maps} containing their locations.
+Pixels flagged as damaged in such maps
+are identified by a combination of criteria based on signal intensities, noise levels, uniformity and lag
 (see e.g.~\cite{manualXRD1621}). 
-Common formats to store the coordinates of these pixels are \texttt{xml} for coordinates or \texttt{tiff} for masks. 
+Common formats for bad pixel maps are \texttt{xml} for coordinates or \texttt{tiff} for masks. 
 \DetectorChecker can process both of these formats.
 
 After uploading the file, \DetectorChecker automatically produces an image indicating the dysfunctional pixel locations 
-by solid squares. An example for a highly damaged detector panel is shown in Figure \ref{damagedPixels}.
-The pixels shown are not to scale but are magnified to make them large enough so even individual
-damaged pixels are visible.
+by open squares. An example for a highly damaged detector panel is shown in Figure \ref{damagedPixels}.
+The pixels are not plotted to scale but are magnified to ensure visibility of isolated damaged pixels.
 
-We distinguish different types of dysfunctional pixels depending on their spatial arrangement. 
-This includes:
+We distinguish the types of spatial arrangements of dysfunctional pixels defined in \cite{brettschneider2014crism}:
 \begin{itemize}
-\item singletons
-\item doubles
-\item triplets
-\item larger clusters
-\item upper and lower vertical lines
-\item right and left horizontal lines
-\end{itemize}
-
- singletons, doubles, small clusters, lines and high density regions (\cite{brettschneider2014crism}). 
-The example shown in Figure \ref{damagedPixels} has singletons all over the panel, lines intersecting
-with the horizontal midline indicated the two rows of subpanels, a small cluster in the top right corner
-and a high density region in the bottom right corner. 
+\item[1.] singletons
+\item[2.] doubles
+\item[3.] triplets
+\item[4.] larger clusters
+\item[5./6.] upper / lower vertical lines
+\item[7./8.] right / left horizontal lines
+\end{itemize} 
+The example shown in Figure \ref{damagedPixels} 
+contains singleton dysfunctional pixels 
+scattered all over the panel, 
+lines of dysfunctional pixels intersecting with the horizontal midline indicating the two rows of sub-panels, a small cluster of dysfunctional pixels in the top right corner, and a high density region in the bottom right corner. 
 
 \begin{figure}[htbp]
 \begin{center}
-\includegraphics[width=10cm]{damagedPixels.png}
+\includegraphics[width=11.5cm]{damagedPixels.png}
 \caption
 {
 {\bfseries Representation of detector panel with dysfunctional pixels.}
@@ -388,44 +398,74 @@ and a high density region in the bottom right corner.
 \section{Spatial analysis}\label{spatial}
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
-An important clue to the reasons for detector panel damage can come from the spatial arrangements
-of dysfunctional pixels. \DetectorChecker offers a number of exploratory tools to analyse this.
+Spatial arrangement of dysfunctional pixels
+can provide important clues to the reasons for damage.
+Step 5 of the \DetectorChecker work-flow 
+offers a number of exploratory tool to investigate this.
 
-To see areas of concentrated damage we recommend a density plot:\\
-$\medblacktriangleright$ In Step 5 choose {\it Density}.
+To see approximate areas of concentrated damage:\\
+$\medblacktriangleright$ Choose \emph{Density}.
 
-Some of the tools offer insight into the directions between nearest neighbours.
-To plot an arrow for each pixel towards its nearest neighbour:\\
-$\medblacktriangleright$ In Step 5 choose {\it Arrows}.
+To visualise the directions between nearest dysfunctional pixels by arrows:
+\\
+$\medblacktriangleright$ Choose \emph{Arrows}.
 
 To obtain the resulting distribution of all the angles corresponding to the arrows:\\ 
-$\medblacktriangleright$ In Step 5 choose {\it Angles}.
+$\medblacktriangleright$ Choose \emph{Angles}.
 
-For details on the statistical methods underlying these tools see \cite{brettschneider2017crism}.
+To obtain plots of functions examining complete spatial randomness:\\ 
+$\medblacktriangleright$ Choose \emph{K-func.}, 
+\emph{F-func.}, or\emph{G-func.}.
+
+To obtain plots of functions examining complete spatial randomness, while correcting for spatial inhomogeneity:\\ 
+$\medblacktriangleright$ Choose \emph{K-func.}, 
+\emph{F-func.}, or \emph{G-func.}.
+
+Having made a choice, click on the \emph{Plot} button.
+Recall that clicking on a sub-panel, followed by double-clicking,
+produces a corresponding plot or report 
+for the sub-panel in question.
+In the case of a density map, the smoothing 
+chosen for the sub-panel is different
+from that chosen for the plot for the entire panel,
+so it will not simply be a detail of the larger image.
+
+For details on the statistical methods and interpretation underlying these tools see \cite{brettschneider2017crism}.
 
 
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 \section{Levels of Assessment}\label{levels}
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
-While the natural entity of damage are pixels, this is not necessarily the best ways to detect the reasons 
-for damage nor to rank their importance. For this reason, \cite{brettschneider2017crism} introduced 
-the notion of a higher level analysis by summarising adjacent pixels into events. Roughly speaking, lines are represented by one of their ends, small clusters by their centre etc. For more details about the pixel and event perspectives see \cite{brettschneider2017crism}.
+While the natural entity of damage are pixels, this may
+be neither the best way
+to detect the reasons for damage nor 
+the best way to rank their importance. For this reason,
+a notion of a higher level analysis was introduced in
+\cite{brettschneider2017crism}, summarising 
+groups of adjacent pixels as \emph{events}. 
+Speaking in general terms, lines are represented by one of their ends, and small clusters by their centre. For more details about the motivation and the technical definitions related to pixel and event perspectives see \cite{brettschneider2017crism}.
 
-\DetectorChecker allows to use either of the two alternative levels of quality assessment, pixels or events.
-The default is set on pixels. To perform the alternative event based analysis proceed as follows:\\
-$\medblacktriangleright$ In Step 4 choose {\it Events.}\\
-$\medblacktriangleright$ In Step 6 choose Analysis as described in Section \ref{spatial}.
+\DetectorChecker permits use of either of the two alternative levels of quality assessment, \emph{pixels}
+or \emph{events}, defaulting to \emph{pixels}.
+To perform the alternative event based analysis:\\
+$\medblacktriangleright$ In Step 4 choose \emph{Events}. A list of types will pop up. Choose a subset of these types and click on the \emph{Plot} button.\\
+$\medblacktriangleright$ In Step 5 choose one of the options for graphical analysis, as described in the previous section, and 
+click on the \emph{Plot} button.
 
 
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 \section{Modelling}\label{model}
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
-In Step 2 we had the option to display some functions that assigned each pixel coordinate 
-values to do with the distance to the edges, the corners or to the vertical and/or horizontal
-subpanel boundaries, if applicable. These spatial functions are used as covariates in a
-statistical model that aims to determine factors contributing to the decay of pixels.
+Step 2 provided the option to display some functions that assigned coordinate values to pixels: the distance to the edges, the corners or to the vertical or horizontal sub-panel boundaries, if applicable. These spatial functions are used as covariates in a statistical model that aims to determine factors contributing to the decay of pixels. \\
+$\medblacktriangleright$ To visualise the spatial covariates, in Step 2 choose a specific covariate
+(options 2 to 7) and click on the \emph{Display plot} button.\\
+$\medblacktriangleright$ In Step 7 choose a covariate and and click on the \emph{Fit model} button.
+
+After a delay for computation,
+the right hand side of the panel will display 
+output from fitting a linear model (logistic regression) which will assess the size and significance value of the selected covariate. 
 
 
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
@@ -450,5 +490,39 @@ statistical model that aims to determine factors contributing to the decay of pi
 \bibliographystyle{plain}
 \bibliography{biblioManual}
 %BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB
+
+
+\section{Appendix}\label{appendix}
+
+To upload layouts in the web app as user-define detector layouts the list of parameters below has to be stored in a text file. The first example is a detector with photographic aspect ratio built in one piece (no sub-panels). 
+
+\begin{verbatim}
+	detector_width = 600
+	detector_height = 400
+	module_col_n = 1
+	module_row_n = 1
+	module_col_sizes = c(600)
+	module_row_sizes = c(400)
+	gap_col_sizes = c()
+	gap_row_sizes = c()
+	module_edges_col = NA
+	module_edges_row = NA}
+\end{verbatim}
+	
+The second example is a detector with irregular grid. 
+
+\begin{verbatim}
+detector_width = 1720
+detector_height = 1060
+module_col_n = 7
+module_row_n = 5
+module_col_sizes = c(100, 200, 300, 400, 300, 200, 100)
+module_row_sizes = c(100, 200, 400, 200, 100)
+gap_col_sizes = c(10,20,30,30,20,10)
+gap_row_sizes = c(10,20,20,10)
+module_edges_col = NA
+module_edges_row = NA
+\end{verbatim}
+
 
 \end{document}

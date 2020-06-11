@@ -119,7 +119,7 @@
 \begin{center}
 
 {\LARGE\bf DetectorChecker Instruction Manual}
-\footnote{This manual refers to version 1.0.4 of \DetectorChecker and version 1.0.6 of \DetectorCheckerWebApp.}
+\footnote{This manual refers to version 1.0.5 of \DetectorChecker and version 1.0.6 of \DetectorCheckerWebApp.}
 
 %{\Large For release version $\beta$}
 
@@ -279,7 +279,14 @@ This can be an \texttt{xml} file containing the coordinates of the damaged pixel
 describing the dysfunctional pixels. 
 These files can be created by manufacturer maintenance routines (e.g.~Perkin Elmer's \emph{Underperforming Pixel Specification}
 \cite[Section 5.2]{manualXRD1621}) in \texttt{xml} or \texttt{tiff} format. An image with open squares indicating dysfunctional pixels
-is then plotted automatically 
+is then plotted automatically.
+Examples can be found in sub-directories of
+\href{https://github.com/alan-turing-institute/DetectorChecker/tree/master/inst/extdata}{DetectorChecker/tree/master/inst/extdata} 
+of the
+\href{https://doi.org/10.5281/zenodo.3662235}{Github repository}
+for the web app
+(pointed to by \emph{Examples} in the \emph{Help} tab of the web app).
+
 
 \item {\bf Choose Level of Assessment:} 
 Damage can be assessed at two different levels (see Section \ref{levels}). If the \emph{Pixels} option is selected, each damaged pixel is treated as an equally relevant occurrence. If \emph{Events} is selected then combinations of adjacent pixels form the basis of analysis, according to user choice of combination rules. 
@@ -533,6 +540,10 @@ module_edges_row = NA
 \end{verbatim}
 
  A further example, \texttt{user-defined.txt}, can be found in
-\url{https://github.com/alan-turing-institute/DetectorChecker/tree/master/inst/extdata} (pointed to by \emph{Examples} in the \emph{Help} tab of the web app.
+\href{https://github.com/alan-turing-institute/DetectorChecker/tree/master/inst/extdata}{DetectorChecker/tree/master/inst/extdata}
+of the 
+\href{https://doi.org/10.5281/zenodo.3662235}{Github repository}
+for the web app
+(pointed to by \emph{Examples} in the \emph{Help} tab of the web app).
 
 \end{document}

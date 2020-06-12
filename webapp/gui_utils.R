@@ -110,7 +110,7 @@ source("global.R")
 
 # success message: Data upload was successful
 .upload_success <- function(){
-  showModal(modalDialog(title = "Data upload", "Upload successful."))
+  showModal(modalDialog(title = "Data upload", "Upload successful. Please email detectorchecker@gmail.com to notify us that you have done this."))
 }
 
 # pixel damage file upload

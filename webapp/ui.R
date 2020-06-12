@@ -158,8 +158,8 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
             condition = "input.level_radio == 'Events'",
             checkboxGroupInput("events_chk_group", label = h5("Incl. event types"),
               choices = list("1 - Singletons" = 1, "2 - Doublets" = 2, "3 - Triplets" = 3, "4 - Larger clusters" = 4,
-                             "5 - Upper horizontal lines" = 5, "6 - Lower horizontal lines" = 6,
-                             "7 - Left vertical lines" = 7, "8 - Right vertical lines" = 8),
+                             "5 - Upper vertical lines" = 5, "6 - Lower vertical lines" = 6,
+                             "7 - Right horizontal lines" = 7, "8 - Left horizontal lines" = 8),
               selected = 1:8, inline = FALSE)
           ),
 
@@ -305,8 +305,10 @@ shinyUI(fluidPage(theme = shinytheme("flatly"),
                 choices = list(
                   "euclidean distance from centre" = const_model_fit_centreeucl,
                   "L-infinity distance from centre" = const_model_fit_centrlinf,
+                  "euclidean distance to nearest corner" = const_model_fit_distcorner,
                   "horizontal distance to nearest sub-panel edge" = const_model_fit_distedgecol,
-                  "vertical distance to nearest sub-panel edge" = const_model_fit_distedgerow
+                  "vertical distance to nearest sub-panel edge" = const_model_fit_distedgerow,
+                  "L-infinity distance to nearest sub-panel edge" = const_model_fit_distedgesmin
                 ),
                 selected = const_model_fit_centreeucl)),
 

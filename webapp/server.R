@@ -303,7 +303,12 @@ shinyServer(function(input, output, session) {
         return(NULL)
       }
 
-      if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
+      if (is.null(input$dead_file)) {
+        return(NULL)
+        .dead_file_error()
+      }
+
+      if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) { 
         .dead_file_error()
         return(NULL)
       }
@@ -361,6 +366,11 @@ shinyServer(function(input, output, session) {
       if (is.null(layout) || is.na(layout)) {
         .layout_not_selected_error()
         return(NULL)
+      }
+      
+      if (is.null(input$dead_file)) {
+        return(NULL)
+        .dead_file_error()
       }
 
       if (is.na(layout$dead_stats) || is.null(layout$dead_stats)) {
@@ -996,6 +1006,11 @@ shinyServer(function(input, output, session) {
       if (is.null(layout) || is.na(layout)) {
         .layout_not_selected_error()
         return(NULL)
+      }
+
+      if (is.null(input$dead_file)) {
+        return(NULL)
+        .dead_file_error()
       }
 
       # check if pixel damage file was uploaded

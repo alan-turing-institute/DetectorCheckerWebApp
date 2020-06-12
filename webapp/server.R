@@ -209,14 +209,17 @@ shinyServer(function(input, output, session) {
         dead_load_ok <- TRUE
 
         tryCatch({
-
           layout <<- detectorchecker::load_pix_matrix(detector = layout, file_path = input$dead_file$datapath)
 
           setProgress(message = "Analysing damage...")
 
           .clear_analysis_plots(output)
 
-          layout <<- detectorchecker::get_dead_stats(layout)
+          tryCatch({
+              layout <<- detectorchecker::get_dead_stats(layout)
+          }, error = function(err) {
+              layout <<- detectorchecker::load_pix_matrix(detector = layout, file_path = input$dead_file$datapath)
+          })
 
           },
           error = function(err) {
@@ -1070,6 +1073,13 @@ shinyServer(function(input, output, session) {
           glm_fit <- glm(as.vector(pix_matrix) ~ as.vector(dist),
                          family = binomial(link = logit))
 
+        } else if (input$fit_radio == const_model_fit_distcorner) {
+
+          dist <- detectorchecker::dist_corner(layout)
+
+          glm_fit <- glm(as.vector(pix_matrix) ~ as.vector(dist),
+                         family = binomial(link = logit))
+
         } else if (input$fit_radio == const_model_fit_distedgecol) {
 
           dist <- detectorchecker::dist_edge_col(layout)
@@ -1080,6 +1090,13 @@ shinyServer(function(input, output, session) {
         } else if (input$fit_radio == const_model_fit_distedgerow) {
 
           dist <- detectorchecker::dist_edge_row(layout)
+
+          glm_fit <- glm(as.vector(pix_matrix) ~ as.vector(dist),
+                         family = binomial(link = logit))
+
+        } else if (input$fit_radio == const_model_fit_distedgesmin) {
+
+          dist <- detectorchecker::dist_edge_min(layout)
 
           glm_fit <- glm(as.vector(pix_matrix) ~ as.vector(dist),
                          family = binomial(link = logit))

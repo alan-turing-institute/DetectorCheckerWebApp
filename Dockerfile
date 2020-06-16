@@ -63,6 +63,7 @@ RUN Rscript -e "install.packages('devtools')"
 # Installing detector checker
 RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker', ref = 'master')"
 
+
 ADD . DetectorCheckerWebApp
 WORKDIR DetectorCheckerWebApp
 ENV DC_HOME /DetectorCheckerWebApp

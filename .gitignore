@@ -59,3 +59,4 @@ docs/files/WebApp_user_docs/*.out
 docs/files/WebApp_user_docs/*.blg
 docs/files/WebApp_user_docs/*.bbl
 *.log
+packrat/lib*/

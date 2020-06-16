@@ -215,11 +215,7 @@ shinyServer(function(input, output, session) {
 
           .clear_analysis_plots(output)
 
-          tryCatch({
-              layout <<- detectorchecker::get_dead_stats(layout)
-          }, error = function(err) {
-              layout <<- detectorchecker::load_pix_matrix(detector = layout, file_path = input$dead_file$datapath)
-          })
+          layout <<- detectorchecker::get_dead_stats(layout)
 
           },
           error = function(err) {

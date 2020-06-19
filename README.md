@@ -89,7 +89,11 @@ If you use DetectorChecker in your work please cite our package.
 BibTeX:
 
 ```
-
+  @Misc{,
+    title = {{DetectorChecker}: Assessment of damage to CT scanners},
+    author = {Tomas Lazauskas and Julia Brettschneider and Oscar Giles and Wilfrid Kendall},
+    url = {https://github.com/alan-turing-institute/DetectorChecker},
+  }
 ```
 
 # Getting help

@@ -1066,7 +1066,9 @@ shinyServer(function(input, output, session) {
             return(NULL)
           }
 
-          pix_matrix <- layout$clumps$events_matrix
+          incl_event_list <- as.list(as.integer(input$events_chk_group))
+
+          pix_matrix <- get_events_matrix(layout, incl_event_list = incl_event_list)
         }
 
         if (input$fit_radio == const_model_fit_centreeucl) {

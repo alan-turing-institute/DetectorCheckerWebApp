@@ -182,7 +182,7 @@ users in assessing likely reasons for such damage.
 At the beginning of a session, 
 \DetectorChecker allows users either (a) to select one of the common detector layouts,
 or (b) to enter parameters defining a custom layout. 
-Users can then upload data in the form of \texttt{xml} or \texttt{tiff} files;
+Users can then upload data in the form of \texttt{xml} or \texttt{tif} files;
 \DetectorChecker will then identify dysfunctional pixels.
 Users can then instruct
 \DetectorChecker to create numerical and graphical summaries 
@@ -255,7 +255,7 @@ These spatial functions are provided as covariates in Step 7.
 
 \item {\bf Import File:} 
 Upload a file with information on dysfunctional pixel locations. 
-This can be an \texttt{xml} file containing the coordinates of the damaged pixels, or a \texttt{tiff} or \texttt{hdf} file containing an array of pixel intensities corresponding to the mask describing the dysfunctional pixels. Examples for common detector layouts and for two user-defined layouts are included in the web app GitHub archive. Details are explained in Section \ref{dysfct} and \ref{examples}.
+This can be an \texttt{xml} file containing the coordinates of the damaged pixels, or a \texttt{tif} or \texttt{hdf} file containing an array of pixel intensities corresponding to the mask describing the dysfunctional pixels. Examples for common detector layouts and for two user-defined layouts are included in the web app GitHub archive. Details are explained in Section \ref{dysfct} and \ref{examples}.
  
 \item {\bf Choose Level:} 
 Damage can be assessed at two different levels (see Section \ref{levels}). If the \emph{Pixels} option is selected, each damaged pixel is treated as an equally relevant occurrence. If \emph{Events} is selected then combinations of adjacent pixels form the basis of analysis, according to user choice of combination rules. 
@@ -322,7 +322,7 @@ to locate and upload a plain text file containing a list of parameters specifyin
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
 Dysfunctional pixels are referred to by many names including \emph{bad, damaged, dead, erratic, stuck, hot, defective, broken and underperforming.} Maintenance protocols may include the creation of so-called \emph{bad pixel maps} containing their locations. Pixels flagged as damaged in such maps are identified by a combination of criteria based on signal intensities, noise levels, uniformity and lag (see e.g.~Section 5.2 in \cite{manualXRD1621}). 
-Common formats for bad pixel maps are \texttt{xml} for coordinates or \texttt{tiff} or \texttt{hdf} for masks. 
+Common formats for bad pixel maps are \texttt{xml} for coordinates or \texttt{tif} or \texttt{hdf} for masks. 
 \DetectorChecker can process all of these formats. To access examples files of dysfunctional pixel locations for both the built-in and the user-defined layouts see Section \ref{examples}.
 
 To specify your dysfunctional pixel file:
@@ -366,11 +366,11 @@ lines of dysfunctional pixels intersecting with the horizontal midline indicatin
 %SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS
 
 For each of the built-in detector layouts, sample files with dysfunctional pixel locations are provided.
-There is a dysfunctional pixel mask in \texttt{tiff} format for the Pilatus detector layout. There are two sample  \texttt{xml} files giving two different examples of dysfunctional pixel coordinates for each of the Perkin Elmer layouts. 
+There is a dysfunctional pixel mask in \texttt{tif} format for the Pilatus detector layout. There are two sample  \texttt{xml} files giving two different examples of dysfunctional pixel coordinates for each of the Perkin Elmer layouts. 
 There are also five \texttt{hdf} format which together give an example for the locations of disfunctional pixels in an Excalibur detector.
 
 To illustrate the use of user-defined layouts two example layouts ``\texttt{.txt}'' files are included (see Appendix A). 
-The first example is ``\texttt{layout\_par\_photographic.txt}'',  a single-panel photographic ratio layout. Three example for dysfunctional pixel locations are provided, a mask in ``\texttt{.tiff}'' format and two coordinate lists in ``\texttt{.xml}'' format. (The latter ones have been simulated from homogeneous and inhomogeneous planar Poisson point patterns.)
+The first example is ``\texttt{layout\_par\_photographic.txt}'',  a single-panel photographic ratio layout. Three example for dysfunctional pixel locations are provided, a mask in ``\texttt{.tif}'' format and two coordinate lists in ``\texttt{.xml}'' format. (The latter ones have been simulated from homogeneous and inhomogeneous planar Poisson point patterns.)
 The second example is ``\texttt{layout\_par\_irregular.txt}'', an irregular layout with varying sub-panel sizes and varying gap sizes. 
 
 All examples are listed in Figure \ref{fig_examplesDirectory} in Appendix B and can be found in sub-directories of
@@ -382,7 +382,7 @@ of the
 To use these examples, first download them from the GitHub repository onto your computer and then upload them into the web app in steps 1 and 3 as described in Sections \ref{layout} and \ref{dysfct}. If you need several of them the most efficient way may be to download the whole  \href{https://github.com/alan-turing-institute/DetectorChecker}{\DetectorChecker package}
 as a ZIP file by pressing on the green ``Clone or download" button. Alternatively, you can download an individual file by clicking through subfolders until you find it, then clicking
 on the file. 
-For files in \texttt{tiff} and \texttt{hdf} format, 
+For files in \texttt{tif} and \texttt{hdf} format, 
 a ``Download" button will appear and should also be clicked on. 
 For the examples in \texttt{xml} format, GitHub will offer a ``Raw" button, 
 which displays the file on the browser. 

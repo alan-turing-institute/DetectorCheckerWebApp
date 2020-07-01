@@ -146,7 +146,7 @@ authors or copyright holders be liable for any claim, damages or other
 liability, whether in an action of contract, tort or otherwise, arising from,
 out of or in connection with the software or the use or other dealings in the
 software.</p>
-<p><strong>Acknowledgments:</strong></p>
+<p><strong>Authors:</strong></p>
 <p>Dr <a href="https://warwick.ac.uk/fac/sci/statistics/staff/academic-research/brettschneider/">Julia Brettschneider</a></p>
 <p>Dr <a href="https://github.com/tomaslaz">Tomas Lazauskas</a></p>
 <p>Dr <a href="https://www.turing.ac.uk/people/researchers/oscar-giles">Oscar Giles</a></p>

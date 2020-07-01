@@ -328,7 +328,7 @@ Common formats for bad pixel maps are \texttt{xml} for coordinates or \texttt{ti
 To specify your dysfunctional pixel file:
 \\
 $\medblacktriangleright$ Click in the ``Browse" button 
-to upload (from your computer) a plain text file containing a list of parameters specifying the layout. Note that the plain text file will have to have the extension ``\texttt{.txt}''. (Users who use MS Word to construct the file should export the result as a ``\texttt{.txt}'' file.) 
+to upload (from your computer) a file specifying bad pixels for your chosen layout, to be found in a sub-directory of \texttt{inst/extdata} named according to your chosen layout. Note that such files will have to have one of the extensions ``\texttt{.xml}'' (actually a text file listing bad pixel coordinates), ``\text{.tif}'' (an image derived from a test run) or ``\text{.hdf}'' (an alternative image specification found in the case of Excalibur: note that in this case you will need to shift-click to select and load all six files ``\texttt{pixelmask.fem*.hdf}`` together).
 
 After uploading the file, \DetectorChecker automatically produces an image indicating the dysfunctional pixel locations 
 by open squares. The characters are not plotted to scale but are magnified to ensure visibility of isolated damaged pixels.

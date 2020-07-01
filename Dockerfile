@@ -52,7 +52,7 @@ RUN apt-get update; apt-get install -y --allow-unauthenticated azure-cli
 RUN apt-get -y install python3
 RUN apt-get -y install python3-pip
 RUN pip3 install --upgrade pip
-RUN python3 -m pip install azure
+RUN python3 -m pip install azure==4.0
 
 RUN apt-get update; apt-get -y install libxml2-dev
 
@@ -62,7 +62,6 @@ RUN Rscript -e "install.packages('devtools')"
 
 # Installing detector checker
 RUN Rscript -e "devtools::install_github('alan-turing-institute/DetectorChecker', ref = 'master')"
-
 
 ADD . DetectorCheckerWebApp
 WORKDIR DetectorCheckerWebApp

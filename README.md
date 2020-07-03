@@ -1,6 +1,5 @@
 # DetectorCheckerWebApp
 
-[![DOI](https://zenodo.org/badge/147701683.svg)](https://zenodo.org/badge/latestdoi/147701683)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
 Created by: [Julia Brettschneider](https://github.com/ejulia17) (original R code), [Tomas Lazauskas](https://github.com/tomaslaz) (R package engineering), [Oscar Giles](https://github.com/OscartGiles) (package development) and [Wilfrid Kendall](https://github.com/WilfridSKendall) (testing and editing).

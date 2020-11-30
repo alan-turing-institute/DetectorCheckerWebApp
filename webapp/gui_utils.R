@@ -2,11 +2,11 @@ source("global.R")
 
 # renders selected layout
 .render_layout <- function(layout, output) {
-  output$layoutPlot <- renderPlot({detectorchecker::plot_detector(layout, caption = FALSE)},
+  output$layoutPlot <- renderPlot({plot(layout, caption = FALSE)},
                                   width = "auto", height = "auto")
 
   output$layout_summary <- renderPrint({
-    cat(detectorchecker::detector_summary(layout))
+    cat(summary(layout))
   })
 
   .update_layout_textbox(layout = layout, output = output)

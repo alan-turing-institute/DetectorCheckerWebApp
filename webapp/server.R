@@ -131,7 +131,7 @@ shinyServer(function(input, output, session) {
           withProgress({
             setProgress(message = "Rendering layout...")
 
-            output$layoutPlot <- renderPlot({detectorchecker::plot_detector(layout, caption = FALSE)},
+            output$layoutPlot <- renderPlot({plot(layout, caption = FALSE)},
                        width = "auto", height = "auto")
 
             setProgress(message = "Finished!", value = 1.0)
